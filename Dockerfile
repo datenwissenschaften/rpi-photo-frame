@@ -1,4 +1,4 @@
-FROM resin/rpi-raspbian:wheezy
+FROM resin/rpi-raspbian:jessie
 
 MAINTAINER Martin Franke <martin.franke@me.com>
 
@@ -10,7 +10,7 @@ RUN apt-get update && apt-get install -y \
     python-pip \
     python-numpy \
     python-flask \
-    python-pillow \
+    python-pil \
     nodejs \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
