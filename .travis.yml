@@ -1,0 +1,11 @@
+sudo: required
+services:
+- docker
+language: bash
+script:
+# prepare qemu
+- docker run --rm --privileged multiarch/qemu-user-static:register --reset
+# build image
+- docker build -t mtnfranke/rpi-photo-frame .
+# test image
+- docker run mtnfranke/rpi-photo-frame bash echo "1"
