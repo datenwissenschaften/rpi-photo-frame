@@ -16,7 +16,7 @@ RUN apt-get update && apt-get install -y \
 
 # Install nodejs
 RUN curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
-RUN apt-get install nodejs
+RUN apt-get install -y nodejs
 
 # Compile additional dependencies
 RUN pip install flask-bower
