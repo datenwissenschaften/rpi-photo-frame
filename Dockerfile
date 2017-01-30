@@ -21,6 +21,10 @@ RUN npm install -g bower
 
 # Define working directory
 WORKDIR /data
+COPY * /data/
+
+# Frontend dependencies
+RUN bower install
 
 # Define default command
 CMD ["bash"]
