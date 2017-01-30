@@ -11,9 +11,12 @@ RUN apt-get update && apt-get install -y \
     python-numpy \
     python-flask \
     python-pil \
-    nodejs \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
+
+# Install nodejs
+RUN curl -sL https://deb.nodesource.com/setup_7.x | sudo -E bash -
+RUN apt-get install nodejs
 
 # Compile additional dependencies
 RUN pip install flask-bower
