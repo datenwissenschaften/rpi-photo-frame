@@ -13,7 +13,7 @@ script:
 - >
   if [ "$TRAVIS_BRANCH" == "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker login -u="$DOCKER_USER" -p="$DOCKER_PASS"
-    TAG=latest
+    TAG="latest"
     docker tag mtnfranke/rpi-photo-frame mtnfranke/rpi-photo-frame:$TAG
     docker push mtnfranke/rpi-photo-frame:$TAG
     docker push mtnfranke/rpi-photo-frame
