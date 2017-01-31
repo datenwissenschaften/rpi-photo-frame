@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     python-numpy \
     python-flask \
     python-pil \
+    curl \
     --no-install-recommends && \
     rm -rf /var/lib/apt/lists/*
 
