@@ -6,7 +6,7 @@
 # Add arm build chain for cross building (only for non-rpi hosts(!))
 # docker run --rm --privileged multiarch/qemu-user-static:register --reset
 
-# Build docker image on qemu
+# Build docker image on rpi or qemu
 docker build -t mtnfranke/rpi-photo-frame .
 
 # Serve all images from give folder
