@@ -4,7 +4,9 @@
 
 ## Preview
 
-[[https://github.com/MtnFranke/rpi-photo-frame/blob/master/doc/preview.png|alt=Preview]]
+![Preview](https://github.com/MtnFranke/rpi-photo-frame/raw/master/doc/preview.png)
+
+## Build
 
 ```
 # Add arm build chain for cross building (only for non-rpi hosts(!))
