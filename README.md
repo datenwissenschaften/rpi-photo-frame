@@ -6,6 +6,11 @@
 
 ![Preview](https://github.com/MtnFranke/rpi-photo-frame/raw/master/doc/preview.png)
 
+### Build Details
+- [Source Repository](https://github.com/MtnFranke/rpi-photo-frame)
+- [Dockerfile](https://github.com/MtnFranke/rpi-photo-frame/blob/master/Dockerfile)
+- [DockerHub](https://hub.docker.com/r/mtnfranke/rpi-photo-frame/)
+
 ## Build
 
 ```
