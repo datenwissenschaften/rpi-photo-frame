@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta http-equiv="Refresh" content="3600">
+
+    <link rel="manifest" href="manifest.json">
+
+    <script src="{{ url_for('bower.static', filename='jquery/dist/jquery.min.js') }}"></script>
+    <script src="{{ url_for('bower.static', filename='async/dist/async.min.js') }}"></script>
+    <script src="{{ url_for('bower.static', filename='moment/min/moment.min.js') }}"></script>
+
+    <script src="/static/script.js"></script>
+
+    <style media="screen">
+        .module {
+            background-size: cover;
+            position: relative;
+        }
+
+        h2#time {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 4px 8px;
+            color: white;
+            margin: 0;
+            font: 64px Sans-Serif;
+            z-index: 10000;
+        }
+
+        h2#temp {
+            position: fixed;
+            bottom: 10px;
+            right: 10px;
+            background: rgba(0, 0, 0, 0.75);
+            padding: 4px 8px;
+            color: white;
+            margin: 0;
+            font: 64px Sans-Serif;
+            z-index: 10000;
+        }
+
+        .opp h2 {
+            background: rgba(255, 255, 255, 0.75);
+            color: black;
+            z-index: 10000;
+        }
+
+        html {
+            background: url(/photo) no-repeat center center fixed;
+            background-color: black;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="module opp">
+        <h2 id="time">xx/xx/xx xx:xx</h2>
+        <h2 id="temp">&#9728; <span id="tempval">--.-</span>&#8451;</h2>
+    </div>
+
+</body>
+
+</html>

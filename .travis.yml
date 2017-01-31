@@ -8,4 +8,4 @@ script:
 # build image
 - docker build -t mtnfranke/rpi-photo-frame .
 # test image
-- docker run mtnfranke/rpi-photo-frame ls
+- docker run mtnfranke/rpi-photo-frame /bin/bash

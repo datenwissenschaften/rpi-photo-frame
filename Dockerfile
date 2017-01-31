@@ -4,13 +4,13 @@ MAINTAINER Martin Franke <martin.franke@me.com>
 
 # Install dependencies from debian packages
 RUN apt-get update && apt-get install -y \
-    python \
-    python-dev \
-    python-virtualenv \
-    python-pip \
-    python-numpy \
-    python-flask \
-    python-pil \
+    python3 \
+    python3-dev \
+    python3-virtualenv \
+    python3-pip \
+    python3-numpy \
+    python3-flask \
+    python3-pil \
     ca-certificates \
     curl \
     wget \
@@ -71,16 +71,18 @@ RUN npm -v
 WORKDIR /data
 
 # Install additional dependencies
-RUN pip install flask-bower
+RUN pip3 install flask-bower
+RUN pip3 install pyfunctional
 RUN npm install bower
 
 # Copy source files
-COPY src/* /data/
+COPY src/ /data/
 
-# Frontend dependencies
+# Download frontend dependencies
 RUN node_modules/bower/bin/bower install --allow-root
 
-RUN ls -al
+# Ports
+EXPOSE 5000
 
 # Define default command
-CMD ["bash"]
+CMD ["python3", "app.py"]
