@@ -91,3 +91,5 @@ ENV/
 # rpi-photo-frame
 .idea
 cache
+bower_components
+node_modules

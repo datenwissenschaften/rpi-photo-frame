@@ -16,12 +16,15 @@ Bower(app)
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    try:
+        return render_template('index.html')
+    except Exception:
+        return "Missing frontend dependencies. Run bower install..."
 
 
 @app.route('/status')
 def status():
-    return 200
+    return "200"
 
 
 @app.route('/photo')
@@ -54,13 +57,17 @@ def photo():
     abs_path = numpy.random.choice(photos, p=prob)
 
     if not os.path.exists('./cache/' + os.path.basename(abs_path)):
+
         im = Image.open(abs_path)
-
-        exif = im.info['exif']
-
         im.thumbnail((w, h), Image.ANTIALIAS)
-        im.save('./cache/' + os.path.basename(abs_path),
-                format='JPEG', exif=exif)
+
+        try:
+            exif = im.info['exif']
+            im.save('./cache/' + os.path.basename(abs_path),
+                    format='JPEG', exif=exif)
+        except Exception:
+            im.save('./cache/' + os.path.basename(abs_path),
+                    format='JPEG')
 
     f = open('./cache/' + os.path.basename(abs_path), 'rb', buffering=0)
 
@@ -78,10 +85,6 @@ def extract_exif_date(photo):
         for tag, value in exif_data.items():
             decoded = TAGS.get(tag, tag)
             ret[decoded] = value
-    except Exception:
-        pass
-
-    try:
 
         datetime_object = datetime.datetime.strptime(
             ret.get('DateTime'), '%Y:%m:%d %H:%M:%S'
@@ -90,7 +93,8 @@ def extract_exif_date(photo):
         unix_time = datetime_object.timestamp()
 
     except Exception:
-        unix_time = 1.0
+        # File modification date as fallback
+        unix_time = os.path.getmtime(photo)
 
     return unix_time
 
