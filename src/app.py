@@ -52,7 +52,7 @@ def photo():
 
     photos = sort.map(lambda x: x[0]).to_list()
 
-    prob = sort.map(lambda x: x[1] / s).to_list()
+    prob = sort.map(lambda x: float(x[1]) / float(s)).to_list()
 
     abs_path = numpy.random.choice(photos, p=prob)
 
@@ -71,8 +71,10 @@ def photo():
 
     f = open('./cache/' + os.path.basename(abs_path), 'rb', buffering=0)
 
-    return Response(f.readall(), mimetype='image/jpeg')
-
+    try:
+        return Response(f.readall(), mimetype='image/jpeg')
+    except Exception:
+        return Response(f.readlines(), mimetype='image/jpeg')
 
 def extract_exif_date(photo):
     ret = {}
