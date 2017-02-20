@@ -1,6 +1,8 @@
 import datetime
 import glob
 import os
+import argparse
+
 from operator import itemgetter
 
 import numpy
@@ -12,6 +14,10 @@ from functional import seq
 
 app = Flask(__name__, static_url_path='/static')
 Bower(app)
+
+parser = argparse.ArgumentParser(description='Starts the photo frame server.')
+parser.add_argument('-d', '--directory', default='/srv/photos/')
+args = parser.parse_args()
 
 
 @app.route('/')
@@ -29,7 +35,8 @@ def status():
 
 @app.route('/photo')
 def photo():
-    files = glob.glob('/srv/photos/*.jp*g')
+    print(args)
+    files = glob.glob(args.directory + '*.jp*g')
 
     if not files:
         files = glob.glob('./cache/*.*')
@@ -75,6 +82,7 @@ def photo():
         return Response(f.readall(), mimetype='image/jpeg')
     except Exception:
         return Response(f.readlines(), mimetype='image/jpeg')
+
 
 def extract_exif_date(photo):
     ret = {}
