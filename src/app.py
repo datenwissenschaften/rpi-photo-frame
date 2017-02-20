@@ -2,6 +2,7 @@ import datetime
 import glob
 import os
 import argparse
+import setproctitle
 
 from operator import itemgetter
 
@@ -11,6 +12,8 @@ from PIL.ExifTags import TAGS
 from flask import Flask, Response, render_template
 from flask.ext.bower import Bower
 from functional import seq
+
+setproctitle.setproctitle('rpi-photo-frame')
 
 app = Flask(__name__, static_url_path='/static')
 Bower(app)
