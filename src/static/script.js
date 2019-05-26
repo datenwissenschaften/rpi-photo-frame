@@ -5,7 +5,7 @@ jQuery(document).ready(function() {
         setTimeout(arguments.callee, 60000);
     })();
 
-    jQuery.getJSON("/weather"), function(data) {
+    jQuery.getJSON("/weather", function(data) {
         $("#tempval").text(data.currently.temperature)
     });
 
