@@ -3,6 +3,7 @@ import glob
 import os
 import argparse
 import setproctitle
+import requests
 
 from operator import itemgetter
 
@@ -34,6 +35,11 @@ def index():
 @app.route('/status')
 def status():
     return "200"
+
+
+@app.route('/weather')
+def weather():
+    return requests.get('https://api.darksky.net/forecast/9559aa7862d3ef0cf894d3593fde1b11/48.199760,11.308920?lang=de&units=si').json()
 
 
 @app.route('/photo')
