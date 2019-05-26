@@ -44,7 +44,7 @@ def status():
 def weather():
     return get_weather_from_darksky()
 
-    
+
 @cached(cache)
 def get_weather_from_darksky():
     return requests.get('https://api.darksky.net/forecast/9559aa7862d3ef0cf894d3593fde1b11/48.199760,11.308920?lang=de&units=si').text
@@ -79,7 +79,10 @@ def photo():
 
     prob = sort.map(lambda x: float(x[1]) / float(s)).to_list()
 
-    abs_path = numpy.random.choice(photos, p=prob)
+    print(prob)
+
+    # abs_path = numpy.random.choice(photos, p=prob)
+    abs_path = numpy.random.choice(photos)
 
     if not os.path.exists('./cache/' + os.path.basename(abs_path)):
 
