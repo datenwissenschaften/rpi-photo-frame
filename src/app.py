@@ -11,8 +11,11 @@ import numpy
 from PIL import Image
 from PIL.ExifTags import TAGS
 from flask import Flask, Response, render_template
-from flask.ext.bower import Bower
+from flask_bower import Bower
 from functional import seq
+
+from cachetools import cached, TTLCache
+cache = TTLCache(maxsize=100, ttl=3600)
 
 setproctitle.setproctitle('rpi-photo-frame')
 
@@ -39,8 +42,12 @@ def status():
 
 @app.route('/weather')
 def weather():
-    return requests.get('https://api.darksky.net/forecast/9559aa7862d3ef0cf894d3593fde1b11/48.199760,11.308920?lang=de&units=si').json()
+    return get_weather_from_darksky()
 
+    
+@cached(cache)
+def get_weather_from_darksky():
+    return requests.get('https://api.darksky.net/forecast/9559aa7862d3ef0cf894d3593fde1b11/48.199760,11.308920?lang=de&units=si').text
 
 @app.route('/photo')
 def photo():
@@ -67,6 +74,8 @@ def photo():
         .sum()
 
     photos = sort.map(lambda x: x[0]).to_list()
+
+    print(photos)
 
     prob = sort.map(lambda x: float(x[1]) / float(s)).to_list()
 

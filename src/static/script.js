@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
     })();
 
     jQuery.getJSON("/weather", function(data) {
-        $("#tempval").text(data.currently.temperature)
+        $("#tempval").text(parseFloat(data.currently.temperature).toFixed(1))
     });
 
 });
