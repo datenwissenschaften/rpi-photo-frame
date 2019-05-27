@@ -16,7 +16,7 @@ from flask_bower import Bower
 from functional import seq
 
 from cachetools import cached, TTLCache
-cache = TTLCache(maxsize=100, ttl=3600)
+cache = TTLCache(maxsize=100, ttl=600)
 
 setproctitle.setproctitle('rpi-photo-frame')
 
@@ -55,9 +55,7 @@ def get_weather_from_darksky():
 def photo():
     files = glob.glob(args.directory + '*.jp*g')
 
-    seq_files = seq(files)
-
-    sort = seq_files \
+    sort = seq(files) \
         .map(lambda x: (x, extract_exif_date(x))) \
         .sorted(key=itemgetter(1), reverse=False) \
         .map(lambda x: x[0]) \
@@ -70,18 +68,17 @@ def photo():
 
     photos = sort.map(lambda x: x[0]).to_list()
 
-    print(photos)
-
     prob = sort.map(lambda x: float(x[1]) / float(s)).to_list()
 
-    print(prob)
-
-    # abs_path = numpy.random.choice(photos, p=prob)
-    abs_path = numpy.random.choice(photos)
+    abs_path = numpy.random.choice(photos, p=prob)
 
     head, tail = os.path.split(abs_path)
 
-    url = 'http://localhost:8888/unsafe/800x480/filters:rgb(40,0,-40)/Downloads/' + tail
+    r = 20
+    g = 0
+    b = -r
+
+    url = 'http://localhost:8888/unsafe/800x480/filters:rgb(%s,%s,%s)/Downloads/%s' % (r, g, b, tail)
 
     response = requests.get(url, stream=True)
     
@@ -89,7 +86,7 @@ def photo():
         shutil.copyfileobj(response.raw, out_file)
 
     f = open('./cache/' + tail, 'rb', buffering=0)
-    
+±   
     try:
         return Response(f.readall(), mimetype='image/jpeg')
     except Exception:
