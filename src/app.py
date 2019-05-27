@@ -110,7 +110,7 @@ def photo():
     g = 0
     b = -r
 
-    bl.set_brightness(brightness, smooth=True, duration=30)
+    bl.set_brightness(brightness, smooth=True, duration=3)
 
     url = 'http://localhost:8888/unsafe/800x480/filters:rgb(%s,%s,%s)/Downloads/%s' % (
         r, g, b, tail)
