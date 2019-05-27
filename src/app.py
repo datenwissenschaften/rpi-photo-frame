@@ -16,6 +16,7 @@ from flask_bower import Bower
 from functional import seq
 
 from astral import Astral, Location
+import rpi_backlight as bl
 
 from cachetools import cached, TTLCache
 cache = TTLCache(maxsize=100, ttl=600)
@@ -85,20 +86,36 @@ def photo():
     l.elevation = 500
     sun = l.sun(local=True)
 
-    print('Dawn:    %s' % str(sun['dawn']))
-    print('Sunrise: %s' % str(sun['sunrise']))
-    print('Noon:    %s' % str(sun['noon']))
-    print('Sunset:  %s' % str(sun['sunset']))
-    print('Dusk:    %s' % str(sun['dusk']))
+    brightness = 255
+    r = 0
 
-    r = 20
+    now = datetime.datetime.now()
+    if(now >= sun['dawn'] and now < sun['sunrise']):
+        r = 80
+        brightness = 10
+    if(now >= sun['sunrise'] and now < sun['noon']):
+        r = 10
+        brightness = 100
+    if(now >= sun['noon'] and now < sun['sunset']):
+        r = 0
+        brightness = 200
+    if(now >= sun['sunset'] and now < sun['dusk']):
+        r = 40
+        brightness = 100
+    if(now >= sun['dusk']):
+        r = 80
+        brightness = 10
+
     g = 0
     b = -r
 
-    url = 'http://localhost:8888/unsafe/800x480/filters:rgb(%s,%s,%s)/Downloads/%s' % (r, g, b, tail)
+    bl.set_brightness(brightness, smooth=True, duration=30)
+
+    url = 'http://localhost:8888/unsafe/800x480/filters:rgb(%s,%s,%s)/Downloads/%s' % (
+        r, g, b, tail)
 
     response = requests.get(url, stream=True)
-    
+
     with open('./cache/' + tail, 'wb') as out_file:
         shutil.copyfileobj(response.raw, out_file)
 
