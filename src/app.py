@@ -79,7 +79,7 @@ def photo():
     # abs_path = numpy.random.choice(photos, p=prob)
     abs_path = numpy.random.choice(photos)
 
-    url = 'http://localhost:8888/unsafe/800x480/filters:rgb(40,0,-40)/Downloads/' + abs_path
+    url = 'http://localhost:8888/unsafe/800x480/filters:rgb(40,0,-40)' + abs_path
     response = requests.get(url, stream=True)
     
     with open('./cache/' + os.path.basename(abs_path), 'wb') as out_file:
