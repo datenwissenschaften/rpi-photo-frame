@@ -53,16 +53,9 @@ def get_weather_from_darksky():
 
 @app.route('/photo')
 def photo():
-    print(args)
     files = glob.glob(args.directory + '*.jp*g')
 
-    if not files:
-        files = glob.glob('./cache/*.*')
-
     seq_files = seq(files)
-
-    w = 1920
-    h = 1080
 
     sort = seq_files \
         .map(lambda x: (x, extract_exif_date(x))) \
@@ -86,7 +79,7 @@ def photo():
     # abs_path = numpy.random.choice(photos, p=prob)
     abs_path = numpy.random.choice(photos)
 
-    url = 'http://localhost:8888/unsafe/800x480/Downloads/IMG_0568.jpg'
+    url = 'http://localhost:8888/unsafe/800x480/filters:rgb(40,0,-40)/Downloads/' + abs_path
     response = requests.get(url, stream=True)
     
     with open('./cache/' + os.path.basename(abs_path), 'wb') as out_file:
