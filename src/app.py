@@ -93,7 +93,7 @@ def photo():
     now = datetime.now(timezone.utc)
     if(now >= sun['dawn'] and now < sun['sunrise']):
         r = 80
-        brightness = 10
+        brightness = 50
     if(now >= sun['sunrise'] and now < sun['noon']):
         r = 10
         brightness = 100
@@ -105,7 +105,7 @@ def photo():
         brightness = 100
     if(now >= sun['dusk']):
         r = 80
-        brightness = 10
+        brightness = 50
 
     g = 0
     b = -r
