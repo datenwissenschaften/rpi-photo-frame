@@ -49,6 +49,7 @@ def weather():
 def get_weather_from_darksky():
     return requests.get('https://api.darksky.net/forecast/9559aa7862d3ef0cf894d3593fde1b11/48.199760,11.308920?lang=de&units=si').text
 
+
 @app.route('/photo')
 def photo():
     print(args)
@@ -84,25 +85,8 @@ def photo():
     # abs_path = numpy.random.choice(photos, p=prob)
     abs_path = numpy.random.choice(photos)
 
-    if not os.path.exists('./cache/' + os.path.basename(abs_path)):
-
-        im = Image.open(abs_path)
-        im.thumbnail((w, h), Image.ANTIALIAS)
-
-        try:
-            exif = im.info['exif']
-            im.save('./cache/' + os.path.basename(abs_path),
-                    format='JPEG', exif=exif)
-        except Exception:
-            im.save('./cache/' + os.path.basename(abs_path),
-                    format='JPEG')
-
-    f = open('./cache/' + os.path.basename(abs_path), 'rb', buffering=0)
-
-    try:
-        return Response(f.readall(), mimetype='image/jpeg')
-    except Exception:
-        return Response(f.readlines(), mimetype='image/jpeg')
+    url = 'http://image-frame.local:8888/unsafe/800x480/Downloads/IMG_0568.jpg'
+    return = requests.get(url, stream=True)
 
 
 def extract_exif_date(photo):
