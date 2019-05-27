@@ -85,7 +85,7 @@ def photo():
     # abs_path = numpy.random.choice(photos, p=prob)
     abs_path = numpy.random.choice(photos)
 
-    url = 'http://image-frame.local:8888/unsafe/800x480/Downloads/IMG_0568.jpg'
+    url = 'http://localhost:8888/unsafe/800x480/Downloads/IMG_0568.jpg'
     return = requests.get(url, stream=True)
 
 
