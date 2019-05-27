@@ -6,6 +6,7 @@ import setproctitle
 import requests
 import shutil
 
+from datetime import datetime, timezone
 from operator import itemgetter
 
 import numpy
@@ -84,12 +85,12 @@ def photo():
     l.longitude = 11.308920
     l.timezone = 'Europe/Berlin'
     l.elevation = 500
-    sun = l.sun(local=True)
+    sun = l.sun()
 
     brightness = 255
     r = 0
 
-    now = datetime.datetime.now()
+    now = datetime.now(timezone.utc)
     if(now >= sun['dawn'] and now < sun['sunrise']):
         r = 80
         brightness = 10
