@@ -79,11 +79,11 @@ def photo():
     # abs_path = numpy.random.choice(photos, p=prob)
     abs_path = numpy.random.choice(photos)
 
-    url = 'http://localhost:8888/unsafe/800x480/filters:rgb(40,0,-40)' + abs_path
+    head, tail = os.path.split(abs_path)
+
+    url = 'http://localhost:8888/unsafe/800x480/filters:rgb(40,0,-40)/Downloads/' + tail
 
     response = requests.get(url, stream=True)
-
-    head, tail = os.path.split(abs_path)
     
     with open('./cache/' + tail, 'wb') as out_file:
         shutil.copyfileobj(response.raw, out_file)
