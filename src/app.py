@@ -90,7 +90,6 @@ def photo():
 
     f = open('./cache/' + tail, 'rb', buffering=0)
     
-
     try:
         return Response(f.readall(), mimetype='image/jpeg')
     except Exception:
