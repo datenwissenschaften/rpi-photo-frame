@@ -86,7 +86,7 @@ def photo():
     abs_path = numpy.random.choice(photos)
 
     url = 'http://localhost:8888/unsafe/800x480/Downloads/IMG_0568.jpg'
-    return requests.get(url, stream=True)
+    return requests.get(url, stream=True).raw
 
 
 def extract_exif_date(photo):
