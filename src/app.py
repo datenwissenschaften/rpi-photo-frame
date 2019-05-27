@@ -4,6 +4,7 @@ import os
 import argparse
 import setproctitle
 import requests
+import shutil
 
 from operator import itemgetter
 
@@ -86,7 +87,18 @@ def photo():
     abs_path = numpy.random.choice(photos)
 
     url = 'http://localhost:8888/unsafe/800x480/Downloads/IMG_0568.jpg'
-    return requests.get(url, stream=True).raw
+    response = requests.get(url, stream=True)
+    
+    with open('./cache/' + os.path.basename(abs_path), 'wb') as out_file:
+        shutil.copyfileobj(response.raw, out_file)
+    del response
+
+    f = open('./cache/' + os.path.basename(abs_path), 'rb', buffering=0)
+
+    try:
+        return Response(f.readall(), mimetype='image/jpeg')
+    except Exception:
+        return Response(f.readlines(), mimetype='image/jpeg')
 
 
 def extract_exif_date(photo):
