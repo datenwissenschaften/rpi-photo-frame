@@ -89,6 +89,7 @@ def photo():
         shutil.copyfileobj(response.raw, out_file)
 
     f = open('./cache/' + tail, 'rb', buffering=0)
+    
 
     try:
         return Response(f.readall(), mimetype='image/jpeg')
