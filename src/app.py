@@ -15,6 +15,8 @@ from flask import Flask, Response, render_template
 from flask_bower import Bower
 from functional import seq
 
+from astral import Astral, Location
+
 from cachetools import cached, TTLCache
 cache = TTLCache(maxsize=100, ttl=600)
 
@@ -74,6 +76,21 @@ def photo():
 
     head, tail = os.path.split(abs_path)
 
+    l = Location()
+    l.name = 'Olching'
+    l.region = 'Bavaria'
+    l.latitude = 48.199760
+    l.longitude = 11.308920
+    l.timezone = 'Europe/Berlin'
+    l.elevation = 500
+    sun = l.sun(local=True)
+
+    print('Dawn:    %s' % str(sun['dawn']))
+    print('Sunrise: %s' % str(sun['sunrise']))
+    print('Noon:    %s' % str(sun['noon']))
+    print('Sunset:  %s' % str(sun['sunset']))
+    print('Dusk:    %s' % str(sun['dusk']))
+
     r = 20
     g = 0
     b = -r
@@ -86,7 +103,7 @@ def photo():
         shutil.copyfileobj(response.raw, out_file)
 
     f = open('./cache/' + tail, 'rb', buffering=0)
-    
+
     try:
         return Response(f.readall(), mimetype='image/jpeg')
     except Exception:
