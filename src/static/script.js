@@ -6,20 +6,7 @@ jQuery(document).ready(function () {
     })();
 
     (function () {
-        if ($("#image1").hasClass("transparent")) {
-            $("#image1").attr("src", "/photo?" + Math.random() * 2048 * 2048);
-            setTimeout(function () {
-                $("#image1").toggleClass("transparent");
-                $("#image2").toggleClass("transparent");
-            }, 2000);
-        }
-        if ($("#image2").hasClass("transparent")) {
-            $("#image2").attr("src", "/photo?" + Math.random() * 2048 * 2048);
-            setTimeout(function () {
-                $("#image1").toggleClass("transparent");
-                $("#image2").toggleClass("transparent");
-            }, 2000);
-        }
+        $("#image1").toggleClass("transparent");
         setTimeout(arguments.callee, 10 * 1000);
     })();
 
