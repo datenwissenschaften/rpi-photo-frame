@@ -63,6 +63,18 @@ def weather():
     return get_weather_from_darksky()
 
 
+@app.route('/off')
+def off():
+    bl.set_power(False)
+    return "200"
+
+
+@app.route('/on')
+def on():
+    bl.set_power(True)
+    return "200"
+
+
 @cached(cache)
 def get_weather_from_darksky():
     return requests.get('https://api.darksky.net/forecast/9559aa7862d3ef0cf894d3593fde1b11/'

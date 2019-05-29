@@ -17,8 +17,16 @@ jQuery(document).ready(function () {
         setTimeout(arguments.callee, 10 * 60 * 1000);
     })();
 
-    jQuery("body").click(function () {
-        location.reload();
+    jQuery("#image").click(function () {
+        jQuery.getJSON("/on", function () {
+            location.reload();
+        });
+    });
+
+    jQuery("#off").click(function () {
+        jQuery.getJSON("/off", function () {
+            location.reload();
+        });
     });
 
 });
