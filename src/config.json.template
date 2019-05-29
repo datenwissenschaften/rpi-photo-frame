@@ -10,23 +10,23 @@
     "brightness": {
         "dawn": {
             "red": 40,
-            "brightness": 50
+            "brightness": 30
         },
         "sunrise": {
             "red": 20,
-            "brightness": 80
+            "brightness": 60
         },
         "noon": {
             "red": 0,
-            "brightness": 200
+            "brightness": 150
         },
         "sunset": {
             "red": 20,
-            "brightness": 80
+            "brightness": 60
         },
         "dusk": {
             "red": 40,
-            "brightness": 50
+            "brightness": 30
         }
     }
 }
