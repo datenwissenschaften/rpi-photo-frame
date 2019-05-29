@@ -7,6 +7,7 @@ jQuery(document).ready(function () {
 
     (function () {
         $("html").css('background-image', 'url("/photo") fixed');
+        setTimeout(arguments.callee, 10 * 1000);
     })();
 
     (function () {
