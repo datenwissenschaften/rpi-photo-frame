@@ -18,7 +18,7 @@
         },
         "noon": {
             "red": 0,
-            "brightness": 150
+            "brightness": 100
         },
         "sunset": {
             "red": 20,

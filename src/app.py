@@ -38,7 +38,8 @@ rpi_folder = '/home/pi/rpi-photo-frame'
 os.makedirs('%s/cache/' % rpi_folder, exist_ok=True)
 
 if not os.path.isfile('%s/src/config.json') or True:
-    copyfile('%s/src/config.json.template' % rpi_folder, '%s/src/config.json' % rpi_folder)
+    copyfile('%s/src/config.json.template' %
+             rpi_folder, '%s/src/config.json' % rpi_folder)
 
 with open('%s/src/config.json' % rpi_folder) as json_data_file:
     config = json.load(json_data_file)
@@ -166,11 +167,5 @@ def extract_exif_date(photo):
     return unix_time
 
 
-def __init():
-    if not os.path.exists('./cache/'):
-        os.makedirs('./cache/')
-
-
 if __name__ == '__main__':
-    __init()
     app.run(debug=True, host='0.0.0.0')
