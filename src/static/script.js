@@ -5,14 +5,10 @@ jQuery(document).ready(function () {
         setTimeout(arguments.callee, 60 * 1000);
     })();
 
-    setTimeout(function () {
-        (function () {
-            $("#image1").attr("src", "/photo?" + Math.random() * 2048 * 2048);
-            $("#image2").toggleClass("transparent");
-            $("#image2").attr("src", "/photo?" + Math.random() * 2048 * 2048);
-            setTimeout(arguments.callee, 10 * 1000);
-        })();
-    }, 2000);
+    (function () {
+        $("#image1").attr("src", "/photo?" + Math.random() * 2048 * 2048);
+        setTimeout(arguments.callee, 10 * 1000);
+    })();
 
     (function () {
         jQuery.getJSON("/weather", function (data) {
