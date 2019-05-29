@@ -167,5 +167,10 @@ def extract_exif_date(photo):
     return unix_time
 
 
+def update_config(cfg):
+    with open('%s/src/config.json' % rpi_folder, 'w') as outfile:
+        json.dump(cfg, outfile)
+
+
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')

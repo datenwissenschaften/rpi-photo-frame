@@ -5,9 +5,17 @@ jQuery(document).ready(function () {
         setTimeout(arguments.callee, 60000);
     })();
 
-    jQuery.getJSON("/weather", function (data) {
-        $("#tempval").text(parseFloat(data.currently.temperature).toFixed(1))
-    });
+    (function () {
+        $("html").css('background-image', 'url("/photo")');
+        setTimeout(arguments.callee, 1000);
+    })();
+
+    (function () {
+        jQuery.getJSON("/weather", function (data) {
+            $("#tempval").text(parseFloat(data.currently.temperature).toFixed(1))
+        });
+        setTimeout(arguments.callee, 600000);
+    })();
 
     jQuery("body").click(function () {
         location.reload();
