@@ -1,5 +1,7 @@
 jQuery(document).ready(function () {
 
+    $("html").css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
+
     (function () {
         $("#time").text(moment().format('DD.MM.YYYY HH:mm'));
         setTimeout(arguments.callee, 60 * 1000);
@@ -16,7 +18,7 @@ jQuery(document).ready(function () {
         jQuery.getJSON("/weather", function (data) {
             $("#tempval").text(parseFloat(data.currently.temperature).toFixed(1))
         });
-        setTimeout(arguments.callee, 60 * 10 * 1000);
+        setTimeout(arguments.callee, 10 * 60 * 1000);
     })();
 
     jQuery("body").click(function () {
