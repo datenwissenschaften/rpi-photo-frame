@@ -6,8 +6,9 @@ jQuery(document).ready(function () {
     })();
 
     (function () {
-        $("html").css('background-image', '');
-        $("html").css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
+        $('#html').fadeTo('slow', 0.3, function () {
+            $("html").css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
+        }).delay(1000).fadeTo('slow', 1);
         setTimeout(arguments.callee, 10 * 1000);
     })();
 
