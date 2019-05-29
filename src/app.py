@@ -96,13 +96,13 @@ def photo():
         brightness = 50
     if(now >= sun['sunrise'] and now < sun['noon']):
         r = 20
-        brightness = 100
+        brightness = 80
     if(now >= sun['noon'] and now < sun['sunset']):
         r = 0
         brightness = 200
     if(now >= sun['sunset'] and now < sun['dusk']):
         r = 20
-        brightness = 100
+        brightness = 80
     if(now >= sun['dusk']):
         r = 40
         brightness = 50
