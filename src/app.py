@@ -90,12 +90,12 @@ def photo():
     folder_name, file_name = os.path.split(abs_path)
 
     l = Location()
-    l.name = config.location.name
-    l.region = config.location.region
-    l.latitude = config.location.lat
-    l.longitude = config.location.lon
-    l.timezone = config.location.timezone
-    l.elevation = config.location.elevation
+    l.name = config['location']['name']
+    l.region = config['location']['region']
+    l.latitude = config['location']['lat']
+    l.longitude = config['location']['lon']
+    l.timezone = config['location']['timezone']
+    l.elevation = config['location']['elevation']
     sun = l.sun()
 
     brightness = 255
@@ -103,20 +103,20 @@ def photo():
 
     now = datetime.now(timezone.utc)
     if(now >= sun['dawn'] and now < sun['sunrise']):
-        red = config.brightness.dawn.red
-        brightness = config.brightness.dawn.brightness
+        red = config['brightness']['dawn']['red']
+        brightness = config['brightness']['dawn']['brightness']
     if(now >= sun['sunrise'] and now < sun['noon']):
-        red = config.brightness.sunrise.red
-        brightness = config.brightness.sunrise.brightness
+        red = config['brightness']['sunrise']['red']
+        brightness = config['brightness']['sunrise']['brightness']
     if(now >= sun['noon'] and now < sun['sunset']):
-        red = config.brightness.noon.red
-        brightness = config.brightness.noon.brightness
+        red = config['brightness']['noon']['red']
+        brightness = config['brightness']['noon']['brightness']
     if(now >= sun['sunset'] and now < sun['dusk']):
-        red = config.brightness.sunset.red
-        brightness = config.brightness.sunset.brightness
+        red = config['brightness']['sunset']['red']
+        brightness = config['brightness']['sunset']['brightness']
     if(now >= sun['dusk']):
-        red = config.brightness.dusk.red
-        brightness = config.brightness.dusk.brightness
+        red = config['brightness']['dusk']['red']
+        brightness = config['brightness']['dusk']['brightness']
 
     green = 0
     blue = -red
@@ -129,10 +129,10 @@ def photo():
 
     response = requests.get(url, stream=True)
 
-    with open('%s/src/cache/' % rpi_folder + file_name, 'wb') as out_file:
+    with open('%s/cache/' % rpi_folder + file_name, 'wb') as out_file:
         shutil.copyfileobj(response.raw, out_file)
 
-    f = open('%s/src/cache/' % rpi_folder + file_name, 'rb', buffering=0)
+    f = open('%s/cache/' % rpi_folder + file_name, 'rb', buffering=0)
 
     try:
         return Response(f.readall(), mimetype='image/jpeg')
