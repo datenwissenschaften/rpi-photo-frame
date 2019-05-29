@@ -1,10 +1,15 @@
 jQuery(document).ready(function () {
 
-    $("html").css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
+    $(document.body).css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
 
     (function () {
         $("#time").text(moment().format('DD.MM.YYYY HH:mm'));
         setTimeout(arguments.callee, 60 * 1000);
+    })();
+
+    (function () {
+        $(document.body).css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
+        setTimeout(arguments.callee, 10 * 1000);
     })();
 
     (function () {

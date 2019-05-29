@@ -23,6 +23,7 @@
             background-size: cover;
             position: relative;
         }
+
         h2#time {
             position: fixed;
             bottom: 10px;
@@ -34,6 +35,7 @@
             font: 48px Sans-Serif;
             z-index: 10000;
         }
+
         h2#temp {
             position: fixed;
             bottom: 10px;
@@ -45,17 +47,24 @@
             font: 48px Sans-Serif;
             z-index: 10000;
         }
+
         .opp h2 {
             background: rgba(255, 255, 255, 0.75);
             color: black;
             z-index: 10000;
         }
-        html {
+
+        html,
+        body {
             background-color: black;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
+            height: 100%;
+            overflow: hidden;
+            opacity: 1.0;
+            -webkit-transition: background 1.5s linear;
+            -moz-transition: background 1.5s linear;
+            -o-transition: background 1.5s linear;
+            -ms-transition: background 1.5s linear;
+            transition: background 1.5s linear;
         }
     </style>
 
