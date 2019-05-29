@@ -7,7 +7,7 @@ jQuery(document).ready(function () {
 
     (function () {
         $("html").css('background-image', '');
-        $("html").css('background-image', 'url("/photo")');
+        $("html").css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
         setTimeout(arguments.callee, 10 * 1000);
     })();
 
