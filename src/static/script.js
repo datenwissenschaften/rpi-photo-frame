@@ -6,6 +6,7 @@ jQuery(document).ready(function () {
     })();
 
     (function () {
+        $("#image2").attr("src", "/photo?" + Math.random() * 2048 * 2048);
         $("#image1").toggleClass("transparent");
         setTimeout(arguments.callee, 10 * 1000);
     })();
