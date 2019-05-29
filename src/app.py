@@ -66,8 +66,8 @@ def weather():
 @cached(cache)
 def get_weather_from_darksky():
     return requests.get('https://api.darksky.net/forecast/9559aa7862d3ef0cf894d3593fde1b11/'
-                        + config['location']['lat']
-                        + ',' + config['location']['lon']
+                        + str(config['location']['lat'])
+                        + ',' + str(config['location']['lon'])
                         + '?lang=de&units=si').text
 
 
