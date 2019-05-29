@@ -8,9 +8,11 @@ jQuery(document).ready(function () {
     })();
 
     (function () {
-        $('#html').fadeTo('slow', 0.3, function () {
-            $("html").css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
-        }).delay(1000).fadeTo('slow', 1);
+        var image = $('#html');
+        image.fadeOut(1000, function () {
+            image.css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
+            image.fadeIn(1000);
+        });
         setTimeout(arguments.callee, 10 * 1000);
     })();
 
