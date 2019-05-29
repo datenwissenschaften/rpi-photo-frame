@@ -8,16 +8,6 @@ jQuery(document).ready(function () {
     })();
 
     (function () {
-        var image = $('#html');
-        image.css('background-image', '');
-        image.fadeOut(1000, function () {
-            image.css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
-            image.fadeIn(1000);
-        });
-        setTimeout(arguments.callee, 10 * 1000);
-    })();
-
-    (function () {
         jQuery.getJSON("/weather", function (data) {
             $("#tempval").text(parseFloat(data.currently.temperature).toFixed(1))
         });
