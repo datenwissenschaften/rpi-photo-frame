@@ -5,6 +5,7 @@ import argparse
 import setproctitle
 import requests
 import shutil
+import json
 
 from datetime import datetime, timezone
 from operator import itemgetter
@@ -15,6 +16,8 @@ from PIL.ExifTags import TAGS
 from flask import Flask, Response, render_template
 from flask_bower import Bower
 from functional import seq
+
+from shutil import copyfile
 
 from astral import Astral, Location
 import rpi_backlight as bl
@@ -30,6 +33,12 @@ Bower(app)
 parser = argparse.ArgumentParser(description='Starts the photo frame server.')
 parser.add_argument('-d', '--directory', default='/srv/photos/')
 args = parser.parse_args()
+
+if not os.path.isfile('./config.json') or True:
+    copyfile('./config.json.template', './config.json')
+
+with open('./config.json') as json_data_file:
+    config = json.load(json_data_file)
 
 
 @app.route('/')
@@ -76,52 +85,52 @@ def photo():
 
     abs_path = numpy.random.choice(photos, p=prob)
 
-    head, tail = os.path.split(abs_path)
+    folder_name, file_name = os.path.split(abs_path)
 
     l = Location()
-    l.name = 'Olching'
-    l.region = 'Bavaria'
-    l.latitude = 48.199760
-    l.longitude = 11.308920
-    l.timezone = 'Europe/Berlin'
-    l.elevation = 500
+    l.name = config.location.name
+    l.region = config.location.region
+    l.latitude = config.location.lat
+    l.longitude = config.location.lon
+    l.timezone = config.location.timezone
+    l.elevation = config.location.elevation
     sun = l.sun()
 
     brightness = 255
-    r = 0
+    red = 0
 
     now = datetime.now(timezone.utc)
     if(now >= sun['dawn'] and now < sun['sunrise']):
-        r = 40
-        brightness = 50
+        red = config.brightness.dawn.red
+        brightness = config.brightness.dawn.brightness
     if(now >= sun['sunrise'] and now < sun['noon']):
-        r = 20
-        brightness = 80
+        red = config.brightness.sunrise.red
+        brightness = config.brightness.sunrise.brightness
     if(now >= sun['noon'] and now < sun['sunset']):
-        r = 0
-        brightness = 200
+        red = config.brightness.noon.red
+        brightness = config.brightness.noon.brightness
     if(now >= sun['sunset'] and now < sun['dusk']):
-        r = 20
-        brightness = 80
+        red = config.brightness.sunset.red
+        brightness = config.brightness.sunset.brightness
     if(now >= sun['dusk']):
-        r = 40
-        brightness = 50
+        red = config.brightness.dusk.red
+        brightness = config.brightness.dusk.brightness
 
-    g = 0
-    b = -r
+    green = 0
+    blue = -red
 
     bl.set_power(True)
     bl.set_brightness(brightness, smooth=True, duration=3)
 
     url = 'http://localhost:8888/unsafe/800x480/filters:rgb(%s,%s,%s)/Downloads/%s' % (
-        r, g, b, tail)
+        red, green, blue, file_name)
 
     response = requests.get(url, stream=True)
 
-    with open('./cache/' + tail, 'wb') as out_file:
+    with open('./cache/' + file_name, 'wb') as out_file:
         shutil.copyfileobj(response.raw, out_file)
 
-    f = open('./cache/' + tail, 'rb', buffering=0)
+    f = open('./cache/' + file_name, 'rb', buffering=0)
 
     try:
         return Response(f.readall(), mimetype='image/jpeg')

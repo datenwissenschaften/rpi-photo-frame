@@ -1,0 +1,32 @@
+{
+    "location": {
+        "name": "Olching",
+        "region": "Bavaria",
+        "lat": 48.199760,
+        "lon": 11.308920,
+        "timezone": "Europe/Berlin",
+        "elevation": 500
+    },
+    "brightness": {
+        "dawn": {
+            "red": 40,
+            "brightness": 50
+        },
+        "sunrise": {
+            "red": 20,
+            "brightness": 80
+        },
+        "noon": {
+            "red": 0,
+            "brightness": 200
+        },
+        "sunset": {
+            "red": 20,
+            "brightness": 80
+        },
+        "dusk": {
+            "red": 40,
+            "brightness": 50
+        }
+    }
+}
