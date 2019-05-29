@@ -60,11 +60,35 @@
             height: 100%;
             overflow: hidden;
             opacity: 1.0;
-            -webkit-transition: background 1.5s linear;
-            -moz-transition: background 1.5s linear;
-            -o-transition: background 1.5s linear;
-            -ms-transition: background 1.5s linear;
-            transition: background 1.5s linear;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+            -webkit-animation: myfirst 5s;
+            /* Chrome, Safari, Opera */
+            animation: myfirst 5s;
+        }
+
+        /* Chrome, Safari, Opera */
+        @-webkit-keyframes myfirst {
+            from {
+                opacity: 0.2;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Standard syntax */
+        @keyframes myfirst {
+            from {
+                opacity: 0.2;
+            }
+
+            to {
+                opacity: 1;
+            }
         }
     </style>
 
