@@ -54,41 +54,34 @@
             z-index: 10000;
         }
 
-        html,
-        body {
-            background-color: black;
+        html {
+            padding: 0;
+            margin: 0;
+            width: 100%;
             height: 100%;
+        }
+
+        body {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .bg {
+            width: 100%;
+            height: 100%;
+            background-color: black;
             overflow: hidden;
             opacity: 1.0;
-            -webkit-background-size: cover;
-            -moz-background-size: cover;
-            -o-background-size: cover;
-            background-size: cover;
-            -webkit-animation: myfirst 5s;
-            /* Chrome, Safari, Opera */
-            animation: myfirst 5s;
+            -webkit-transition: opacity 1s ease-in-out;
+            -moz-transition: opacity 1s ease-in-out;
+            -o-transition: opacity 1s ease-in-out;
+            transition: opacity 1s ease-in-out;
         }
 
-        /* Chrome, Safari, Opera */
-        @-webkit-keyframes myfirst {
-            from {
-                opacity: 0.2;
-            }
-
-            to {
-                opacity: 1;
-            }
-        }
-
-        /* Standard syntax */
-        @keyframes myfirst {
-            from {
-                opacity: 0.2;
-            }
-
-            to {
-                opacity: 1;
-            }
+        .transparent {
+            opacity: 0;
         }
     </style>
 
@@ -96,7 +89,9 @@
 
 <body>
 
-    <div class="module opp">
+    <div class="module opp bg">
+        <img class="bg" src="/photo?100" />
+        <img class="bg transparent" src="/photo?200" />
         <h2 id="time">xx/xx/xx xx:xx</h2>
         <h2 id="temp">&#9728; <span id="tempval">--.-</span>&#8451;</h2>
     </div>
