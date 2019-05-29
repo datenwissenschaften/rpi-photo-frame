@@ -34,10 +34,12 @@ parser = argparse.ArgumentParser(description='Starts the photo frame server.')
 parser.add_argument('-d', '--directory', default='/srv/photos/')
 args = parser.parse_args()
 
-if not os.path.isfile('/root/config.json') or True:
-    copyfile('/root/config.json.template', '/root/config.json')
+rpi_folder = '/home/pi/rpi-photo-frame'
 
-with open('/root/config.json') as json_data_file:
+if not os.path.isfile('/root/config.json') or True:
+    copyfile('%s/config.json.template' % rpi_folder, '%s/config.json' % rpi_folder)
+
+with open('%s/config.json' % rpi_folder) as json_data_file:
     config = json.load(json_data_file)
 
 
@@ -127,10 +129,10 @@ def photo():
 
     response = requests.get(url, stream=True)
 
-    with open('./cache/' + file_name, 'wb') as out_file:
+    with open('%s/cache/' % rpi_folder + file_name, 'wb') as out_file:
         shutil.copyfileobj(response.raw, out_file)
 
-    f = open('./cache/' + file_name, 'rb', buffering=0)
+    f = open('%s/cache/' % rpi_folder + file_name, 'rb', buffering=0)
 
     try:
         return Response(f.readall(), mimetype='image/jpeg')
