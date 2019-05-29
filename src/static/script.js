@@ -16,7 +16,7 @@ jQuery(document).ready(function () {
         if ($("#image2").hasClass("transparent")) {
             $("#image2").attr("src", "/photo?" + Math.random() * 2048 * 2048);
             setTimeout(function () {
-                $("#image2").toggleClass("transparent");
+                $("#image1").toggleClass("transparent");
                 $("#image2").toggleClass("transparent");
             }, 2000);
         }
