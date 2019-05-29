@@ -1,14 +1,14 @@
 jQuery(document).ready(function () {
 
-    $("#bg").css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
-
     (function () {
         $("#time").text(moment().format('DD.MM.YYYY HH:mm'));
         setTimeout(arguments.callee, 60 * 1000);
     })();
 
     (function () {
-        $("#bg").css('background-image', 'url("/photo?' + Math.random() * 2048 * 2048 + '")');
+        $("#image1").toggleClass("transparent");
+        $("#image2").toggleClass("transparent");
+        // $("#my_image").attr("src","second.jpg");
         setTimeout(arguments.callee, 10 * 1000);
     })();
 
