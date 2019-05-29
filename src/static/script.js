@@ -7,7 +7,7 @@ jQuery(document).ready(function () {
 
     (function () {
         $("#image").attr("src", "/photo?" + Math.random() * 2048 * 2048);
-        setTimeout(arguments.callee, 10 * 1000);
+        setTimeout(arguments.callee, 60 * 60 * 1000);
     })();
 
     (function () {
