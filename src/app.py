@@ -35,6 +35,7 @@ parser.add_argument('-d', '--directory', default='/srv/photos/')
 args = parser.parse_args()
 
 rpi_folder = '/home/pi/rpi-photo-frame'
+os.makedirs('%s/cache/' % rpi_folder, exist_ok=True)
 
 if not os.path.isfile('%s/src/config.json') or True:
     copyfile('%s/src/config.json.template' % rpi_folder, '%s/src/config.json' % rpi_folder)
