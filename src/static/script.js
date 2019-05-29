@@ -25,7 +25,6 @@ jQuery(document).ready(function () {
 
     jQuery("#off").click(function () {
         jQuery.getJSON("/off", function () {
-            location.reload();
         });
     });
 
