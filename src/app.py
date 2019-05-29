@@ -34,10 +34,10 @@ parser = argparse.ArgumentParser(description='Starts the photo frame server.')
 parser.add_argument('-d', '--directory', default='/srv/photos/')
 args = parser.parse_args()
 
-if not os.path.isfile('./config.json') or True:
-    copyfile('./config.json.template', './config.json')
+if not os.path.isfile('/root/config.json') or True:
+    copyfile('/root/config.json.template', '/root/config.json')
 
-with open('./config.json') as json_data_file:
+with open('/root/config.json') as json_data_file:
     config = json.load(json_data_file)
 
 
