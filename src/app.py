@@ -60,7 +60,7 @@ def get_backlight():
 
 @app.route('/backlight', methods=['POST'])
 def set_backlight():
-    bl.set_power(request.json.switch)
+    bl.set_power(request.json['switch'])
     return jsonify({"status": bl.get_power()})
 
 
