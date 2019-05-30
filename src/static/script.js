@@ -18,14 +18,28 @@ jQuery(document).ready(function () {
     })();
 
     jQuery("#image").click(function () {
-        $.post("/backlight", JSON.stringify({ "switch": true }), function (response) {
-            location.reload();
-        }, 'json');
+        jQuery.ajax({
+            url: "/backlight",
+            type: "POST",
+            data: JSON.stringify({ "switch": true }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+                location.reload();
+            }
+        });
     });
 
     jQuery("#off").click(function () {
-        $.post("/backlight", JSON.stringify({ "switch": false }), function (response) {
-        }, 'json');
+        jQuery.ajax({
+            url: "/backlight",
+            type: "POST",
+            data: JSON.stringify({ "switch": false }),
+            dataType: "json",
+            contentType: "application/json; charset=utf-8",
+            success: function () {
+            }
+        });
     });
 
 });
