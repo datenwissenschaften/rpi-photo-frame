@@ -18,13 +18,13 @@ jQuery(document).ready(function () {
     })();
 
     jQuery("#image").click(function () {
-        $.post("/backlight", { "switch": true }, function (response) {
+        $.post("/backlight", JSON.stringify({ "switch": true }), function (response) {
             location.reload();
         }, 'json');
     });
 
     jQuery("#off").click(function () {
-        $.post("/backlight", { "switch": false }, function (response) {
+        $.post("/backlight", JSON.stringify({ "switch": false }), function (response) {
         }, 'json');
     });
 
