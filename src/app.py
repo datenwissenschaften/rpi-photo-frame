@@ -13,7 +13,7 @@ from operator import itemgetter
 import numpy
 from PIL import Image
 from PIL.ExifTags import TAGS
-from flask import Flask, Response, render_template
+from flask import Flask, Response, render_template, request, jsonify
 from flask_bower import Bower
 from functional import seq
 
@@ -53,26 +53,20 @@ def index():
         return "Missing frontend dependencies. Run bower install..."
 
 
-@app.route('/status')
-def status():
-    return "200"
+@app.route('/backlight', methods=['GET'])
+def get_backlight():
+    return jsonify({"status": bl.get_power()})
+
+
+@app.route('/backlight', methods=['POST'])
+def set_backlight():
+    bl.set_power(request.json.switch)
+    return jsonify({"status": bl.get_power()})
 
 
 @app.route('/weather')
 def weather():
     return get_weather_from_darksky()
-
-
-@app.route('/off')
-def off():
-    bl.set_power(False)
-    return "200"
-
-
-@app.route('/on')
-def on():
-    bl.set_power(True)
-    return "200"
 
 
 @cached(cache)
@@ -137,7 +131,7 @@ def photo():
 
     green = 0
     blue = -red
-    
+
     bl.set_brightness(brightness, smooth=True, duration=3)
 
     url = 'http://localhost:8888/unsafe/800x480/filters:rgb(%s,%s,%s)/Downloads/%s' % (
