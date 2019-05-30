@@ -25,7 +25,7 @@ jQuery(document).ready(function () {
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
-                location.reload();
+                $("#image").attr("src", "/photo?" + Math.random() * 2048 * 2048);
             }
         });
     });
