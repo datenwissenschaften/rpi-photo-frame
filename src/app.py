@@ -134,7 +134,7 @@ def photo():
 
     bl.set_brightness(brightness, smooth=True, duration=3)
 
-    url = 'http://localhost:8888/unsafe/trim/800x400/smart/filters:rgb(%s,%s,%s)/Downloads/%s' % (
+    url = 'http://localhost:8888/unsafe/trim/800x420/smart/filters:rgb(%s,%s,%s)/Downloads/%s' % (
         red, green, blue, file_name)
 
     response = requests.get(url, stream=True)
