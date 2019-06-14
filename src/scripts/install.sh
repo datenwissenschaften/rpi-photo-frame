@@ -62,9 +62,13 @@ echo "lcd_rotate=2" >> /boot/config.txt
 echo "start_x=0" >> /boot/config.txt
 echo "gpu_mem=256" >> /boot/config.txt
 
-# Install application
+# Install application dependencies
+
 cd /home/pi
 git clone https://github.com/MtnFranke/rpi-photo-frame
 cd rpi-photo-frame/src
 bower install
+
+# BOOTSTRAP (!)
+
 sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh
