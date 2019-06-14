@@ -41,11 +41,11 @@ rpi_folder = '/home/pi/rpi-photo-frame'
 os.makedirs('%s/cache/' % rpi_folder, exist_ok=True)
 
 # Read / write / merge config file
-config_template = json.load('%s/src/config.json.template' % rpi_folder)
-current_config = json.load('%s/src/config.json' % rpi_folder)
-config = merge(config_template, current_config)
-with open('%s/src/config.json' % rpi_folder, 'w') as outfile:
-    outfile.write(json.dumps(config, indent=4, sort_keys=True))
+with open('%s/src/config.json.template' % rpi_folder, 'r+') as base, open('%s/src/config.json' % rpi_folder, 'r+') as head:
+    config_template = json.load(base)
+    current_config = json.load(head)
+    config = merge(config_template, current_config)
+    head.write(json.dumps(config, indent=4, sort_keys=True))
 
 
 @app.route('/')
