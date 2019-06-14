@@ -38,7 +38,13 @@ Bower(app)
 
 # Make working folders and files
 rpi_folder = '/home/pi/rpi-photo-frame'
-open('%s/src/config.json' % rpi_folder, 'a+').close()
+if not os.path.isfile('%s/src/config.json' % rpi_folder):
+    with open('%s/src/config.json' % rpi_folder, 'w') as f:
+        f.write('{}')
+        f.close()
+else:
+    pass
+
 
 # Read / write / merge config file
 with open('%s/src/config.json.template' % rpi_folder, 'r+') as base, open('%s/src/config.json' % rpi_folder, 'r+') as head:
