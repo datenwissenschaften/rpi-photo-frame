@@ -67,7 +67,7 @@ echo "gpu_mem=256" >> /boot/config.txt
 cd /home/pi
 git clone https://github.com/MtnFranke/rpi-photo-frame
 cd rpi-photo-frame/src
-bower install
+bower install --allow-root
 
 # BOOTSTRAP (!)
 
