@@ -6,36 +6,37 @@ import setproctitle
 import requests
 import shutil
 import json
-
 from datetime import datetime, timezone
 from operator import itemgetter
-
 import numpy
 from PIL import Image
 from PIL.ExifTags import TAGS
 from flask import Flask, Response, render_template, request, jsonify
 from flask_bower import Bower
 from functional import seq
-
 from jsonmerge import merge
-
 from shutil import copyfile
-
 from astral import Astral, Location
 import rpi_backlight as bl
-
 from cachetools import cached, TTLCache
-cache = TTLCache(maxsize=100, ttl=600)
 
-setproctitle.setproctitle('rpi-photo-frame')
 
-app = Flask(__name__, static_url_path='/static')
-Bower(app)
-
+# Argument parsing
 parser = argparse.ArgumentParser(description='Starts the photo frame server.')
 parser.add_argument('-d', '--directory', default='/srv/photos/')
 args = parser.parse_args()
 
+# Cache configuration
+cache = TTLCache(maxsize=100, ttl=600)
+
+# Process name for os
+setproctitle.setproctitle('rpi-photo-frame')
+
+# Flask configuration
+app = Flask(__name__, static_url_path='/static')
+Bower(app)
+
+# Make working folders
 rpi_folder = '/home/pi/rpi-photo-frame'
 os.makedirs('%s/cache/' % rpi_folder, exist_ok=True)
 
@@ -83,6 +84,7 @@ def get_weather_from_darksky():
 def photo():
     files = glob.glob(args.directory + '*.jp*g')
 
+    # Sort images by date
     sort = seq(files) \
         .map(lambda x: (x, extract_exif_date(x))) \
         .sorted(key=itemgetter(1), reverse=False) \
@@ -90,14 +92,18 @@ def photo():
         .zip_with_index() \
         .map(lambda x: (x[0], x[1] ** 6 + 1))
 
+    # Sum off all images
     s = sort \
         .map(lambda x: x[1]) \
         .sum()
 
+    # All photos
     photos = sort.map(lambda x: x[0]).to_list()
 
+    # Generate probabilites based on date
     prob = sort.map(lambda x: float(x[1]) / float(s)).to_list()
 
+    # Get weighted random image, newer images are more likely to show up
     abs_path = numpy.random.choice(photos, p=prob)
 
     folder_name, file_name = os.path.split(abs_path)
@@ -111,45 +117,44 @@ def photo():
     l.elevation = config['location']['elevation']
     sun = l.sun()
 
+    # Full brightness and all colors as fallback
     brightness = 255
     red = 0
+    green = 0
+    blue = 0
 
+    # Set brightness and redness based on the sun
     now = datetime.now(timezone.utc)
     if(now >= sun['dawn'] and now < sun['sunrise']):
         red = config['brightness']['dawn']['red']
         brightness = config['brightness']['dawn']['brightness']
+        blue = -red
     if(now >= sun['sunrise'] and now < sun['noon']):
         red = config['brightness']['sunrise']['red']
         brightness = config['brightness']['sunrise']['brightness']
+        blue = -red
     if(now >= sun['noon'] and now < sun['sunset']):
         red = config['brightness']['noon']['red']
         brightness = config['brightness']['noon']['brightness']
+        blue = -red
     if(now >= sun['sunset'] and now < sun['dusk']):
         red = config['brightness']['sunset']['red']
         brightness = config['brightness']['sunset']['brightness']
+        blue = -red
     if(now >= sun['dusk']):
         red = config['brightness']['dusk']['red']
         brightness = config['brightness']['dusk']['brightness']
-
-    green = 0
-    blue = -red
+        blue = -red
 
     bl.set_brightness(brightness, smooth=True, duration=3)
 
+    # Get processed image from thumbor
     url = 'http://localhost:8888/unsafe/trim/800x450/smart/filters:rgb(%s,%s,%s)/Downloads/%s' % (
         red, green, blue, file_name)
-
     response = requests.get(url, stream=True)
 
-    with open('%s/cache/' % rpi_folder + file_name, 'wb') as out_file:
-        shutil.copyfileobj(response.raw, out_file)
-
-    f = open('%s/cache/' % rpi_folder + file_name, 'rb', buffering=0)
-
-    try:
-        return Response(f.readall(), mimetype='image/jpeg')
-    except Exception:
-        return Response(f.readlines(), mimetype='image/jpeg')
+    # Show the processed image
+    Response(response.raw, mimetype='image/jpeg')
 
 
 def extract_exif_date(photo):
