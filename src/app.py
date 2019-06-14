@@ -164,7 +164,7 @@ def photo():
     response = requests.get(url, stream=True)
 
     # Show the processed image
-    Response(response.raw, mimetype='image/jpeg')
+    Response(response.content, mimetype='image/jpeg')
 
 
 def extract_exif_date(photo):
