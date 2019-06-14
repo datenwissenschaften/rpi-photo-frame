@@ -17,6 +17,8 @@ sudo apt-get remove --purge libreoffice* -y
 sudo apt-get clean -y
 sudo apt-get autoremove -y
 
+sudo npm i frontail -g
+
 —
 
 sudo apt-get install -y software-properties-common

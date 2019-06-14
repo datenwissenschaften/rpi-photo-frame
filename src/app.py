@@ -36,9 +36,9 @@ setproctitle.setproctitle('rpi-photo-frame')
 app = Flask(__name__, static_url_path='/static')
 Bower(app)
 
-# Make working folders
+# Make working folders and files
 rpi_folder = '/home/pi/rpi-photo-frame'
-os.makedirs('%s/cache/' % rpi_folder, exist_ok=True)
+open('%s/src/config.json' % rpi_folder, 'a+').close()
 
 # Read / write / merge config file
 with open('%s/src/config.json.template' % rpi_folder, 'r+') as base, open('%s/src/config.json' % rpi_folder, 'r+') as head:
