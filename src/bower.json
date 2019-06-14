@@ -6,7 +6,7 @@
     "description": "",
     "main": "",
     "license": "Apache-2.0",
-    "homepage": "",
+    "homepage": "https://github.com/MtnFranke/rpi-photo-frame",
     "private": true,
     "ignore": [
         "**/.*",

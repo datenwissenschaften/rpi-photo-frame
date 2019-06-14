@@ -17,6 +17,8 @@ from flask import Flask, Response, render_template, request, jsonify
 from flask_bower import Bower
 from functional import seq
 
+from jsonmerge import merge
+
 from shutil import copyfile
 
 from astral import Astral, Location
@@ -37,12 +39,12 @@ args = parser.parse_args()
 rpi_folder = '/home/pi/rpi-photo-frame'
 os.makedirs('%s/cache/' % rpi_folder, exist_ok=True)
 
-if not os.path.isfile('%s/src/config.json') or True:
-    copyfile('%s/src/config.json.template' %
-             rpi_folder, '%s/src/config.json' % rpi_folder)
-
-with open('%s/src/config.json' % rpi_folder) as json_data_file:
-    config = json.load(json_data_file)
+# Read / write / merge config file
+config_template = json.load('%s/src/config.json.template' % rpi_folder)
+current_config = json.load('%s/src/config.json' % rpi_folder)
+config = merge(config_template, current_config)
+with open('%s/src/config.json' % rpi_folder, 'w') as outfile:
+    outfile.write(json.dumps(config, indent=4, sort_keys=True))
 
 
 @app.route('/')
