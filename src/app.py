@@ -163,8 +163,10 @@ def photo():
         red, green, blue, file_name)
     response = requests.get(url, stream=True)
 
-    # Show the processed image
-    Response(response.content, mimetype='image/jpeg')
+    # Cache image locally and show the processed image
+    with open('/tmp/_img.jpg', 'wb') as f:
+        shutil.copyfileobj(response.raw, f)
+    return Response(open('/tmp/_img.jpg', 'rb', buffering=0).readall(), mimetype='image/jpeg')
 
 
 def extract_exif_date(photo):
