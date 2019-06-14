@@ -1,82 +1,70 @@
-sudo nano /boot/config.txt
+#!/bin/bash
 
-and added line:
-lcd_rotate=2
+# Make sure only root can run our script
 
-—
+if [[ $EUID -ne 0 ]]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
 
-Turn display off
+# APT packages
 
-sudo xset dpms force off
+## Clean
 
-— 
+apt purge -y wolfram-engine
+apt -y purge libreoffice*
+apt -y clean
+apt -y autoremove
+apt update && apt-get -y upgrade
 
-Remove office
+## Install
 
-sudo apt-get remove --purge libreoffice* -y
-sudo apt-get clean -y
-sudo apt-get autoremove -y
+apt install -y cmake
+apt install -y software-properties-common libjpeg-dev zlib1g-dev 
+apt install -y libcurl4-openssl-dev libssl-dev
+apt install -y chromium-browser 
+apt install -y unclutter
+apt install -y git
+apt install -y ttf-ancient-fonts
+apt install -y libopencv-dev python-opencv python-picamera
+apt install -y fbi
 
-sudo npm i frontail -g
+# PIP packages
 
-—
+## Python 2.x
 
-sudo apt-get install -y software-properties-common
-sudo apt-get install libjpeg-dev zlib1g-dev -y
-sudo apt install libcurl4-openssl-dev libssl-dev -y
-sudo pip install thumbor
+pip install thumbor
 
-—
+## Python 3.x
 
-sudo pip3 install setproctitle
-sudo pip3 install pyfunctional
-sudo pip3 install Flask-Bower
-sudo pip3 install requests
-sudo pip3 install cachetools
-jsonmerge
+pip3 install setproctitle
+pip3 install pyfunctional
+pip3 install Flask-Bower
+pip3 install requests
+pip3 install cachetools
+pip3 install jsonmerge
+pip3 install astral
+pip3 install rpi_backlight
 
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-sudo apt-get install -y nodejs
-sudo npm install bower -g
+# Nodejs
 
-python3 app.py -d /home/pi/Downloads/
+curl -sL https://deb.nodesource.com/setup_10.x | -E bash -
+apt-get install -y nodejs
 
-—
+# NPM packages
 
-sudo apt-get install chromium-browser -y
-sudo apt-get install unclutter -y
+npm i bower -g
+npm i frontail -g
 
-—
+# config.txt
 
+echo "lcd_rotate=2" >> /boot/config.txt
+echo "start_x=0" >> /boot/config.txt
+echo "gpu_mem=256" >> /boot/config.txt
 
-
-sudo apt install cmake
-
-sudo pip3 install astral
-sudo pip3 install rpi_backlight
-
-
-sudo apt-get install fbi
-
-
-—
-
-pi@image-frame:~ $ sudo bash -c "echo 0 > /sys/class/backlight/rpi_backlight/bl_power"
-pi@image-frame:~ $ sudo bash -c "echo 1 > /sys/class/backlight/rpi_backlight/bl_power"
-pi@image-frame:~ $ sudo bash -c "echo 0 > /sys/class/backlight/rpi_backlight/bl_power"
-pi@image-frame:~ $ sudo bash -c "echo 0 > /sys/class/backlight/rpi_backlight/brightness"
-pi@image-frame:~ $ sudo bash -c "echo 128 > /sys/class/backlight/rpi_backlight/brightness"
-pi@image-frame:~ $ sudo bash -c "echo 64 > /sys/class/backlight/rpi_backlight/brightness"
-pi@image-frame:~ $ sudo bash -c "echo 32 > /sys/class/backlight/rpi_backlight/brightness"
-pi@image-frame:~ $ sudo bash -c "echo 16 > /sys/class/backlight/rpi_backlight/brightness"
-pi@image-frame:~ $ sudo bash -c "echo 255 > /sys/class/backlight/rpi_backlight/brightness"
-
-——
-
-sudo apt-get install ttf-ancient-fonts
-
-——
-
-OPENCV
-
-sudo apt-get install libopencv-dev python-opencv python-picamera
+# Install application
+cd /home/pi
+git clone https://github.com/MtnFranke/rpi-photo-frame
+cd rpi-photo-frame/src
+bower install
+sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh
