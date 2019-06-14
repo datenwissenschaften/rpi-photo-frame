@@ -8,9 +8,6 @@ Raspberry Pi compatible image, that serves random fullscreen images over HTTP.
 
 ![Preview](https://github.com/MtnFranke/rpi-photo-frame/raw/master/doc/preview.png)
 
-### Build Details
-- [Source Repository](https://github.com/MtnFranke/rpi-photo-frame)
-
 ## Install
 
 ```
