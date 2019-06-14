@@ -39,19 +39,23 @@ Bower(app)
 # Make working folders and files
 rpi_folder = '/home/pi/rpi-photo-frame'
 if not os.path.isfile('%s/src/config.json' % rpi_folder):
-    with open('%s/src/config.json' % rpi_folder, 'w') as f:
-        f.write('{}')
-        f.close()
+    copyfile('%s/src/config.json.template' %
+             rpi_folder, '%s/src/config.json' % rpi_folder)
 else:
     pass
 
 
 # Read / write / merge config file
+def update_config(cfg):
+    with open('%s/src/config.json' % rpi_folder, 'w') as outfile:
+        json.dump(cfg, outfile, indent=4, sort_keys=True)
+
+
 with open('%s/src/config.json.template' % rpi_folder, 'r+') as base, open('%s/src/config.json' % rpi_folder, 'r+') as head:
     config_template = json.load(base)
     current_config = json.load(head)
     config = merge(config_template, current_config)
-    head.write(json.dumps(config, indent=4, sort_keys=True))
+    update_config(config)
 
 
 @app.route('/')
@@ -186,11 +190,6 @@ def extract_exif_date(photo):
         unix_time = os.path.getmtime(photo)
 
     return unix_time
-
-
-def update_config(cfg):
-    with open('%s/src/config.json' % rpi_folder, 'w') as outfile:
-        json.dump(cfg, outfile)
 
 
 if __name__ == '__main__':
