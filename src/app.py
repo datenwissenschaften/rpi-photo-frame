@@ -135,6 +135,10 @@ def photo():
 
     # Set brightness and redness based on the sun
     now = datetime.now(timezone.utc)
+    if(now < sun['dawn']):
+        red = config['brightness']['dawn']['red']
+        brightness = config['brightness']['dawn']['brightness']
+        blue = -red
     if(now >= sun['dawn'] and now < sun['sunrise']):
         red = config['brightness']['dawn']['red']
         brightness = config['brightness']['dawn']['brightness']
