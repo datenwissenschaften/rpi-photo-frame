@@ -30,8 +30,8 @@ setproctitle.setproctitle('rpi-photo-frame')
 # Flask configuration
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = 'secret!'
+Bower(app)
 socketio = SocketIO(app)
-Bower(socketio)
 
 # Make working folders and files
 working_dir = os.path.dirname(os.path.realpath(__file__))
