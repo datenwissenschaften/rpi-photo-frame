@@ -31,8 +31,7 @@ setproctitle.setproctitle('rpi-photo-frame')
 app = Flask(__name__, static_url_path='/static')
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
-
-Bower(app)
+Bower(socketio)
 
 # Make working folders and files
 working_dir = os.path.dirname(os.path.realpath(__file__))
@@ -203,4 +202,4 @@ def random():
 
 
 if __name__ == '__main__':
-    app.run(debug=False, host='0.0.0.0')
+    socketio.run(app, debug=False, host='0.0.0.0')
