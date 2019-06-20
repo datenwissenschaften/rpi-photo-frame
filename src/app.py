@@ -165,7 +165,9 @@ def extract_exif_date(photo):
 
 @app.route('/random')
 def random():
-    files = glob.glob('../images/*.jp*g')
+    files = glob.glob(f'${working_dir}/../images/*.jp*g')
+
+    print(files)
 
     # Decay factor for the weighted random choice
     decay_factor = int(config['decay'])
