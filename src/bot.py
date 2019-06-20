@@ -82,7 +82,7 @@ def photo_handler(update, context):
             'Bitte nutze den /start command 🧐.')
     else:
         photo_file = update.message.photo[-1].get_file()
-        photo_file.download(f'../images/{str(uuid.uuid4())}.jpg')
+        photo_file.download('../images/%s.jpg' % str(uuid.uuid4()))
         update.message.reply_text('Danke für das Photo 🤩!\n'
                                   'Ich zeige es dir gleich an.')
 
