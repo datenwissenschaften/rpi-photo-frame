@@ -96,7 +96,7 @@ def cancel():
 
 
 def main():
-    pp = PicklePersistence(filename='../data/conversationbot')
+    pp = PicklePersistence(filename='%s/../data/conversationbot' % working_dir)
     updater = Updater(str(config['telegram']['bot']['token']), persistence=pp, use_context=True)
 
     dp = updater.dispatcher
