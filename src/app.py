@@ -19,7 +19,7 @@ from flask import Flask, Response, render_template, request, jsonify
 from flask_bower import Bower
 from functional import seq
 from jsonmerge import merge
-from flask_socketio import SocketIO
+from flask_socketio import SocketIO, send, emit
 
 # Cache configuration
 cache = TTLCache(maxsize=100, ttl=600)
@@ -198,6 +198,9 @@ def random():
     abs_path = numpy.random.choice(photos, p=prob)
 
     folder_name, file_name = os.path.split(abs_path)
+
+    send(file_name)
+
     return jsonify({'folder_name': folder_name, 'file_name': file_name})
 
 

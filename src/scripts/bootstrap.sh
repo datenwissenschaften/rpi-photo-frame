@@ -20,7 +20,7 @@ chmod -R 777 /home/pi
 /usr/bin/python3 /home/pi/rpi-photo-frame/src/app.py >> /var/log/rpi-photo-frame.log &
 
 # Start photo frame bot
-/usr/bin/python3 /home/pi/rpi-photo-frame/src/bot.py >> /var/log/bot.log &
+(sleep 30 && /usr/bin/python3 /home/pi/rpi-photo-frame/src/bot.py) >> /var/log/bot.log &
 
 # Start logging proxy
 /usr/bin/frontail -n 2000 -p 9010 -d /var/log/bootstrap.log &
