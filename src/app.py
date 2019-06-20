@@ -195,7 +195,7 @@ def random():
     abs_path = numpy.random.choice(photos, p=prob)
 
     folder_name, file_name = os.path.split(abs_path)
-    return jsonify({folder_name: folder_name, file_name: file_name})
+    return jsonify({'folder_name': folder_name, 'file_name': file_name})
 
 
 if __name__ == '__main__':
