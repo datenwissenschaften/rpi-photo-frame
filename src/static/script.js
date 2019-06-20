@@ -1,15 +1,19 @@
 jQuery(document).ready(function () {
 
-    (function () {
-        jQuery("#time").text(moment().format('DD.MM.YYYY HH:mm'));
-        setTimeout(arguments.callee, 60 * 1000);
-    })();
-
-    (function () {
+    function setNewImage() {
         jQuery.getJSON("/random", function (data) {
             $("#image").attr("src", "/image/" + data.file_name);
         });
+    }
+
+    (function () {
+        setNewImage();
         setTimeout(arguments.callee, 60 * 60 * 1000);
+    })();
+
+    (function () {
+        jQuery("#time").text(moment().format('DD.MM.YYYY HH:mm'));
+        setTimeout(arguments.callee, 60 * 1000);
     })();
 
     (function () {
@@ -27,7 +31,7 @@ jQuery(document).ready(function () {
             dataType: "json",
             contentType: "application/json; charset=utf-8",
             success: function () {
-                $("#image").attr("src", "/photo?" + Math.random() * 2048 * 2048);
+                setNewImage();
             }
         });
     });
