@@ -199,7 +199,7 @@ def random():
 
     folder_name, file_name = os.path.split(abs_path)
 
-    send(file_name)
+    send(file_name, namespace='/image')
 
     return jsonify({'folder_name': folder_name, 'file_name': file_name})
 
