@@ -1,0 +1,11 @@
+setproctitle
+requests
+numpy
+cachetools
+rpi_backlight
+astral
+jsonmerge
+flask
+pyfunctional
+python-telegram-bot==12.0.0b1
+Flask-Bower

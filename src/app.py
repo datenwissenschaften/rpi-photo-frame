@@ -1,30 +1,24 @@
 import datetime
 import glob
-import os
-import argparse
-import setproctitle
-import requests
-import shutil
 import json
+import os
+import shutil
 from datetime import datetime, timezone
 from operator import itemgetter
+from shutil import copyfile
+
 import numpy
+import requests
+import rpi_backlight as bl
+import setproctitle
 from PIL import Image
 from PIL.ExifTags import TAGS
+from astral import Location
+from cachetools import cached, TTLCache
 from flask import Flask, Response, render_template, request, jsonify
 from flask_bower import Bower
 from functional import seq
 from jsonmerge import merge
-from shutil import copyfile
-from astral import Astral, Location
-import rpi_backlight as bl
-from cachetools import cached, TTLCache
-
-
-# Argument parsing
-parser = argparse.ArgumentParser(description='Starts the photo frame server.')
-parser.add_argument('-d', '--directory', default='/srv/photos/')
-args = parser.parse_args()
 
 # Cache configuration
 cache = TTLCache(maxsize=100, ttl=600)
@@ -37,21 +31,21 @@ app = Flask(__name__, static_url_path='/static')
 Bower(app)
 
 # Make working folders and files
-rpi_folder = '/home/pi/rpi-photo-frame'
-if not os.path.isfile('%s/src/config.json' % rpi_folder):
-    copyfile('%s/src/config.json.template' %
-             rpi_folder, '%s/src/config.json' % rpi_folder)
+working_dir = os.path.dirname(os.path.realpath(__file__))
+if not os.path.isfile('%s/config.json' % working_dir):
+    copyfile('%s/config.json.template' %
+             working_dir, '%s/config.json' % working_dir)
 else:
     pass
 
 
 # Read / write / merge config file
 def update_config(cfg):
-    with open('%s/src/config.json' % rpi_folder, 'w') as outfile:
+    with open('%s/config.json' % working_dir, 'w') as outfile:
         json.dump(cfg, outfile, indent=4, sort_keys=True)
 
 
-with open('%s/src/config.json.template' % rpi_folder, 'r+') as base, open('%s/src/config.json' % rpi_folder, 'r+') as head:
+with open('%s/config.json.template' % working_dir, 'r+') as base, open('%s/config.json' % working_dir, 'r+') as head:
     config_template = json.load(base)
     current_config = json.load(head)
     config = merge(config_template, current_config)
@@ -90,42 +84,18 @@ def get_weather_from_darksky():
                         + '?lang=de&units=si').text
 
 
-@app.route('/photo')
-def photo():
-    files = glob.glob(args.directory + '*.jp*g')
-
-    # Sort images by date
-    sort = seq(files) \
-        .map(lambda x: (x, extract_exif_date(x))) \
-        .sorted(key=itemgetter(1), reverse=False) \
-        .map(lambda x: x[0]) \
-        .zip_with_index() \
-        .map(lambda x: (x[0], x[1] ** 6 + 1))
-
-    # Sum off all images
-    s = sort \
-        .map(lambda x: x[1]) \
-        .sum()
-
-    # All photos
-    photos = sort.map(lambda x: x[0]).to_list()
-
-    # Generate probabilites based on date
-    prob = sort.map(lambda x: float(x[1]) / float(s)).to_list()
-
-    # Get weighted random image, newer images are more likely to show up
-    abs_path = numpy.random.choice(photos, p=prob)
-
-    folder_name, file_name = os.path.split(abs_path)
-
-    l = Location()
-    l.name = config['location']['name']
-    l.region = config['location']['region']
-    l.latitude = config['location']['lat']
-    l.longitude = config['location']['lon']
-    l.timezone = config['location']['timezone']
-    l.elevation = config['location']['elevation']
-    sun = l.sun()
+# noinspection PyUnresolvedReferences
+@app.route('/image/<filename>')
+def image(filename):
+    # Location for the blue filter
+    loc = Location()
+    loc.name = config['location']['name']
+    loc.region = config['location']['region']
+    loc.latitude = config['location']['lat']
+    loc.longitude = config['location']['lon']
+    loc.timezone = config['location']['timezone']
+    loc.elevation = config['location']['elevation']
+    sun = loc.sun()
 
     # Full brightness and all colors as fallback
     brightness = 255
@@ -135,27 +105,27 @@ def photo():
 
     # Set brightness and redness based on the sun
     now = datetime.now(timezone.utc)
-    if(now < sun['dawn']):
+    if now < sun['dawn']:
         red = config['brightness']['dawn']['red']
         brightness = config['brightness']['dawn']['brightness']
         blue = -red
-    if(now >= sun['dawn'] and now < sun['sunrise']):
+    if sun['dawn'] <= now < sun['sunrise']:
         red = config['brightness']['dawn']['red']
         brightness = config['brightness']['dawn']['brightness']
         blue = -red
-    if(now >= sun['sunrise'] and now < sun['noon']):
+    if sun['sunrise'] <= now < sun['noon']:
         red = config['brightness']['sunrise']['red']
         brightness = config['brightness']['sunrise']['brightness']
         blue = -red
-    if(now >= sun['noon'] and now < sun['sunset']):
+    if sun['noon'] <= now < sun['sunset']:
         red = config['brightness']['noon']['red']
         brightness = config['brightness']['noon']['brightness']
         blue = -red
-    if(now >= sun['sunset'] and now < sun['dusk']):
+    if sun['sunset'] <= now < sun['dusk']:
         red = config['brightness']['sunset']['red']
         brightness = config['brightness']['sunset']['brightness']
         blue = -red
-    if(now >= sun['dusk']):
+    if now >= sun['dusk']:
         red = config['brightness']['dusk']['red']
         brightness = config['brightness']['dusk']['brightness']
         blue = -red
@@ -163,8 +133,8 @@ def photo():
     bl.set_brightness(brightness, smooth=True, duration=3)
 
     # Get processed image from thumbor
-    url = 'http://localhost:8888/unsafe/trim/800x450/smart/filters:rgb(%s,%s,%s)/Downloads/%s' % (
-        red, green, blue, file_name)
+    url = 'http://localhost:8888/unsafe/trim/800x450/smart/filters:rgb(%s,%s,%s)/rpi-photo-frame/images/%s' % (
+        red, green, blue, filename)
     response = requests.get(url, stream=True)
 
     # Cache image locally and show the processed image
@@ -173,29 +143,58 @@ def photo():
     return Response(open('/tmp/_img.jpg', 'rb', buffering=0).readall(), mimetype='image/jpeg')
 
 
+# noinspection PyProtectedMember
+# noinspection PyBroadException
 def extract_exif_date(photo):
     ret = {}
-
     im = Image.open(photo)
-
     exif_data = im._getexif()
-
     try:
         for tag, value in exif_data.items():
             decoded = TAGS.get(tag, tag)
             ret[decoded] = value
-
         datetime_object = datetime.datetime.strptime(
             ret.get('DateTime'), '%Y:%m:%d %H:%M:%S'
         )
-
         unix_time = datetime_object.timestamp()
-
     except Exception:
         # File modification date as fallback
         unix_time = os.path.getmtime(photo)
-
     return unix_time
+
+
+@app.route('/photo')
+def photo():
+    files = glob.glob('images/*.jp*g')
+
+    # Decay factor for the weighted random choice
+    decay_factor = int(config['decay'])
+
+    # Sort images by date
+    sort = seq(files) \
+        .map(lambda x: (x, extract_exif_date(x))) \
+        .sorted(key=itemgetter(1), reverse=False) \
+        .map(lambda x: x[0]) \
+        .zip_with_index() \
+        .map(lambda x: (x[0], x[1] ** decay_factor + 1))
+
+    # Sum off all images
+    s = sort \
+        .map(lambda x: x[1]) \
+        .sum()
+
+    # All photos
+    photos = sort.map(lambda x: x[0]).to_list()
+
+    # Generate probabilities based on date
+    prob = sort.map(lambda x: float(x[1]) / float(s)).to_list()
+
+    # Get weighted random image, newer images are more likely to show up
+    abs_path = numpy.random.choice(photos, p=prob)
+
+    folder_name, file_name = os.path.split(abs_path)
+
+    return {folder_name: folder_name, file_name: file_name}
 
 
 if __name__ == '__main__':

@@ -1,11 +1,12 @@
 {
+    "decay": 4,
     "location": {
-        "name": "Olching",
-        "region": "Bavaria",
-        "lat": 48.199760,
-        "lon": 11.308920,
+        "name": "FrameName",
+        "region": "FrameRegion",
+        "lat": 0.0,
+        "lon": 0.0,
         "timezone": "Europe/Berlin",
-        "elevation": 500
+        "elevation": 0
     },
     "brightness": {
         "dawn": {
@@ -28,5 +29,11 @@
             "red": 40,
             "brightness": 30
         }
+    },
+    "telegram" : {
+        "bot" : {
+            "token" : "###CHANGE_ME###"
+        },
+        "pin" : "000000"
     }
 }

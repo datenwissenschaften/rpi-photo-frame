@@ -29,22 +29,9 @@ apt install -y ttf-ancient-fonts
 apt install -y libopencv-dev python-opencv python-picamera
 apt install -y fbi
 
-# PIP packages
-
-## Python 2.x
+# Python applications
 
 pip install thumbor
-
-## Python 3.x
-
-pip3 install setproctitle
-pip3 install pyfunctional
-pip3 install Flask-Bower
-pip3 install requests
-pip3 install cachetools
-pip3 install jsonmerge
-pip3 install astral
-pip3 install rpi_backlight
 
 # Nodejs
 
@@ -66,7 +53,9 @@ echo "gpu_mem=256" >> /boot/config.txt
 
 cd /home/pi
 git clone https://github.com/MtnFranke/rpi-photo-frame
-cd rpi-photo-frame/src
+cd rpi-photo-frame
+pip3 install -r requirements.txt
+cd src
 bower install --allow-root
 
 # BOOTSTRAP (!)
