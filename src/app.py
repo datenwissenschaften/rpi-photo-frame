@@ -19,6 +19,7 @@ from flask import Flask, Response, render_template, request, jsonify
 from flask_bower import Bower
 from functional import seq
 from jsonmerge import merge
+from flask_socketio import SocketIO
 
 # Cache configuration
 cache = TTLCache(maxsize=100, ttl=600)
@@ -28,6 +29,9 @@ setproctitle.setproctitle('rpi-photo-frame')
 
 # Flask configuration
 app = Flask(__name__, static_url_path='/static')
+app.config['SECRET_KEY'] = 'secret!'
+socketio = SocketIO(app)
+
 Bower(app)
 
 # Make working folders and files
@@ -199,4 +203,4 @@ def random():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=False, host='0.0.0.0')
