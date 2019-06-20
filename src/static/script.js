@@ -6,7 +6,9 @@ jQuery(document).ready(function () {
     })();
 
     (function () {
-        $("#image").attr("src", "/photo?" + Math.random() * 2048 * 2048);
+        jQuery.getJSON("/random", function (data) {
+            $("#image").attr("src", "/image/" + data.file_name);
+        });
         setTimeout(arguments.callee, 60 * 60 * 1000);
     })();
 

@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Repair permissions
+chmod -R 777 /home/pi
+
 # Turn backlight off
 /usr/local/bin/rpi-backlight --off &
 

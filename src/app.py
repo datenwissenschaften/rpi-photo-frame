@@ -163,9 +163,9 @@ def extract_exif_date(photo):
     return unix_time
 
 
-@app.route('/photo')
-def photo():
-    files = glob.glob('images/*.jp*g')
+@app.route('/random')
+def random():
+    files = glob.glob('../images/*.jp*g')
 
     # Decay factor for the weighted random choice
     decay_factor = int(config['decay'])
@@ -193,8 +193,7 @@ def photo():
     abs_path = numpy.random.choice(photos, p=prob)
 
     folder_name, file_name = os.path.split(abs_path)
-
-    return {folder_name: folder_name, file_name: file_name}
+    return jsonify({folder_name: folder_name, file_name: file_name})
 
 
 if __name__ == '__main__':
