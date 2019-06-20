@@ -52,7 +52,7 @@ jQuery(document).ready(function () {
     socket.on('connect', function(){
         console.log("CONNECTED!")
     });
-    socket.on('event', function(data){
+    socket.on('image', function(data){
         console.log(data)
     });
     socket.on('disconnect', function(){
