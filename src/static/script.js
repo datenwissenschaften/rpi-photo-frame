@@ -48,7 +48,7 @@ jQuery(document).ready(function () {
         });
     });
 
-    var socket = io('http://localhost');
+    var socket = io();
     socket.on('connect', function(){
         console.log("CONNECTED!")
     });
