@@ -48,4 +48,15 @@ jQuery(document).ready(function () {
         });
     });
 
+    var socket = io('http://localhost');
+    socket.on('connect', function(){
+        console.log("CONNECTED!")
+    });
+    socket.on('event', function(data){
+        console.log(data)
+    });
+    socket.on('disconnect', function(){
+        console.log("DISCONNECTED!")
+    });
+
 });
