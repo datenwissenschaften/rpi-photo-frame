@@ -199,7 +199,7 @@ def random():
 
     folder_name, file_name = os.path.split(abs_path)
 
-    send(file_name, namespace='/image')
+    socketio.emit('image', {'data': file_name})
 
     return jsonify({'folder_name': folder_name, 'file_name': file_name})
 

@@ -48,6 +48,9 @@ npm i frontail -g
 echo "lcd_rotate=2" >> /boot/config.txt
 echo "start_x=0" >> /boot/config.txt
 echo "gpu_mem=256" >> /boot/config.txt
+echo "disable_splash=1"  >> /boot/config.txt
+# TODO: Untested
+# echo -n "logo.nologo consoleblank=0 loglevel=1 quiet" >> /boot/cmdline.txt
 
 # Install application dependencies
 
