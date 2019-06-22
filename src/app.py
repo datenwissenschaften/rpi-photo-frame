@@ -92,7 +92,7 @@ def get_weather_from_darksky():
 
 @app.route('/delete', methods=['DELETE'])
 def delete_current():
-    os.remove(current_photo)
+    os.remove(working_dir + '/../images/' + current_photo)
     socketio.emit('command', {'data': 'next'})
     return jsonify({'status': 200})
 
@@ -150,6 +150,10 @@ def image(filename):
         blue = -red
 
     bl.set_brightness(brightness, smooth=True, duration=3)
+
+    # Write global photo to current
+    global current_photo
+    current_photo = filename
 
     # Get processed image from thumbor
     url = 'http://localhost:8888/unsafe/trim/800x450/smart/filters:rgb(%s,%s,%s)/rpi-photo-frame/images/%s' % (
@@ -214,10 +218,6 @@ def random():
     abs_path = numpy.random.choice(photos, p=prob)
 
     folder_name, file_name = os.path.split(abs_path)
-
-    # Write global photo to current
-    global current_photo
-    current_photo = abs_path
 
     return jsonify({'folder_name': folder_name, 'file_name': file_name})
 
