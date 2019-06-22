@@ -1,5 +1,8 @@
 #!/bin/sh -e
 
+# Turn backlight off
+/usr/local/bin/rpi-backlight --off &
+
 # Turn all console prints off
 dmesg --console-off
 

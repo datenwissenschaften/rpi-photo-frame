@@ -61,7 +61,8 @@ echo "start_x=0" >> /boot/config.txt
 echo "gpu_mem=256" >> /boot/config.txt
 echo "disable_splash=1"  >> /boot/config.txt
 # TODO: Untested
-# echo -n "logo.nologo consoleblank=0 loglevel=1 quiet" >> /boot/cmdline.txt
+# TODO: Change tty1 to tty3
+# echo -n "quiet plymouth.ignore-serial-consoles logo.nologo vt.global_cursor_default=0" >> /boot/cmdline.txt
 
 # Install application dependencies
 
