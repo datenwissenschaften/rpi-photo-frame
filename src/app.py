@@ -99,7 +99,7 @@ def delete_current():
 
 @app.route('/next/<filename>', methods=['GET'])
 def show_next(filename):
-    socketio.emit('image', {'data': filename})
+    socketio.emit('image', {'data': filename + '.jpg'})
     return jsonify({'status': 200})
 
 

@@ -58,11 +58,11 @@ jQuery(document).ready(function () {
     });
     socket.on('image', function(data){
         console.log(data)
-        setImage(data);
+        setImage(data.data);
     });
     socket.on('command', function(data){
         console.log(data)
-        if(data == 'next') {
+        if(data.data == 'next') {
             setNewImage();
         }
     });
