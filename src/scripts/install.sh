@@ -30,15 +30,16 @@ apt update && apt-get -y upgrade
 
 ## Install
 
-apt install -y cmake
-apt install -y software-properties-common libjpeg-dev zlib1g-dev 
-apt install -y libcurl4-openssl-dev libssl-dev
-apt install -y chromium-browser 
-apt install -y unclutter
-apt install -y git
-apt install -y ttf-ancient-fonts
-apt install -y libopencv-dev python-opencv python-picamera
-apt install -y fbi
+apt install -y cmake \
+    software-properties-common libjpeg-dev zlib1g-dev \
+    libcurl4-openssl-dev libssl-dev \
+    chromium-browser \
+    unclutter \
+    git \
+    ttf-ancient-fonts \
+    libopencv-dev python-opencv python-picamera \
+    fbi \
+    x11-xserver-utils
 
 # Python applications
 
