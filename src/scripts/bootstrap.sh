@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# Show splash screen
-/usr/bin/fbi -T 1 -noverbose -a -t 60 --once /home/pi/rpi-photo-frame/doc/splash.png &
-
 # Repair permissions
 chmod -R 777 /home/pi
 
@@ -16,6 +13,9 @@ DISPLAY=:0.0 ; export DISPLAY
 
 # Reload crontab from git
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab &
+
+# Show splash screen
+/usr/bin/fbi -T 1 -noverbose -a -t 60 --once /home/pi/rpi-photo-frame/doc/splash.png &
 
 # Start thumbor
 /usr/local/bin/thumbor -c /home/pi/rpi-photo-frame/src/conf/thumbor.conf >> /var/log/thumbor.log &
