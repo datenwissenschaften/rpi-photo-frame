@@ -28,6 +28,13 @@ apt -y clean
 apt -y autoremove
 apt update && apt-get -y upgrade
 
+rm -r /home/pi/Desktop
+rm -r /home/pi/python_games
+
+## Regenerate SSH keys
+
+rm /etc/ssh/ssh_host_* && sudo dpkg-reconfigure openssh-server
+
 ## Install
 
 apt install -y cmake \
