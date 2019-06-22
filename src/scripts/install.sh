@@ -80,6 +80,9 @@ pip3 install -r requirements.txt
 cd src
 bower install --allow-root
 
+# Repair permissions
+chmod -R 777 /home/pi
+
 # BOOTSTRAP (!)
 
 sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh

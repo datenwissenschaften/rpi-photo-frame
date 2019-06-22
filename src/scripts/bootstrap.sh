@@ -1,11 +1,5 @@
 #!/bin/bash
 
-# Repair permissions
-chmod -R 777 /home/pi
-
-# Update SSH key
-cp /home/pi/rpi-photo-frame/src/ssh/photo_frame_rsa.pub /home/pi/.ssh/authorized_keys/*
-
 # Disable console prompt
 systemctl disable getty@tty1.service
 
