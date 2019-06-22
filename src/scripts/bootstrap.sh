@@ -10,9 +10,6 @@ cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
 # Reload crontab from git
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab &
 
-# Show splash screen
-# /usr/bin/fbi -T 1 -noverbose -a -t 60 --once /home/pi/rpi-photo-frame/doc/splash.png &
-
 # Start thumbor
 /usr/local/bin/thumbor -c /home/pi/rpi-photo-frame/src/conf/thumbor.conf >> /var/log/thumbor.log &
 
@@ -24,9 +21,6 @@ cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
 
 # Start logging proxy
 /usr/bin/frontail -n 2000 -p 9010 -d /var/log/bootstrap.log &
-
-# Turn display on after 30s
-# (sleep 30 && /usr/local/bin/rpi-backlight --on) &
 
 # Start the X programs
 xinit /home/pi/rpi-photo-frame/src/scripts/xprograms.sh

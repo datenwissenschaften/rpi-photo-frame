@@ -1,6 +1,0 @@
-[Desktop Entry]
-Type=Application
-Name=Chromium
-Comment=Chromium Webbrowser
-NoDisplay=false
-Exec=chromium-browser --noerrordialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --kiosk "http://localhost:5000"
