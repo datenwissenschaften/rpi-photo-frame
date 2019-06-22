@@ -6,6 +6,10 @@
 # Repair permissions
 chmod -R 777 /home/pi
 
+# Update scripts
+cp -R /home/pi/rpi-photo-frame/conf/chromium.desktop /etc/xdg/autostart/chromium.desktop
+cp -R /home/pi/rpi-photo-frame/conf/rc.local /etc/rc.local
+
 # Turn backlight off
 # /usr/local/bin/rpi-backlight --off &
 
