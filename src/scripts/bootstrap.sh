@@ -4,8 +4,8 @@
 chmod -R 777 /home/pi
 
 # Update scripts
-cp -R /home/pi/rpi-photo-frame/conf/chromium.desktop /etc/xdg/autostart/chromium.desktop
-cp -R /home/pi/rpi-photo-frame/conf/rc.local /etc/rc.local
+cp /home/pi/rpi-photo-frame/src/conf/chromium.desktop /etc/xdg/autostart/chromium.desktop
+cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
 
 # No mouse cursor
 DISPLAY=:0.0 ; export DISPLAY
