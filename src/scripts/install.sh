@@ -7,6 +7,17 @@ if [[ $EUID -ne 0 ]]; then
    exit 1
 fi
 
+# Parameters to environment
+
+if [[ $# -le 1 ]]
+then
+   echo "This script must be run with configuration" 1>&2
+   exit 1
+fi
+
+echo "TELEGRAM_TOKEN=$1" >> /etc/environment
+echo "PIN=$2"  >> /etc/environment
+
 # APT packages
 
 ## Clean
