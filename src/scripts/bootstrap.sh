@@ -7,8 +7,8 @@ chmod -R 777 /home/pi
 # /usr/local/bin/rpi-backlight --off &
 
 # No mouse cursor
-# export DISPLAY=:0
-# /usr/bin/unclutter -idle 0.1 -root &
+DISPLAY=:0.0 ; export DISPLAY
+/usr/bin/unclutter -idle 0 -root &
 
 # Reload crontab from git
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab &
