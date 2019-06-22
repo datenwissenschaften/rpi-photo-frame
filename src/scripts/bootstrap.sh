@@ -7,10 +7,6 @@ chmod -R 777 /home/pi
 cp /home/pi/rpi-photo-frame/src/conf/chromium.desktop /etc/xdg/autostart/chromium.desktop
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
 
-# No mouse cursor
-DISPLAY=:0.0 ; export DISPLAY
-/usr/bin/unclutter -idle 0 -root &
-
 # Reload crontab from git
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab &
 
@@ -32,5 +28,5 @@ DISPLAY=:0.0 ; export DISPLAY
 # Turn display on after 30s
 # (sleep 30 && /usr/local/bin/rpi-backlight --on) &
 
-# Start chromium
-xinit /usr/bin/chromium-browser --noerrordialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --no-sandbox --kiosk "http://localhost:5000"
+# Start the X programs
+xinit /home/pi/rpi-photo-frame/src/scripts/xprograms.sh
