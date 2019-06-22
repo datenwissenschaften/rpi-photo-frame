@@ -6,6 +6,10 @@ jQuery(document).ready(function () {
         });
     }
 
+    function setImage(data) {
+         $("#image").attr("src", "/image/" + data);
+    }
+
     (function () {
         setNewImage();
         setTimeout(arguments.callee, 60 * 60 * 1000);
@@ -53,10 +57,10 @@ jQuery(document).ready(function () {
         console.log("CONNECTED!")
     });
     socket.on('image', function(data){
-        console.log(data)
+        setImage(data);
     });
     socket.on('command', function(data){
-        if(data === 'next') {
+        if(data == 'next') {
             setNewImage();
         }
     });

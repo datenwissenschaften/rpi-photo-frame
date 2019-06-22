@@ -92,9 +92,12 @@ def photo_handler(update, context):
 
 
 def delete_photo(update, context):
-    requests.delete('http://127.0.0.1:5000/some/endpoint')
-    update.message.reply_text('Photo erfolgreich gelöscht ✅!\n'
-                              'Ich zeige es dir nicht mehr an.')
+    r = requests.delete('http://localhost:5000/delete').json()
+    if int(r['status']) == 200:
+        update.message.reply_text('Photo erfolgreich gelöscht ✅!\n'
+                                  'Ich zeige es dir nicht mehr an.')
+    else:
+        update.message.reply_text('Fehler ❌!\n')
 
 
 def error(update, context):
@@ -122,7 +125,7 @@ def main():
     dp.add_handler(start_conversation_handler)
 
     dp.add_handler(CommandHandler('delete', delete_photo))
-    
+
     dp.add_handler(MessageHandler(Filters.photo, photo_handler))
 
     dp.add_error_handler(error)
