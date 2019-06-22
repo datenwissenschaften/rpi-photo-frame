@@ -29,11 +29,5 @@
             "red": 40,
             "brightness": 30
         }
-    },
-    "telegram" : {
-        "bot" : {
-            "token" : "###CHANGE_ME###"
-        },
-        "pin" : "000000"
     }
 }

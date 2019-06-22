@@ -9,5 +9,4 @@
 ## Install
 
 ```
-curl -sSf https://raw.githubusercontent.com/MtnFranke/rpi-photo-frame/master/src/scripts/install.sh TELEGRAM_TOKEN PIN | sudo bash
-```
+curl -sSf https://raw.githubusercontent.com/MtnFranke/rpi-photo-frame/master/src/scripts/install.sh | sudo bash -s TELEGRAM_BOT_TOKEN PIN```

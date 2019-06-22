@@ -34,7 +34,7 @@ SET_PIN, SET_LOCATION = range(2)
 def start(update, context):
     current_pin = context.user_data.get('pin') or None
 
-    if (current_pin is None) or (int(current_pin) != int(config['telegram']['pin'])):
+    if (current_pin is None) or (int(current_pin) != int(os.environ['PIN'])):
         update.message.reply_text(
             'Hallo! \nIch bin dein Bilderrahmen 😁 🏞 🎉 \n\n'
             'Bitte schicke mir die aufgedruckte PIN.')
@@ -78,7 +78,7 @@ def set_pin(update, context):
 def photo_handler(update, context):
     current_pin = context.user_data.get('pin') or None
 
-    if (current_pin is None) or (int(current_pin) != int(config['telegram']['pin'])):
+    if (current_pin is None) or (int(current_pin) != int(os.environ['PIN'])):
         update.message.reply_text(
             'Du hast keine PIN gesetzt 😱.\n'
             'Bitte nutze den /start command 🧐.')
@@ -110,7 +110,7 @@ def cancel():
 
 def main():
     pp = PicklePersistence(filename='%s/../data/conversationbot' % working_dir)
-    updater = Updater(str(config['telegram']['bot']['token']), persistence=pp, use_context=True)
+    updater = Updater(str(os.environ['TELEGRAM_TOKEN']), persistence=pp, use_context=True)
 
     dp = updater.dispatcher
 
