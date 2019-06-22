@@ -30,4 +30,7 @@ DISPLAY=:0.0 ; export DISPLAY
 /usr/bin/frontail -n 2000 -p 9010 -d /var/log/bootstrap.log &
 
 # Turn display on after 30s
-(sleep 30 && /usr/local/bin/rpi-backlight --on) &
+# (sleep 30 && /usr/local/bin/rpi-backlight --on) &
+
+# Start chromium
+xinit /usr/bin/chromium-browser --noerrordialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --kiosk "http://localhost:5000"
