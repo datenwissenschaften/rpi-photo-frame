@@ -57,9 +57,11 @@ jQuery(document).ready(function () {
         console.log("CONNECTED!")
     });
     socket.on('image', function(data){
+        console.log(data)
         setImage(data);
     });
     socket.on('command', function(data){
+        console.log(data)
         if(data == 'next') {
             setNewImage();
         }

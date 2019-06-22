@@ -97,6 +97,12 @@ def delete_current():
     return jsonify({'status': 200})
 
 
+@app.route('/next/<filename>', methods=['GET'])
+def show_next(filename):
+    socketio.emit('image', {'data': filename})
+    return jsonify({'status': 200})
+
+
 # noinspection PyUnresolvedReferences
 @app.route('/image/<filename>')
 def image(filename):

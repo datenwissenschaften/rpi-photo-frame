@@ -86,7 +86,7 @@ def photo_handler(update, context):
         filename = str(uuid.uuid4())
         photo_file = update.message.photo[-1].get_file()
         photo_file.download('%s/../images/%s.jpg' % (working_dir, filename))
-        # socketio.emit('image', {'data': filename})
+        requests.get('http://localhost:5000/next/%s' % filename).json()
         update.message.reply_text('Danke für das Photo 🤩!\n'
                                   'Ich zeige es dir gleich an.')
 
