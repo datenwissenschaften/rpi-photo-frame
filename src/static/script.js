@@ -55,6 +55,11 @@ jQuery(document).ready(function () {
     socket.on('image', function(data){
         console.log(data)
     });
+    socket.on('command', function(data){
+        if(data === 'next') {
+            setNewImage();
+        }
+    });
     socket.on('disconnect', function(){
         console.log("DISCONNECTED!")
     });

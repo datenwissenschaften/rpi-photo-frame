@@ -2,8 +2,10 @@ import json
 import logging
 import os
 import uuid
+import requests
 
 from jsonmerge import merge
+# noinspection PyPackageRequirements
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, PicklePersistence)
 
 # Enable logging
@@ -81,10 +83,18 @@ def photo_handler(update, context):
             'Du hast keine PIN gesetzt 😱.\n'
             'Bitte nutze den /start command 🧐.')
     else:
+        filename = str(uuid.uuid4())
         photo_file = update.message.photo[-1].get_file()
-        photo_file.download('%s/../images/%s.jpg' % (working_dir, str(uuid.uuid4())))
+        photo_file.download('%s/../images/%s.jpg' % (working_dir, filename))
+        # socketio.emit('image', {'data': filename})
         update.message.reply_text('Danke für das Photo 🤩!\n'
                                   'Ich zeige es dir gleich an.')
+
+
+def delete_photo(update, context):
+    requests.delete('http://127.0.0.1:5000/some/endpoint')
+    update.message.reply_text('Photo erfolgreich gelöscht ✅!\n'
+                              'Ich zeige es dir nicht mehr an.')
 
 
 def error(update, context):
@@ -111,6 +121,8 @@ def main():
     )
     dp.add_handler(start_conversation_handler)
 
+    dp.add_handler(CommandHandler('delete', delete_photo))
+    
     dp.add_handler(MessageHandler(Filters.photo, photo_handler))
 
     dp.add_error_handler(error)

@@ -4,7 +4,7 @@
 chmod -R 777 /home/pi
 
 # Turn backlight off
-/usr/local/bin/rpi-backlight --off &
+# /usr/local/bin/rpi-backlight --off &
 
 # No mouse cursor
 # export DISPLAY=:0

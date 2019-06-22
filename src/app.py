@@ -33,6 +33,9 @@ app.config['SECRET_KEY'] = 'secret!'
 Bower(app)
 socketio = SocketIO(app)
 
+# Global variables
+current_photo = ''
+
 # Make working folders and files
 working_dir = os.path.dirname(os.path.realpath(__file__))
 if not os.path.isfile('%s/config.json' % working_dir):
@@ -85,6 +88,13 @@ def get_weather_from_darksky():
                         + str(config['location']['lat'])
                         + ',' + str(config['location']['lon'])
                         + '?lang=de&units=si').text
+
+
+@app.route('/delete', methods=['DELETE'])
+def delete_current():
+    os.remove(current_photo)
+    socketio.emit('command', {'data': 'next'})
+    return jsonify({'status': 200})
 
 
 # noinspection PyUnresolvedReferences
@@ -199,7 +209,9 @@ def random():
 
     folder_name, file_name = os.path.split(abs_path)
 
-    socketio.emit('image', {'data': file_name})
+    # Write global photo to current
+    global current_photo
+    current_photo = abs_path
 
     return jsonify({'folder_name': folder_name, 'file_name': file_name})
 
