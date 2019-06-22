@@ -3,6 +3,9 @@
 # Repair permissions
 chmod -R 777 /home/pi
 
+# Disable console prompt
+systemctl disable getty@tty1.service
+
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/chromium.desktop /etc/xdg/autostart/chromium.desktop
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
