@@ -4,6 +4,10 @@
 DISPLAY=:0.0 ; export DISPLAY
 /usr/bin/unclutter -idle 0 -root &
 
+# Screensaver fixes
+xset -dpms
+xset s off
+
 # Start lightweight window manager
 matchbox-window-manager &
 
