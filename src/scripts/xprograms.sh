@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# No mouse cursor
+DISPLAY=:0.0 ; export DISPLAY
+/usr/bin/unclutter -idle 0 -root &
+
 # Start lightweight window manager
 matchbox-window-manager &
 
@@ -8,4 +12,4 @@ matchbox-window-manager &
 
 # No mouse cursor
 DISPLAY=:0.0 ; export DISPLAY
-(sleep 60 && /usr/bin/unclutter -idle 0 -root) &
+/usr/bin/unclutter -idle 0 -root &
