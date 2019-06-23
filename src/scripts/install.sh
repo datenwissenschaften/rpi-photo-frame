@@ -46,7 +46,8 @@ apt install -y cmake \
     ttf-ancient-fonts \
     libopencv-dev python-opencv python-picamera \
     fbi \
-    x11-xserver-utils
+    x11-xserver-utils \
+    python3 python3-rpi.gpio python3-pip dnsmasq hostapd
 
 # Python applications
 
@@ -69,7 +70,7 @@ echo "start_x=0" >> /boot/config.txt
 echo "gpu_mem=256" >> /boot/config.txt
 echo "disable_splash=1"  >> /boot/config.txt
 # TODO: Untested
-# echo -n "quiet plymouth.ignore-serial-consoles logo.nologo vt.global_cursor_default=0 loglevel=3" >> /boot/cmdline.txt
+# echo -n "quiet plymouth.ignore-serial-consoles logo.nologo vt.global_cursor_default=0 loglevel=3 disable_splash=1" >> /boot/cmdline.txt
 
 # Install application dependencies
 
@@ -81,8 +82,15 @@ cd src
 bower install --allow-root
 
 # Repair permissions
+
 chmod -R 777 /home/pi
 
-# BOOTSTRAP (!)
+# Wifi config
 
-sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh
+git clone https://github.com/MtnFranke/RaspiWiFi
+cd RaspiWifi
+sudo python3 initial_setup.py
+
+# Bootstrap application
+
+sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh &

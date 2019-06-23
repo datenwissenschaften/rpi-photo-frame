@@ -9,6 +9,7 @@ cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/chromium.desktop /etc/xdg/autostart/chromium.desktop
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
+cp /home/pi/rpi-photo-frame/src/conf/raspiwifi.conf /etc/raspiwifi/raspiwifi.conf
 
 # Reload crontab from git
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab &
