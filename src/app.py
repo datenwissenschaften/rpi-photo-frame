@@ -103,6 +103,12 @@ def show_next(filename):
     return jsonify({'status': 200})
 
 
+@app.route('/next', methods=['GET'])
+def show_next_random():
+    socketio.emit('command', {'data': 'next'})
+    return jsonify({'status': 200})
+
+
 # noinspection PyUnresolvedReferences
 @app.route('/image/<filename>')
 def image(filename):

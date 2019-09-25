@@ -103,6 +103,14 @@ def delete_photo(update, context):
         update.message.reply_text('Fehler ❌!\n')
 
 
+def next_photo(update, context):
+    r = requests.get('http://localhost:5000/next').json()
+    if int(r['status']) == 200:
+        update.message.reply_text('Ok, ich zeige es dir das nächste Photo an.')
+    else:
+        update.message.reply_text('Fehler ❌!\n')
+
+
 def error(update, context):
     logger.warning('Update "%s" caused error "%s"', update, context.error)
 
@@ -128,6 +136,8 @@ def main():
     dp.add_handler(start_conversation_handler)
 
     dp.add_handler(CommandHandler('delete', delete_photo))
+
+    dp.add_handler(CommandHandler('next', next_photo))
 
     dp.add_handler(MessageHandler(Filters.photo, photo_handler))
 
