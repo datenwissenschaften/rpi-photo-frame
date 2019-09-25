@@ -9,7 +9,7 @@ from shutil import copyfile
 
 import numpy
 import requests
-import rpi_backlight as bl
+# import rpi_backlight as bl
 import setproctitle
 from PIL import Image
 from PIL.ExifTags import TAGS
@@ -66,15 +66,15 @@ def index():
         return "Missing frontend dependencies. Run bower install..."
 
 
-@app.route('/backlight', methods=['GET'])
-def get_backlight():
-    return jsonify({"status": bl.get_power()})
+# @app.route('/backlight', methods=['GET'])
+# def get_backlight():
+#    return jsonify({"status": bl.get_power()})
 
 
-@app.route('/backlight', methods=['POST'])
-def set_backlight():
-    bl.set_power(request.json['switch'])
-    return jsonify({"status": bl.get_power()})
+# @app.route('/backlight', methods=['POST'])
+# def set_backlight():
+#    bl.set_power(request.json['switch'])
+#    return jsonify({"status": bl.get_power()})
 
 
 @app.route('/weather')
@@ -149,14 +149,14 @@ def image(filename):
         brightness = config['brightness']['dusk']['brightness']
         blue = -red
 
-    bl.set_brightness(brightness, smooth=True, duration=3)
+    # bl.set_brightness(brightness, smooth=True, duration=3)
 
     # Write global photo to current
     global current_photo
     current_photo = filename
 
     # Get processed image from thumbor
-    url = 'http://localhost:8888/unsafe/trim/800x450/smart/filters:rgb(%s,%s,%s)/rpi-photo-frame/images/%s' % (
+    url = 'http://localhost:8888/unsafe/trim/1280x800/smart/filters:rgb(%s,%s,%s)/rpi-photo-frame/images/%s' % (
         red, green, blue, filename)
     response = requests.get(url, stream=True)
 

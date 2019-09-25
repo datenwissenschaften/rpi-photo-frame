@@ -27,6 +27,8 @@ jQuery(document).ready(function () {
         setTimeout(arguments.callee, 10 * 60 * 1000);
     })();
 
+    /*
+
     jQuery("#image").click(function () {
         jQuery.ajax({
             url: "/backlight",
@@ -51,6 +53,8 @@ jQuery(document).ready(function () {
             }
         });
     });
+
+    */
 
     var socket = io();
     socket.on('connect', function(){
