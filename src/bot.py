@@ -84,7 +84,10 @@ def photo_handler(update, context):
             'Bitte nutze den /start command 🧐.')
     else:
         filename = str(uuid.uuid4())
-        photo_file = update.message.photo[-1].get_file()
+        try:
+            photo_file = update.message.photo[-1].get_file()
+        except:
+            photo_file = update.message.document[-1].get_file()
         photo_file.download('%s/../images/%s.jpg' % (working_dir, filename))
         requests.get('http://localhost:5000/next/%s' % filename).json()
         update.message.reply_text('Danke für das Photo 🤩!\n'
@@ -127,6 +130,8 @@ def main():
     dp.add_handler(CommandHandler('delete', delete_photo))
 
     dp.add_handler(MessageHandler(Filters.photo, photo_handler))
+
+    dp.add_handler(MessageHandler(Filters.document.category('image/'), photo_handler))
 
     dp.add_error_handler(error)
 
