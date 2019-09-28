@@ -123,7 +123,7 @@ def image(filename):
     sun = loc.sun()
 
     # Full brightness and all colors as fallback
-    brightness = 255
+    brightness = 0
     red = 0
     green = 0
     blue = 0
@@ -155,15 +155,13 @@ def image(filename):
         brightness = config['brightness']['dusk']['brightness']
         blue = -red
 
-    # bl.set_brightness(brightness, smooth=True, duration=3)
-
     # Write global photo to current
     global current_photo
     current_photo = filename
 
     # Get processed image from thumbor
-    url = 'http://localhost:8888/unsafe/trim/2560x1600/smart/filters:rgb(%s,%s,%s):brightness(0)/rpi-photo-frame/images/%s' % (
-        red, green, blue, filename)
+    url = 'http://localhost:8888/unsafe/trim/2560x1600/smart/filters:rgb(%s,%s,%s):brightness(%s)/rpi-photo-frame/images/%s' % (
+        red, green, blue, brightness, filename)
     response = requests.get(url, stream=True)
 
     # Cache image locally and show the processed image
