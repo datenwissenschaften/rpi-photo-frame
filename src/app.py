@@ -162,7 +162,7 @@ def image(filename):
     current_photo = filename
 
     # Get processed image from thumbor
-    url = 'http://localhost:8888/unsafe/trim/2560x1600/smart/filters:rgb(%s,%s,%s)/rpi-photo-frame/images/%s' % (
+    url = 'http://localhost:8888/unsafe/trim/2560x1600/smart/filters:rgb(%s,%s,%s):brightness(-90)/rpi-photo-frame/images/%s' % (
         red, green, blue, filename)
     response = requests.get(url, stream=True)
 

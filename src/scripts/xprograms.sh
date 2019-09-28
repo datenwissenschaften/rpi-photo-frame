@@ -20,3 +20,6 @@ matchbox-window-manager &
 # No mouse cursor
 DISPLAY=:0.0 ; export DISPLAY
 /usr/bin/unclutter -idle 0 -root &
+
+# Turn display on (force)
+/usr/bin/vcgencmd display_power 1
