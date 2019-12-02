@@ -27,7 +27,11 @@ jQuery(document).ready(function () {
             // Temperature icon
             jQuery("#tempicon").removeClass();
             jQuery("#tempicon").addClass("wi");
-            jQuery("#tempicon").addClass("wi-" + data.currently.icon);
+            var icon = data.currently.icon;
+            if(icon.includes("partly-cloudy")) {
+                icon = "day-cloudy";
+            }
+            jQuery("#tempicon").addClass("wi-" + icon);
         });
         setTimeout(arguments.callee, 10 * 60 * 1000);
     })();

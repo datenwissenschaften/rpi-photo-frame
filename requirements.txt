@@ -2,7 +2,6 @@ setproctitle
 requests
 numpy
 cachetools
-rpi_backlight
 astral
 jsonmerge
 flask
