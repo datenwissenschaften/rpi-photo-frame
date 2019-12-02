@@ -202,7 +202,6 @@ def get_geotagging(exif):
 
 
 def get_decimal_from_dms(dms, ref):
-
     degrees = dms[0][0] / dms[0][1]
     minutes = dms[1][0] / dms[1][1] / 60.0
     seconds = dms[2][0] / dms[2][1] / 3600.0
@@ -220,7 +219,7 @@ def get_coordinates(geotags):
 
     lon = get_decimal_from_dms(geotags['GPSLongitude'], geotags['GPSLongitudeRef'])
 
-    return (lat,lon)
+    return (lat, lon)
 
 
 def get_location(geotags):
@@ -279,11 +278,13 @@ def random():
     folder_name, file_name = os.path.split(abs_path)
 
     # Extract location
-    exif = get_exif(abs_path)
-    geotags = get_geotagging(exif)
-    location = get_location(geotags)
-
-    print(location['Response']['View'][0]['Result'][0]['Location'])
+    try:
+        exif = get_exif(abs_path)
+        geotags = get_geotagging(exif)
+        location = get_location(geotags)
+        print(location['Response']['View'][0]['Result'][0]['Location'])
+    except Exception:
+        pass
 
     return jsonify({'folder_name': folder_name, 'file_name': file_name})
 
