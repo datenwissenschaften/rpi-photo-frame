@@ -94,10 +94,6 @@ curl https://www.dataplicity.com/sopukyyq.py | sudo python
 
 # SD card
 
-sudo dphys-swapfile swapoff
-sudo dphys-swapfile uninstall
-sudo update-rc.d dphys-swapfile remove
-
 cd /home/pi
 git clone https://github.com/azlux/log2ram.git
 cd log2ram

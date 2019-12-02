@@ -3,6 +3,11 @@
 # Disable console prompt
 systemctl disable getty@tty1.service
 
+# Disable swapping
+dphys-swapfile swapoff
+dphys-swapfile uninstall
+update-rc.d dphys-swapfile remove
+
 # Replace splash screen
 # wget -O /home/pi/rpi-photo-frame/doc/splash.png https://www.datenwissenschaften.com/resources/splash.png
 # cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
