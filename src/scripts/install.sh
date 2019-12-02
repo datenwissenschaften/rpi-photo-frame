@@ -68,6 +68,7 @@ echo "lcd_rotate=2" >> /boot/config.txt
 echo "start_x=0" >> /boot/config.txt
 echo "gpu_mem=256" >> /boot/config.txt
 echo "disable_splash=1"  >> /boot/config.txt
+
 # TODO: Untested
 # echo -n "quiet plymouth.ignore-serial-consoles logo.nologo vt.global_cursor_default=0 loglevel=3 disable_splash=1" >> /boot/cmdline.txt
 
