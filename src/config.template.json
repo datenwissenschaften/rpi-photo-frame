@@ -1,0 +1,33 @@
+{
+  "decay": 4,
+  "location": {
+    "name": "FrameName",
+    "region": "FrameRegion",
+    "lat": 0.0,
+    "lon": 0.0,
+    "timezone": "Europe/Berlin",
+    "elevation": 0
+  },
+  "brightness": {
+    "dawn": {
+      "brightness": -70,
+      "red": 20
+    },
+    "dusk": {
+      "brightness": -70,
+      "red": 20
+    },
+    "noon": {
+      "brightness": 0,
+      "red": 0
+    },
+    "sunrise": {
+      "brightness": -10,
+      "red": 5
+    },
+    "sunset": {
+      "brightness": -10,
+      "red": 5
+    }
+  }
+}

@@ -22,7 +22,7 @@ def update_config(cfg):
 
 
 working_dir = os.path.dirname(os.path.realpath(__file__))
-with open('%s/config.json.template' % working_dir, 'r+') as base, open('%s/config.json' % working_dir, 'r+') as head:
+with open('%s/config.template.json' % working_dir, 'r+') as base, open('%s/config.json' % working_dir, 'r+') as head:
     config_template = json.load(base)
     current_config = json.load(head)
     config = merge(config_template, current_config)

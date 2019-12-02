@@ -39,7 +39,7 @@ current_photo = ''
 # Make working folders and files
 working_dir = os.path.dirname(os.path.realpath(__file__))
 if not os.path.isfile('%s/config.json' % working_dir):
-    copyfile('%s/config.json.template' %
+    copyfile('%s/config.template.json' %
              working_dir, '%s/config.json' % working_dir)
 else:
     pass
@@ -51,7 +51,7 @@ def update_config(cfg):
         json.dump(cfg, outfile, indent=4, sort_keys=True)
 
 
-with open('%s/config.json.template' % working_dir, 'r+') as base, open('%s/config.json' % working_dir, 'r+') as head:
+with open('%s/config.template.json' % working_dir, 'r+') as base, open('%s/config.json' % working_dir, 'r+') as head:
     config_template = json.load(base)
     current_config = json.load(head)
     config = merge(config_template, current_config)
