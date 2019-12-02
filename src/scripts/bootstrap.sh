@@ -4,8 +4,8 @@
 systemctl disable getty@tty1.service
 
 # Replace splash screen
-wget -O /home/pi/rpi-photo-frame/doc/splash.png https://www.datenwissenschaften.com/resources/splash.png
-cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
+# wget -O /home/pi/rpi-photo-frame/doc/splash.png https://www.datenwissenschaften.com/resources/splash.png
+# cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
 
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
