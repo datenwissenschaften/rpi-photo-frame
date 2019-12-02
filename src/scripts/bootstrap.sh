@@ -11,12 +11,8 @@ update-rc.d dphys-swapfile remove
 # Browser logs in tmpfs
 systemctl --user start psd
 
-# Replace splash screen
-# wget -O /home/pi/rpi-photo-frame/doc/splash.png https://www.datenwissenschaften.com/resources/splash.png
-# cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
-
 # Update scripts
-# cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
+cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
 cp /home/pi/rpi-photo-frame/src/conf/raspiwifi.conf /etc/raspiwifi/raspiwifi.conf
 cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
 
@@ -30,7 +26,7 @@ cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
 /usr/bin/python3 /home/pi/rpi-photo-frame/src/app.py &
 
 # Start photo frame bot
-(sleep 30 && /usr/bin/python3 /home/pi/rpi-photo-frame/src/bot.py &
+(sleep 30 && /usr/bin/python3 /home/pi/rpi-photo-frame/src/bot.py) &
 
 # Start logging proxy
 /usr/bin/frontail -n 2000 -p 9010 -d /var/log/bootstrap.log &
