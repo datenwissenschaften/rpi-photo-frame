@@ -178,6 +178,74 @@ def extract_exif_date(photo):
     return unix_time
 
 
+def get_exif(filename):
+    image = Image.open(filename)
+    image.verify()
+    return image._getexif()
+
+
+def get_geotagging(exif):
+    if not exif:
+        raise ValueError("No EXIF metadata found")
+
+    geotagging = {}
+    for (idx, tag) in TAGS.items():
+        if tag == 'GPSInfo':
+            if idx not in exif:
+                raise ValueError("No EXIF geotagging found")
+
+            for (key, val) in GPSTAGS.items():
+                if key in exif[idx]:
+                    geotagging[val] = exif[idx][key]
+
+    return geotagging
+
+
+def get_decimal_from_dms(dms, ref):
+    degrees = dms[0][0] / dms[0][1]
+    minutes = dms[1][0] / dms[1][1] / 60.0
+    seconds = dms[2][0] / dms[2][1] / 3600.0
+
+    if ref in ['S', 'W']:
+        degrees = -degrees
+        minutes = -minutes
+        seconds = -seconds
+
+    return round(degrees + minutes + seconds, 5)
+
+
+def get_coordinates(geotags):
+    lat = get_decimal_from_dms(geotags['GPSLatitude'], geotags['GPSLatitudeRef'])
+
+    lon = get_decimal_from_dms(geotags['GPSLongitude'], geotags['GPSLongitudeRef'])
+
+    return (lat, lon)
+
+
+def get_location(geotags):
+    coords = get_coordinates(geotags)
+
+    uri = 'https://reverse.geocoder.api.here.com/6.2/reversegeocode.json'
+    headers = {}
+    params = {
+        'app_id': os.environ['APP_ID_HERE'],
+        'app_code': os.environ['APP_CODE_HERE'],
+        'prox': "%s,%s" % coords,
+        'gen': 9,
+        'mode': 'retrieveAddresses',
+        'maxresults': 1,
+    }
+
+    response = requests.get(uri, headers=headers, params=params)
+    try:
+        response.raise_for_status()
+        return response.json()
+
+    except requests.exceptions.HTTPError as e:
+        print(str(e))
+        return {}
+
+
 @app.route('/random')
 def random():
     files = glob.glob(working_dir + '/../images/*.jp*g')
@@ -208,6 +276,15 @@ def random():
     abs_path = numpy.random.choice(photos, p=prob)
 
     folder_name, file_name = os.path.split(abs_path)
+
+    # Extract location
+    try:
+        exif = get_exif(abs_path)
+        geotags = get_geotagging(exif)
+        location = get_location(geotags)
+        print(location['Response']['View'][0]['Result'][0]['Location'])
+    except Exception:
+        pass
 
     return jsonify({'folder_name': folder_name, 'file_name': file_name})
 
