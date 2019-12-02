@@ -15,6 +15,7 @@ update-rc.d dphys-swapfile remove
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
 cp /home/pi/rpi-photo-frame/src/conf/raspiwifi.conf /etc/raspiwifi/raspiwifi.conf
+cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
 
 # Reload crontab from git
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab &

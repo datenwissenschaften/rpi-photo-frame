@@ -101,6 +101,8 @@ chmod +x install.sh
 sudo ./install.sh
 sudo nano /etc/log2ram.conf
 
+apt install profile-sync-daemon
+
 # Bootstrap application
 
 sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh &
