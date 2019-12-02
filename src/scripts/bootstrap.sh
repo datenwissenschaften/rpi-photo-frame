@@ -9,7 +9,7 @@ dphys-swapfile uninstall
 update-rc.d dphys-swapfile remove
 
 # Browser logs in tmpfs
-systemctl --user start psd
+(sleep 30 && systemctl --user start psd) &
 
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local

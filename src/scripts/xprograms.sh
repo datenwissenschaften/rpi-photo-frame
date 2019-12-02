@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # No mouse cursor
-# DISPLAY=:0.0 ; export DISPLAY
-# /usr/bin/unclutter -idle 0 -root &
+DISPLAY=:0.0 ; export DISPLAY
+/usr/bin/unclutter -idle 0 -root &
 
 # Screensaver fixes
 xset -dpms
@@ -18,8 +18,8 @@ matchbox-window-manager &
 /usr/bin/chromium-browser --noerrordialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --no-sandbox --kiosk "http://localhost:5000"
 
 # No mouse cursor
-# DISPLAY=:0.0 ; export DISPLAY
-# /usr/bin/unclutter -idle 0 -root &
+DISPLAY=:0.0 ; export DISPLAY
+/usr/bin/unclutter -idle 0 -root &
 
 # Turn display on (force)
 /usr/bin/vcgencmd display_power 1
