@@ -22,8 +22,12 @@ jQuery(document).ready(function () {
 
     (function () {
         jQuery.getJSON("/weather", function (data) {
+            // Temperature value
             jQuery("#tempval").text(parseFloat(data.currently.temperature).toFixed(1))
-            // jQuery("#tempicon").text(parseFloat(data.currently.temperature).toFixed(1))
+            // Temperature icon
+            jQuery("#tempicon").removeClass();
+            jQuery("#tempicon").addClass("wi");
+            jQuery("#tempicon").addClass("wi-" + data.currently.icon);
         });
         setTimeout(arguments.callee, 10 * 60 * 1000);
     })();
