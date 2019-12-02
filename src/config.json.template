@@ -10,24 +10,24 @@
     },
     "brightness": {
         "dawn": {
-            "red": 40,
-            "brightness": -50
-        },
-        "sunrise": {
-            "red": 10,
-            "brightness": -20
-        },
-        "noon": {
-            "red": 0,
-            "brightness": 0
-        },
-        "sunset": {
-            "red": 10,
-            "brightness": -20
+            "brightness": -70,
+            "red": 20
         },
         "dusk": {
-            "red": 40,
-            "brightness": -50
+            "brightness": -70,
+            "red": 20
+        },
+        "noon": {
+            "brightness": 0,
+            "red": 0
+        },
+        "sunrise": {
+            "brightness": -10,
+            "red": 5
+        },
+        "sunset": {
+            "brightness": -10,
+            "red": 5
         }
-    }
+    },
 }

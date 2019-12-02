@@ -15,6 +15,8 @@
     <script src="{{ url_for('bower.static', filename='moment/min/moment.min.js') }}"></script>
     <script src="{{ url_for('bower.static', filename='socket.io-client/dist/socket.io.js') }}"></script>
 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.9/css/weather-icons.min.css" integrity="sha256-KcCcakqMaamBrTFaxb9tkrP2iq1X8vUnsm86W8pRcgI=" crossorigin="anonymous" />
+
     <script src="/static/script.js?2010"></script>
 
     <style media="screen">
@@ -91,7 +93,9 @@
     <div class="module opp bg">
         <img id="image" class="bg" src="" />
         <h2 id="time">xx/xx/xx xx:xx</h2>
-        <h2 id="temp">&#9728; <span id="tempval">--.-</span>&#8451;</h2>
+        <h2 id="temp"><i class="wi wi-night-sleet"></i>
+            <span id="tempval">--.-</span>&#8451;
+        </h2>
     </div>
 
 </body>

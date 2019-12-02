@@ -23,38 +23,10 @@ jQuery(document).ready(function () {
     (function () {
         jQuery.getJSON("/weather", function (data) {
             jQuery("#tempval").text(parseFloat(data.currently.temperature).toFixed(1))
+            // jQuery("#tempicon").text(parseFloat(data.currently.temperature).toFixed(1))
         });
         setTimeout(arguments.callee, 10 * 60 * 1000);
     })();
-
-    /*
-
-    jQuery("#image").click(function () {
-        jQuery.ajax({
-            url: "/backlight",
-            type: "POST",
-            data: JSON.stringify({ "switch": true }),
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function () {
-                setNewImage();
-            }
-        });
-    });
-
-    jQuery("#off").click(function () {
-        jQuery.ajax({
-            url: "/backlight",
-            type: "POST",
-            data: JSON.stringify({ "switch": false }),
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            success: function () {
-            }
-        });
-    });
-
-    */
 
     var socket = io();
     socket.on('connect', function(){

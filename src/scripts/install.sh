@@ -91,6 +91,10 @@ git clone https://github.com/MtnFranke/RaspiWiFi
 cd RaspiWifi
 sudo python3 initial_setup.py
 
+# Install dataplicity
+
+curl https://www.dataplicity.com/sopukyyq.py | sudo python
+
 # Bootstrap application
 
 sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh &
