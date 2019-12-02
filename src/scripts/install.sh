@@ -70,7 +70,7 @@ echo "gpu_mem=256" >> /boot/config.txt
 echo "disable_splash=1"  >> /boot/config.txt
 
 # TODO: Untested
-# echo -n "quiet plymouth.ignore-serial-consoles logo.nologo vt.global_cursor_default=0 loglevel=3 disable_splash=1" >> /boot/cmdline.txt
+# echo -n " splash quiet plymouth.ignore-serial-consoles logo.nologo vt.global_cursor_default=0 loglevel=3 disable_splash=1" >> /boot/cmdline.txt
 
 # Install application dependencies
 
@@ -107,3 +107,5 @@ apt install profile-sync-daemon
 # Bootstrap application
 
 sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh &
+
+exit 0

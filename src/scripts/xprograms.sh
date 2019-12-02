@@ -23,3 +23,5 @@ matchbox-window-manager &
 
 # Turn display on (force)
 /usr/bin/vcgencmd display_power 1
+
+exit 0

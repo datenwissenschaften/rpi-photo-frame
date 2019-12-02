@@ -16,7 +16,7 @@ systemctl --user start psd
 # cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
 
 # Update scripts
-cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
+# cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
 cp /home/pi/rpi-photo-frame/src/conf/raspiwifi.conf /etc/raspiwifi/raspiwifi.conf
 cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
 
@@ -36,4 +36,6 @@ cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
 /usr/bin/frontail -n 2000 -p 9010 -d /var/log/bootstrap.log &
 
 # Start the X programs
-xinit /home/pi/rpi-photo-frame/src/scripts/xprograms.sh
+xinit /home/pi/rpi-photo-frame/src/scripts/xprograms.sh &
+
+exit 0
