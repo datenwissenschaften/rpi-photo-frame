@@ -8,6 +8,9 @@ dphys-swapfile swapoff
 dphys-swapfile uninstall
 update-rc.d dphys-swapfile remove
 
+# Browser logs in tmpfs
+systemctl --user start psd
+
 # Replace splash screen
 # wget -O /home/pi/rpi-photo-frame/doc/splash.png https://www.datenwissenschaften.com/resources/splash.png
 # cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
