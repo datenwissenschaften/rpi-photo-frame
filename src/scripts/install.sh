@@ -92,6 +92,19 @@ sudo python3 initial_setup.py
 
 curl https://www.dataplicity.com/sopukyyq.py | sudo python
 
+# SD card
+
+sudo dphys-swapfile swapoff
+sudo dphys-swapfile uninstall
+sudo update-rc.d dphys-swapfile remove
+
+cd /home/pi
+git clone https://github.com/azlux/log2ram.git
+cd log2ram
+chmod +x install.sh
+sudo ./install.sh
+sudo nano /etc/log2ram.conf
+
 # Bootstrap application
 
 sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh &
