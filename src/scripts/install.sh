@@ -60,7 +60,6 @@ apt-get install -y nodejs
 
 # NPM packages
 
-npm i bower -g
 npm i frontail -g
 
 # config.txt
@@ -78,8 +77,6 @@ cd /home/pi
 git clone https://github.com/MtnFranke/rpi-photo-frame
 cd rpi-photo-frame
 pip3 install -r requirements.txt
-cd src
-bower install --allow-root
 
 # Repair permissions
 
