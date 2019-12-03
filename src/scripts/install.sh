@@ -80,6 +80,9 @@ git clone https://github.com/MtnFranke/rpi-photo-frame
 cd rpi-photo-frame
 pip3 install -r requirements.txt
 
+pip3 uninstall numpy #remove previously installed package
+apt install python3-numpy
+
 # Repair permissions
 
 chmod -R 777 /home/pi

@@ -9,11 +9,11 @@ dphys-swapfile uninstall
 update-rc.d dphys-swapfile remove
 
 # Browser logs in tmpfs
-(sleep 30 && systemctl --user start psd) &
+(sleep 30 && sudo -u pi systemctl --user start psd) &
 
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
-cp /home/pi/rpi-photo-frame/src/conf/raspiwifi.conf /etc/raspiwifi/raspiwifi.conf
+# cp /home/pi/rpi-photo-frame/src/conf/raspiwifi.conf /etc/raspiwifi/raspiwifi.conf
 cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
 
 # Reload crontab from git

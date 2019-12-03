@@ -1,6 +1,5 @@
 setproctitle
 requests
-numpy
 cachetools
 astral
 jsonmerge
