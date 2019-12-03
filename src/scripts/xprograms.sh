@@ -12,7 +12,7 @@ xset s off
 matchbox-window-manager &
 
 # Show splash screen
-/usr/bin/fbi -T 1 -noverbose -a -t 30 --once /usr/share/plymouth/themes/pix/splash.png &
+/usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png &
 
 # Start chromium
 /usr/bin/chromium-browser --noerrordialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --no-sandbox --kiosk "http://localhost:5000"

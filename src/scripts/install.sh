@@ -47,7 +47,8 @@ apt install -y cmake \
     libopencv-dev python-opencv python-picamera \
     fbi \
     x11-xserver-utils \
-    python3 python3-rpi.gpio python3-pip dnsmasq hostapd
+    python3 python3-rpi.gpio python3-pip dnsmasq hostapd python-pip \
+    midori matchbox
 
 # Python applications
 
@@ -55,7 +56,7 @@ pip install thumbor
 
 # Nodejs
 
-curl -sL https://deb.nodesource.com/setup_10.x | -E bash -
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 apt-get install -y nodejs
 
 # NPM packages
@@ -83,11 +84,12 @@ pip3 install -r requirements.txt
 
 chmod -R 777 /home/pi
 
+# TODO: Not working in new raspbian
 # Wifi config
-
-git clone https://github.com/MtnFranke/RaspiWiFi
-cd RaspiWifi
-sudo python3 initial_setup.py
+# cd /home/pi
+# git clone https://github.com/MtnFranke/RaspiWiFi
+# cd RaspiWiFi
+# sudo python3 initial_setup.py
 
 # SD card
 
