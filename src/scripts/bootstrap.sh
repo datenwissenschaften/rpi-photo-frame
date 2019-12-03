@@ -4,12 +4,7 @@
 systemctl disable getty@tty1.service
 
 # Disable swapping
-dphys-swapfile swapoff
-dphys-swapfile uninstall
-update-rc.d dphys-swapfile remove
-
-# Browser logs in tmpfs
-(sleep 30 && sudo -u pi systemctl --user start psd) &
+swapoff -a
 
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local

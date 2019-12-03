@@ -48,7 +48,8 @@ apt install -y cmake \
     fbi \
     x11-xserver-utils \
     python3 python3-rpi.gpio python3-pip dnsmasq hostapd python-pip \
-    midori matchbox
+    midori matchbox \
+    libgles2-mesa
 
 # Python applications
 
