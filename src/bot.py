@@ -89,13 +89,13 @@ def photo_handler(update, context):
         except:
             photo_file = update.message.document[-1].get_file()
         photo_file.download('%s/../images/%s.jpg' % (working_dir, filename))
-        requests.get('http://localhost:5000/next/%s' % filename).json()
+        requests.get('http://localhost:5600/next/%s' % filename).json()
         update.message.reply_text('Danke für das Photo 🤩!\n'
                                   'Ich zeige es dir gleich an.')
 
 
 def delete_photo(update, context):
-    r = requests.delete('http://localhost:5000/delete').json()
+    r = requests.delete('http://localhost:5600/delete').json()
     if int(r['status']) == 200:
         update.message.reply_text('Photo erfolgreich gelöscht ✅!\n'
                                   'Ich zeige es dir nicht mehr an.')
@@ -104,7 +104,7 @@ def delete_photo(update, context):
 
 
 def next_photo(update, context):
-    r = requests.get('http://localhost:5000/next').json()
+    r = requests.get('http://localhost:5600/next').json()
     if int(r['status']) == 200:
         update.message.reply_text('Ok, ich zeige es dir das nächste Photo an.')
     else:
