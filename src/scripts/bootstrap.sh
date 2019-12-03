@@ -4,7 +4,7 @@
 systemctl disable getty@tty1.service
 
 # Disable swapping
-swapoff -a
+/sbin/swapoff -a
 
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
