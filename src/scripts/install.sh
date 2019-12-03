@@ -88,13 +88,6 @@ apt install python3-numpy
 
 chmod -R 777 /home/pi
 
-# TODO: Not working in new raspbian
-# Wifi config
-# cd /home/pi
-# git clone https://github.com/MtnFranke/RaspiWiFi
-# cd RaspiWiFi
-# sudo python3 initial_setup.py
-
 # SD card
 
 cd /home/pi
