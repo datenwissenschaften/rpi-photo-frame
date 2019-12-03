@@ -65,7 +65,7 @@ def set_pin(update, context):
 
     current_location = context.user_data.get('user_location') or None
 
-    if current_location is None:
+    if current_location is None and config['location']['lat'] == 0.0 and config['location']['lon'] == 0.0:
         update.message.reply_text('Vielen Dank. Deine PIN wurde erfolgreich gesetzt. '
                                   'Als nächstes brauche ich die Position des Bilderrahmens als Standort,'
                                   'um den Farbfilter und Nachtmodus anzupassen 😴.')
