@@ -9,6 +9,10 @@ systemctl disable getty@tty1.service
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
 cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
+cp /home/pi/rpi-photo-frame/src/conf/asplashscreen /etc/init.d/asplashscreen
+
+update-rc.d asplashscreen defaults
+update-rc.d asplashscreen enable
 
 # Reload crontab from git
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab &
