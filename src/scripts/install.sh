@@ -49,7 +49,7 @@ apt install -y cmake \
     x11-xserver-utils \
     python3 python3-rpi.gpio python3-pip dnsmasq hostapd python-pip \
     midori matchbox \
-    libgles2-mesa
+    libgles2-mesa plymouth plymouth-themes pix-plym-splash
 
 # Python applications
 

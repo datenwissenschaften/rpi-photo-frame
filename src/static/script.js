@@ -31,6 +31,9 @@ jQuery(document).ready(function () {
             if(icon.includes("partly-cloudy")) {
                 icon = "day-cloudy";
             }
+            if(icon.includes("clear")) {
+                icon = "day-sunny";
+            }
             jQuery("#tempicon").addClass("wi-" + icon);
         });
         setTimeout(arguments.callee, 10 * 60 * 1000);
