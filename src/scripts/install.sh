@@ -51,6 +51,8 @@ apt install -y cmake \
     midori matchbox \
     libgles2-mesa plymouth plymouth-themes pix-plym-splash
 
+apt purge plymouth plymouth-themes pix-plym-splash
+
 # Python applications
 
 pip install thumbor
