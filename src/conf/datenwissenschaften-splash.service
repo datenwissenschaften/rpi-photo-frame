@@ -4,7 +4,7 @@ DefaultDependencies=true
 
 [Service]
 Type=simple
-ExecStart=/bin/sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh >> /var/log/bootstrap.log
+ExecStart=/bin/sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh
 WorkingDirectory=/home/pi/
 
 [Install]
