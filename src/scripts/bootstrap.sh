@@ -47,7 +47,4 @@ systemctl enable datenwissenschaften-splash.service
 # Start photo frame bot
 (sleep 30 && /usr/bin/python3 /home/pi/rpi-photo-frame/src/bot.py) &
 
-# Start logging proxy
-/usr/bin/frontail -n 2000 -p 9010 -d /var/log/bootstrap.log &
-
 exit 0
