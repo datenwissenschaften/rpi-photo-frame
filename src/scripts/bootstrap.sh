@@ -3,8 +3,26 @@
 # Disable console prompt
 systemctl disable getty@tty1.service
 
+# Start the X programs
+xinit /home/pi/rpi-photo-frame/src/scripts/xprograms.sh &
+
 # Disable swapping
 /sbin/swapoff -a
+
+# Disable unneeded services
+# sudo systemctl disable dhcpcd.service
+# sudo systemctl disable networking.service
+# sudo systemctl disable ssh.service
+# sudo systemctl disable ntp.service
+# sudo systemctl disable avahi-daemon.service
+
+sudo systemctl disable dphys-swapfile.service
+sudo systemctl disable keyboard-setup.service
+sudo systemctl disable apt-daily.service
+sudo systemctl disable wifi-country.service
+sudo systemctl disable hciuart.service
+sudo systemctl disable raspi-config.service
+sudo systemctl disable triggerhappy.service
 
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
@@ -28,8 +46,5 @@ update-rc.d asplashscreen enable
 
 # Start logging proxy
 /usr/bin/frontail -n 2000 -p 9010 -d /var/log/bootstrap.log &
-
-# Start the X programs
-xinit /home/pi/rpi-photo-frame/src/scripts/xprograms.sh &
 
 exit 0

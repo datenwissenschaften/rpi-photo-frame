@@ -73,6 +73,27 @@ echo "start_x=0" >> /boot/config.txt
 echo "gpu_mem=256" >> /boot/config.txt
 echo "disable_splash=1"  >> /boot/config.txt
 
+# arm_freq=1350
+# core_freq=500
+# sdram_freq=500
+# over_voltage=4
+
+# Disable the splash screen
+# disable_splash=1
+
+# Overclock the SD Card from 50 to 100MHz
+# This can only be done with at least a UHS Class 1 card
+# dtoverlay=sdtweak,overclock_50=100
+
+# Set the bootloader delay to 0 seconds. The default is 1s if not specified.
+# boot_delay=0
+
+# Overclock the raspberry pi. This voids its warranty. Make sure you have a good power supply.
+# force_turbo=1
+
+# Disable bluetooth
+# dtoverlay=pi3-disable-bt
+
 # TODO: Untested
 # echo -n " splash quiet plymouth.ignore-serial-consoles logo.nologo vt.global_cursor_default=0 loglevel=3 disable_splash=1" >> /boot/cmdline.txt
 
