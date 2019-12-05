@@ -1,6 +1,6 @@
 [Unit]
 Description=Starts Datenwissenschaften Splash Screen
-DefaultDependencies=false
+DefaultDependencies=true
 
 [Service]
 Type=simple
@@ -8,4 +8,4 @@ ExecStart=/bin/sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh >> /var/log/
 WorkingDirectory=/home/pi/
 
 [Install]
-WantedBy=local-fs.target
+WantedBy=multi-user.target
