@@ -4,8 +4,8 @@ DefaultDependencies=false
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png
-WorkingDirectory=/root/
+ExecStart=/home/pi/rpi-photo-frame/src/scripts/splash.sh
+WorkingDirectory=/home/pi/
 
 [Install]
 WantedBy=local-fs.target

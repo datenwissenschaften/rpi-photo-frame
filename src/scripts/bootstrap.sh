@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Show splash screen
-/usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png &
+# /usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png &
 
 # Disable console prompt
 systemctl disable getty@tty1.service
@@ -33,13 +33,9 @@ sudo systemctl disable triggerhappy.service
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
 cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
-cp /home/pi/rpi-photo-frame/src/conf/asplashscreen /etc/init.d/asplashscreen
 cp /home/pi/rpi-photo-frame/src/conf/datenwissenschaften-splash.service /etc/systemd/system/datenwissenschaften-splash.service
 
 systemctl enable datenwissenschaften-splash.service
-
-update-rc.d asplashscreen defaults
-update-rc.d asplashscreen enable
 
 # Reload crontab from git
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab &
