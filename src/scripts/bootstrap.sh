@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Show splash screen
-# /usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png &
+DISPLAY=:0.0 ; export DISPLAY
+/usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png &
 
 # Disable console prompt
 systemctl disable getty@tty1.service
