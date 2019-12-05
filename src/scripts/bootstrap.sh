@@ -23,20 +23,17 @@ xinit /home/pi/rpi-photo-frame/src/scripts/xprograms.sh &
 # sudo systemctl disable ntp.service
 # sudo systemctl disable avahi-daemon.service
 
-sudo systemctl disable dphys-swapfile.service
-sudo systemctl disable keyboard-setup.service
-sudo systemctl disable apt-daily.service
-sudo systemctl disable wifi-country.service
-sudo systemctl disable hciuart.service
-sudo systemctl disable raspi-config.service
-sudo systemctl disable triggerhappy.service
+systemctl disable dphys-swapfile.service
+systemctl disable keyboard-setup.service
+systemctl disable apt-daily.service
+systemctl disable wifi-country.service
+systemctl disable hciuart.service
+systemctl disable raspi-config.service
+systemctl disable triggerhappy.service
 
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
 cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
-cp /home/pi/rpi-photo-frame/src/conf/datenwissenschaften-splash.service /etc/systemd/system/datenwissenschaften-splash.service
-
-systemctl enable datenwissenschaften-splash.service
 
 # Reload crontab from git
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab &
