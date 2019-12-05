@@ -4,7 +4,7 @@ DefaultDependencies=false
 
 [Service]
 Type=simple
-ExecStart=/home/pi/rpi-photo-frame/src/scripts/splash.sh
+ExecStart=/bin/sh /home/pi/rpi-photo-frame/src/scripts/splash.sh
 WorkingDirectory=/home/pi/
 
 [Install]
