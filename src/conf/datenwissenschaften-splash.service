@@ -1,0 +1,11 @@
+[Unit]
+Description=Starts Datenwissenschaften Splash Screen
+DefaultDependencies=false
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png
+WorkingDirectory=/root/
+
+[Install]
+WantedBy=local-fs.target
