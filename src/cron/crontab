@@ -1,2 +1,2 @@
-@reboot /bin/sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh >> /var/log/bootstrap.log 2>&1
+# @reboot /bin/sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh >> /var/log/bootstrap.log 2>&1
 * * * * * /bin/sh /home/pi/rpi-photo-frame/src/scripts/update.sh >> /var/log/update.log 2>&1
