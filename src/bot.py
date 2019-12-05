@@ -80,7 +80,7 @@ def photo_handler(update, context):
 
     if (current_pin is None) or (int(current_pin) != int(os.environ['PIN'])):
         update.message.reply_text(
-            'Du hast keine PIN gesetzt 😱.\n'
+            'Du hast keine PIN gesetzt oder deine PIN ist falsch 😱.\n'
             'Bitte nutze den /start command 🧐.')
     else:
         filename = str(uuid.uuid4())
