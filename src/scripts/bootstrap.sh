@@ -33,6 +33,8 @@ systemctl disable triggerhappy.service
 
 # Update scripts
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
+chmod +x /etc/rc.local
+
 cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
 
 # Reload crontab from git
