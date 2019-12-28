@@ -41,7 +41,7 @@ def start(update, context):
         return SET_PIN
     else:
         update.message.reply_text(
-            'Deine PIN wurde bereits erfolgreich gesetzt. Du kannst nun Bilder an mich senden.')
+            'Deine PIN wurde bereits erfolgreich gesetzt 😄. Du kannst nun Bilder an mich senden 🙏.')
         return ConversationHandler.END
 
 
@@ -106,7 +106,7 @@ def delete_photo(update, context):
 def next_photo(update, context):
     r = requests.get('http://localhost:5600/next').json()
     if int(r['status']) == 200:
-        update.message.reply_text('Ok, ich zeige es dir das nächste Photo an.')
+        update.message.reply_text('Ok, ich zeige dir das nächste Photo an 🏞.')
     else:
         update.message.reply_text('Fehler ❌!\n')
 
