@@ -3,6 +3,7 @@ import uuid
 import requests
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, PicklePersistence)
 
+__version__ = '1.0.0'
 
 class PhotoBot:
     def __init__(self, working_dir: str, pin: int, telegram_token: str):
@@ -24,7 +25,9 @@ class PhotoBot:
             return self.set_pin_workflow
         else:
             update.message.reply_text(
-                'Deine PIN wurde bereits erfolgreich gesetzt 😄. Du kannst nun Bilder an mich senden 🙏.')
+                'Deine PIN wurde bereits erfolgreich gesetzt 😄.\n'
+                'Du kannst nun Bilder an mich senden 🙏.\n'
+                'v' + __version__)
             return ConversationHandler.END
 
     def set_pin(self, update, context):

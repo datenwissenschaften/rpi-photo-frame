@@ -2,6 +2,8 @@
 
 import os
 
+__version__ = '1.0.0'
+
 from routes import create_app
 
 (socket_io, app) = create_app(os.getenv("PHOTO_FRAME_ENV", "dev").lower())

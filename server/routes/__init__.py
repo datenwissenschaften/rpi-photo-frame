@@ -3,8 +3,6 @@ import os
 
 from flask import Flask, render_template, send_file, jsonify
 
-__version__ = '1.0.0'
-
 from bot import PhotoBot
 from config import get_config
 from requests import get
