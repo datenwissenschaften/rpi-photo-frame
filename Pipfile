@@ -6,24 +6,14 @@ verify_ssl = true
 [dev-packages]
 
 [packages]
-setproctitle = "*"
+flask = "*"
 requests = "*"
-cachetools = "*"
-astral = "*"
-jsonmerge = "*"
-python-telegram-bot = "==12.0.0b1"
-eventlet = "*"
-Flask = "*"
-PyFunctional = "*"
-Flask-Bower = "*"
-Flask-SocketIO = "*"
-Pillow = "*"
+flask_caching = "*"
+flask_socketio = "*"
+python-telegram-bot = "*"
+pyfunctional = "*"
 numpy = "*"
-smartcrop = "*"
-flask_script = "*"
-gevent = "*"
-psutil = "*"
-Flask-Caching = "*"
+Pillow = "*"
 
 [requires]
 python_version = "3.7"

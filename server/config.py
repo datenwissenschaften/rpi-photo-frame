@@ -5,20 +5,18 @@ import os
 from image.store import ImageStore
 
 
-class Config(object):
+class Config:
     DEBUG = False
     STAGING = False
     BASEDIR = os.path.abspath(os.path.dirname(__file__))
-    IMAGEDIR = os.path.join(BASEDIR, "..", "doc")
+
+
+class DevelopmentConfig(Config):
+    IMAGEDIR = os.path.join(Config.BASEDIR, "..", "doc")
     DECAY = 1
     IMAGESTORE = ImageStore(IMAGEDIR, DECAY)
     PIN = 123456
     TELEGRAM_TOKEN = None
-    # os.environ['PIN'], os.environ['TELEGRAM_TOKEN']
-
-
-class DevelopmentConfig(Config):
-    pass
 
 
 class StagingConfig(Config):
@@ -26,11 +24,17 @@ class StagingConfig(Config):
 
 
 class ProductionConfig(Config):
-    pass
+    IMAGEDIR = os.environ.get('IMAGEDIR') or Config.BASEDIR
+    PIN = os.environ.get('PIN')
+    TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
+    DECAY = 1
+    IMAGESTORE = ImageStore(IMAGEDIR, DECAY)
 
 
-config = {
-    'dev': DevelopmentConfig,
-    'staging': StagingConfig,
-    'prod': ProductionConfig
-}
+def get_config(stage: str):
+    if stage == 'dev':
+        return DevelopmentConfig
+    if stage == 'staging':
+        return StagingConfig
+    if stage == 'prod':
+        return ProductionConfig

@@ -1,7 +1,7 @@
 jQuery(document).ready(function () {
 
     function setRandomImage() {
-        $("#image").attr("src", "/random");
+        $("#image").attr("src", "/random?" + Math.round(new Date().getTime() / 1000));
     }
 
     function setImage(data) {

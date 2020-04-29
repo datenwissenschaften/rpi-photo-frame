@@ -51,6 +51,7 @@ apt install -y cmake \
   libgles2-mesa plymouth plymouth-themes pix-plym-splash
 
 apt purge plymouth plymouth-themes pix-plym-splash
+apt purge nodejs
 
 # Python applications
 
@@ -58,12 +59,12 @@ pip install thumbor
 
 # Nodejs
 
-curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
-apt-get install -y nodejs
+# curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+# apt-get install -y nodejs
 
 # NPM packages
 
-npm i frontail -g
+# npm i frontail -g
 
 # config.txt
 

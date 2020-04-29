@@ -6,7 +6,7 @@ from flask import Flask, render_template, send_file, jsonify
 __version__ = '1.0.0'
 
 from bot import PhotoBot
-from config import config
+from config import get_config
 from requests import get
 from flask_caching import Cache
 from flask_socketio import SocketIO
@@ -14,7 +14,7 @@ from flask_socketio import SocketIO
 from image.cropper import Cropper
 
 
-def create_app(config_type: str):
+def create_app(stage: str):
     app = Flask(
         __name__,
         static_url_path='/static',
@@ -25,11 +25,12 @@ def create_app(config_type: str):
     cache = Cache(app, config={'CACHE_TYPE': 'simple'})
     socket_io = SocketIO(app)
 
-    app_config = config[config_type]
+    app_config = get_config(stage)
 
     PhotoBot(app_config.BASEDIR, app_config.PIN, app_config.TELEGRAM_TOKEN)
 
     @app.route('/')
+    @cache.cached(timeout=300)
     def index():
         return render_template('index.html')
 

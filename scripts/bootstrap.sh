@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # Show splash screen
-DISPLAY=:0.0 ; export DISPLAY
+DISPLAY=:0.0
+export DISPLAY
 /usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png &
 
 # Disable console prompt
 systemctl disable getty@tty1.service
 
 # Start thumbor
-/usr/local/bin/thumbor -c /home/pi/rpi-photo-frame/src/conf/thumbor.conf &
+# /usr/local/bin/thumbor -c /home/pi/rpi-photo-frame/src/conf/thumbor.conf &
 
 # Start the X programs
 xinit /home/pi/rpi-photo-frame/src/scripts/xprograms.sh &
@@ -41,9 +42,7 @@ cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab &
 
 # Start photo frame application
-/usr/bin/python3 /home/pi/rpi-photo-frame/src/app.py &
-
-# Start photo frame bot
-(sleep 30 && /usr/bin/python3 /home/pi/rpi-photo-frame/src/bot.py) &
+export PHOTO_FRAME_ENV=prod
+/usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py runserver &
 
 exit 0
