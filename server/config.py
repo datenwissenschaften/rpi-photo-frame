@@ -10,7 +10,7 @@ class Config(object):
     STAGING = False
     BASEDIR = os.path.abspath(os.path.dirname(__file__))
     IMAGEDIR = os.path.join(BASEDIR, "..", "doc")
-    DECAY = 4
+    DECAY = 1
     IMAGESTORE = ImageStore(IMAGEDIR, DECAY)
 
 

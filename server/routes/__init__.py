@@ -5,6 +5,7 @@ from flask import Flask, render_template, send_file, jsonify
 
 __version__ = '1.0.0'
 
+from bot import PhotoBot
 from config import config
 from requests import get
 from flask_caching import Cache
@@ -25,6 +26,8 @@ def create_app(config_type: str):
     socket_io = SocketIO(app)
 
     app_config = config[config_type]
+
+    PhotoBot(app_config.BASEDIR, os.environ['PIN'], os.environ['TELEGRAM_TOKEN'])
 
     @app.route('/')
     def index():
@@ -57,5 +60,18 @@ def create_app(config_type: str):
     def show_next_random():
         socket_io.emit('command', {'data': 'next'})
         return jsonify({'status': 200})
+
+    @app.route('/next/<filename>', methods=['GET'])
+    def show(filename):
+        socket_io.emit('image', {'data': filename})
+        return jsonify({'status': 200})
+
+    @app.route('/image/<filename>', methods=['GET'])
+    def show_image(filename):
+        return send_file(
+            Cropper().crop(
+                app_config.IMAGEDIR + filename
+            ), mimetype='image/jpeg'
+        )
 
     return socket_io, app
