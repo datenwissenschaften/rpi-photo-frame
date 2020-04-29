@@ -5,13 +5,14 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, Conv
 
 
 class PhotoBot:
-    def __init__(self, working_dir, pin, telegram_token):
+    def __init__(self, working_dir: str, pin: int, telegram_token: str):
         self.set_pin_workflow = range(1)
         self.working_dir = working_dir
         self.url = "http://localhost:5600"
         self.pin = int(pin)
-        self.telegram_token = str(telegram_token)
-        self.main()
+        self.telegram_token = telegram_token
+        if self.telegram_token is not None:
+            self.main()
 
     def start(self, update, context):
         current_pin = context.user_data.get('pin') or None
@@ -70,6 +71,7 @@ class PhotoBot:
         return ConversationHandler.END
 
     def main(self):
+
         updater = Updater(
             self.telegram_token,
             persistence=PicklePersistence(filename='%s/../data/conversationbot' % self.working_dir),

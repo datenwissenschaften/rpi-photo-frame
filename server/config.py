@@ -12,6 +12,9 @@ class Config(object):
     IMAGEDIR = os.path.join(BASEDIR, "..", "doc")
     DECAY = 1
     IMAGESTORE = ImageStore(IMAGEDIR, DECAY)
+    PIN = 123456
+    TELEGRAM_TOKEN = None
+    # os.environ['PIN'], os.environ['TELEGRAM_TOKEN']
 
 
 class DevelopmentConfig(Config):

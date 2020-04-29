@@ -27,7 +27,7 @@ def create_app(config_type: str):
 
     app_config = config[config_type]
 
-    PhotoBot(app_config.BASEDIR, os.environ['PIN'], os.environ['TELEGRAM_TOKEN'])
+    PhotoBot(app_config.BASEDIR, app_config.PIN, app_config.TELEGRAM_TOKEN)
 
     @app.route('/')
     def index():
@@ -70,7 +70,7 @@ def create_app(config_type: str):
     def show_image(filename):
         return send_file(
             Cropper().crop(
-                app_config.IMAGEDIR + filename
+                app_config.IMAGEDIR + "/" + filename
             ), mimetype='image/jpeg'
         )
 

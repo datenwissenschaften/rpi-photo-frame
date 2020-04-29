@@ -1,11 +1,15 @@
 jQuery(document).ready(function () {
 
-    function setNewImage() {
+    function setRandomImage() {
         $("#image").attr("src", "/random");
     }
 
+    function setImage(data) {
+        $("#image").attr("src", "/image/" + data);
+    }
+
     (function () {
-        setNewImage();
+        setRandomImage();
         setTimeout(arguments.callee, 60 * 60 * 1000);
     })();
 
@@ -40,8 +44,11 @@ jQuery(document).ready(function () {
     });
     socket.on('command', function (data) {
         if (data.data === 'next') {
-            setNewImage();
+            setRandomImage();
         }
+    });
+    socket.on('image', function (data) {
+        setImage(data.data);
     });
     socket.on('disconnect', function () {
     });
