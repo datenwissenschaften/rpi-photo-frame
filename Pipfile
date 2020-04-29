@@ -19,6 +19,11 @@ Flask-Bower = "*"
 Flask-SocketIO = "*"
 Pillow = "*"
 numpy = "*"
+smartcrop = "*"
+flask_script = "*"
+gevent = "*"
+psutil = "*"
+Flask-Caching = "*"
 
 [requires]
 python_version = "3.7"

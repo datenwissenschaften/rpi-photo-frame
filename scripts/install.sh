@@ -3,20 +3,19 @@
 # Make sure only root can run our script
 
 if [[ $EUID -ne 0 ]]; then
-   echo "This script must be run as root" 1>&2
-   exit 1
+  echo "This script must be run as root" 1>&2
+  exit 1
 fi
 
 # Parameters to environment
 
-if [[ $# -le 1 ]]
-then
-   echo "This script must be run with configuration" 1>&2
-   exit 1
+if [[ $# -le 1 ]]; then
+  echo "This script must be run with configuration" 1>&2
+  exit 1
 fi
 
-echo "TELEGRAM_TOKEN=$1" >> /etc/environment
-echo "PIN=$2"  >> /etc/environment
+echo "TELEGRAM_TOKEN=$1" >>/etc/environment
+echo "PIN=$2" >>/etc/environment
 
 # APT packages
 
@@ -38,18 +37,18 @@ rm /etc/ssh/ssh_host_* && sudo dpkg-reconfigure openssh-server
 ## Install
 
 apt install -y cmake \
-    software-properties-common libjpeg-dev zlib1g-dev \
-    libcurl4-openssl-dev libssl-dev \
-    chromium-browser \
-    unclutter \
-    git \
-    ttf-ancient-fonts \
-    libopencv-dev python-opencv python-picamera \
-    fbi \
-    x11-xserver-utils \
-    python3 python3-rpi.gpio python3-pip dnsmasq hostapd python-pip \
-    midori matchbox \
-    libgles2-mesa plymouth plymouth-themes pix-plym-splash
+  software-properties-common libjpeg-dev zlib1g-dev \
+  libcurl4-openssl-dev libssl-dev \
+  chromium-browser \
+  unclutter \
+  git \
+  ttf-ancient-fonts \
+  libopencv-dev python-opencv python-picamera \
+  fbi \
+  x11-xserver-utils \
+  python3 python3-rpi.gpio python3-pip dnsmasq hostapd python-pip \
+  midori matchbox \
+  libgles2-mesa plymouth plymouth-themes pix-plym-splash
 
 apt purge plymouth plymouth-themes pix-plym-splash
 
@@ -68,10 +67,10 @@ npm i frontail -g
 
 # config.txt
 
-echo "lcd_rotate=2" >> /boot/config.txt
-echo "start_x=0" >> /boot/config.txt
-echo "gpu_mem=256" >> /boot/config.txt
-echo "disable_splash=1"  >> /boot/config.txt
+echo "lcd_rotate=2" >>/boot/config.txt
+echo "start_x=0" >>/boot/config.txt
+echo "gpu_mem=256" >>/boot/config.txt
+echo "disable_splash=1" >>/boot/config.txt
 
 # arm_freq=1350
 # core_freq=500
@@ -99,9 +98,9 @@ echo "disable_splash=1"  >> /boot/config.txt
 
 # Install application dependencies
 
-cd /home/pi
+cd /home/pi || exit
 git clone https://github.com/MtnFranke/rpi-photo-frame
-cd rpi-photo-frame
+cd rpi-photo-frame || exit
 pip3 install -r requirements.txt
 
 pip3 uninstall numpy #remove previously installed package
@@ -113,9 +112,9 @@ chmod -R 777 /home/pi
 
 # SD card
 
-cd /home/pi
+cd /home/pi || exit
 git clone https://github.com/azlux/log2ram.git
-cd log2ram
+cd log2ram || exit
 chmod +x install.sh
 sudo ./install.sh
 sudo nano /etc/log2ram.conf
