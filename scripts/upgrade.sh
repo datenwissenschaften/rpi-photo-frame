@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# DEACTIVATE CRONTAB
+crontab -r
+
 # STATUS MESSAGE
 
 apt install curl -y
