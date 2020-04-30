@@ -1,13 +1,5 @@
 #!/bin/bash
 
-# Disable unneeded services
-# systemctl disable dhcpcd.service
-# systemctl disable networking.service
-# systemctl disable ssh.service
-# systemctl disable ntp.service
-# systemctl disable avahi-daemon.service
-
-
 # Show splash screen
 DISPLAY=:0.0
 export DISPLAY
@@ -21,20 +13,6 @@ systemctl disable getty@tty1.service
 
 # Start the X programs
 xinit /home/pi/rpi-photo-frame/src/scripts/xprograms.sh &
-
-# Disable swapping
-# /sbin/swapoff -a
-
-
-
-# Update scripts
-
-cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
-chmod +x /etc/rc.local
-
-# Update config files
-
-cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
 
 # Reload crontab from git
 

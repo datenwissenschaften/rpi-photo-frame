@@ -1,2 +1,1 @@
-@reboot /bin/sh /home/pi/rpi-photo-frame/src/scripts/bootstrap.sh >> /dev/null 2>&1
 * * * * * /bin/sh /home/pi/rpi-photo-frame/src/scripts/update.sh >> /dev/null 2>&1
