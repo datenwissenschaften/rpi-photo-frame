@@ -2,7 +2,7 @@
 Description=Starts the X Server and Chromium
 
 [Service]
-ExecStart=xinit /home/pi/rpi-photo-frame/scripts/xprograms.sh
+ExecStart=/usr/bin/xinit /home/pi/rpi-photo-frame/scripts/xprograms.sh
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=piservice

@@ -56,6 +56,7 @@ apt autoclean -y
 # MINIMAL UI
 
 apt install fbi -y
+apt install fim -y
 apt install midori matchbox -y
 apt install chromium-browser -y
 apt install unclutter -y
