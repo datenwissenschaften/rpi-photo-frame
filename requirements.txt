@@ -5,5 +5,5 @@ flask_socketio
 python-telegram-bot
 pyfunctional
 eventlet
-# numpy - VIA apt
-# Pillow - VIA apt
+numpy
+Pillow
