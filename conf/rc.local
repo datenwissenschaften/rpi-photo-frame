@@ -1,6 +1,10 @@
 #!/bin/sh -e
 
-/usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png
+DISPLAY=:0.0 ; export DISPLAY
+
+export PHOTO_FRAME_ENV=prod && /usr/bin/python3.5 /home/pi/rpi-photo-frame/server/manage.py runserver &
+/usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png &
+/usr/bin/xinit /home/pi/rpi-photo-frame/scripts/xprograms.sh &
 
 dmesg --console-off
 clear

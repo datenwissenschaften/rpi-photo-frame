@@ -27,12 +27,7 @@ systemctl disable triggerhappy.service
 
 cp /home/pi/rpi-photo-frame/conf/rc.local /etc/rc.local
 chmod +x /etc/rc.local
-
 cp /home/pi/rpi-photo-frame/conf/config.txt /boot/config.txt
-cp /home/pi/rpi-photo-frame/conf/chrome.service /etc/systemd/system/chrome.service
-cp /home/pi/rpi-photo-frame/conf/photo-frame.service /etc/systemd/system/photo-frame.service
-cp /home/pi/rpi-photo-frame/conf/splash.service /etc/systemd/system/splash.service
-
 /usr/bin/crontab /home/pi/rpi-photo-frame/cron/crontab
 
 # HOUSEKEEPING
@@ -56,7 +51,6 @@ apt autoclean -y
 # MINIMAL UI
 
 apt install fbi -y
-apt install fim -y
 apt install midori matchbox -y
 apt install chromium-browser -y
 apt install unclutter -y
@@ -64,6 +58,12 @@ apt install git -y
 
 # PYTHON DEV PACKAGES
 
+apt install libjpeg-dev -y
+apt install zlib1g-dev -y
+apt install libfreetype6-dev -y
+apt install liblcms1-dev -y
+apt install libopenjp2-7 -y
+apt install libtiff5 -y
 apt install libffi-devel -y
 apt install python-cffi python-cryptography -y
 apt install python3-cffi python3-cryptography python3-numpy python3-pillow python3-dev -y
