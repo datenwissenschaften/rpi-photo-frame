@@ -17,7 +17,7 @@ from PIL import Image
 
 class ImageStore:
     def __init__(self, image_dir, img_decay):
-        self._images = glob.glob(image_dir + "/*")
+        self._image_dir = image_dir
         self._decay = img_decay
         self.current_image = ""
 
@@ -38,7 +38,8 @@ class ImageStore:
         return int(unix_time)
 
     def get_weighted_random_image(self):
-        images_by_date = seq(self._images) \
+        images = glob.glob(self._image_dir + "/*")
+        images_by_date = seq(images) \
             .map(lambda x: (x, self._extract_date(x))) \
             .sorted(key=itemgetter(1), reverse=False) \
             .map(lambda x: x[0]) \
