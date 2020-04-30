@@ -97,4 +97,4 @@ curl http://localhost:5600/toast/Update%20abgeschlossen.%20Neustart...%20
 
 /usr/bin/crontab /home/pi/rpi-photo-frame/cron/crontab
 
-reboot 0
+reboot
