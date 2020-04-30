@@ -33,7 +33,7 @@ cp /home/pi/rpi-photo-frame/chrome.service /etc/systemd/system/chrome.service
 cp /home/pi/rpi-photo-frame/photo-frame.service /etc/systemd/system/photo-frame.service
 cp /home/pi/rpi-photo-frame/splash.service /etc/systemd/system/splash.service
 
-/usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab
+/usr/bin/crontab /home/pi/rpi-photo-frame/cron/crontab
 
 # HOUSEKEEPING
 
