@@ -1,0 +1,14 @@
+[Unit]
+Description=Shows the splash screen
+
+[Service]
+ExecStart=DISPLAY=:0.0 && export DISPLAY && /usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png &
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=piservice
+User=root
+Group=root
+WorkingDirectory=/home/pi
+
+[Install]
+WantedBy=basic.target

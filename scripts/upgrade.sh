@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# STATUS MESSAGE
+
+apt install curl -y
+
 # MIGRATION
 
 apt purge nodejs -y
@@ -27,6 +31,7 @@ chmod +x /etc/rc.local
 cp /home/pi/rpi-photo-frame/conf/config.txt /boot/config.txt
 cp /home/pi/rpi-photo-frame/chrome.service /etc/systemd/system/chrome.service
 cp /home/pi/rpi-photo-frame/photo-frame.service /etc/systemd/system/photo-frame.service
+cp /home/pi/rpi-photo-frame/splash.service /etc/systemd/system/splash.service
 
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab
 
@@ -61,7 +66,6 @@ apt install git -y
 apt install libffi-devel -y
 apt install python-cffi python-cryptography -y
 apt install python3-cffi python3-cryptography python3-numpy python3-pillow python3-dev -y
-apt install curl -y
 
 # http://localhost:5600/toast/...%20Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten%20..%2060%%20
 
@@ -69,4 +73,4 @@ apt install curl -y
 
 python3.5 -m pip install --upgrade pip
 cd /home/pi/rpi-photo-frame || exit
-python3.5 -m pip install -r requirements.txt
+python3.5 -m pip install -r requirements.txt --upgrade
