@@ -15,8 +15,8 @@ class DevelopmentConfig(Config):
     IMAGEDIR = os.environ.get('IMAGEDIR') or os.path.join(Config.BASEDIR, "..", "doc")
     DECAY = 1
     IMAGESTORE = ImageStore(IMAGEDIR, DECAY)
-    PIN = os.environ.get('PIN') or 123456
-    TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN') or None
+    PIN = os.environ.get('PIN')
+    TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 
 
 class StagingConfig(Config):
