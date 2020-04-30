@@ -2,7 +2,7 @@
 Description=Starts photo backend server
 
 [Service]
-ExecStart=/usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py runserver
+ExecStart=export PHOTO_FRAME_ENV=prod && /usr/bin/python3.5 /home/pi/rpi-photo-frame/server/manage.py runserver
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=piservice

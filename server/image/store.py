@@ -23,7 +23,7 @@ class ImageStore:
 
     def _extract_date(self, image_path):
         im = Image.open(image_path)
-        exif_data = im.getexif()
+        exif_data = im._getexif()
         try:
             ret = {}
             for tag, value in exif_data.items():
