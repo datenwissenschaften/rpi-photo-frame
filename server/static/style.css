@@ -3,6 +3,11 @@
     position: relative;
 }
 
+div {
+    color: white;
+    font: 48px Sans-Serif;
+}
+
 h2#time {
     position: fixed;
     bottom: 10px;

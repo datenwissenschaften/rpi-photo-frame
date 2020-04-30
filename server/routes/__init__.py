@@ -2,13 +2,12 @@
 import os
 
 from flask import Flask, render_template, send_file, jsonify
+from flask_caching import Cache
+from flask_socketio import SocketIO
+from requests import get
 
 from bot import PhotoBot
 from config import get_config
-from requests import get
-from flask_caching import Cache
-from flask_socketio import SocketIO
-
 from image.cropper import Cropper
 
 
@@ -28,12 +27,12 @@ def create_app(stage: str):
     PhotoBot(app_config.BASEDIR, app_config.PIN, app_config.TELEGRAM_TOKEN)
 
     @app.route('/')
-    @cache.cached(timeout=300)
+    @cache.cached(timeout=60 * 60)
     def index():
         return render_template('index.html')
 
     @app.route('/weather')
-    @cache.cached(timeout=300)
+    @cache.cached(timeout=60 * 60)
     def weather():
         ip = get('https://api.ipify.org').text
         location = get('http://api.ipstack.com/%s?access_key=95d4301a153ec3361617942d116c8ddb&format=1' % ip).json()
@@ -63,6 +62,11 @@ def create_app(stage: str):
     @app.route('/next/<filename>', methods=['GET'])
     def show(filename):
         socket_io.emit('image', {'data': filename})
+        return jsonify({'status': 200})
+
+    @app.route('/toast/<message>', methods=['GET'])
+    def toast(message):
+        socket_io.emit('toast', {'data': message})
         return jsonify({'status': 200})
 
     @app.route('/image/<filename>', methods=['GET'])

@@ -47,6 +47,20 @@ jQuery(document).ready(function () {
             setRandomImage();
         }
     });
+    socket.on('toast', function (data) {
+        const options = {
+            settings: {
+                duration: 60 * 1000,
+            },
+            style: {
+                main: {
+                    'font': "48px Sans-Serif;"
+                }
+            }
+        };
+        // noinspection JSUnresolvedVariable
+        iqwerty.toast.Toast(data.data, options);
+    });
     socket.on('image', function (data) {
         setImage(data.data);
     });

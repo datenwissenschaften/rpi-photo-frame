@@ -55,7 +55,7 @@ apt purge nodejs
 
 # Python applications
 
-pip install thumbor
+# pip install thumbor
 
 # Nodejs
 
@@ -123,6 +123,7 @@ sudo nano /etc/log2ram.conf
 apt install profile-sync-daemon
 
 # Replace splash screen
+
 wget -O /home/pi/rpi-photo-frame/doc/splash.png https://www.datenwissenschaften.com/resources/splash.png
 cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
 
