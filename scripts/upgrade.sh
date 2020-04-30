@@ -23,8 +23,12 @@ systemctl disable triggerhappy.service
 
 cp /home/pi/rpi-photo-frame/conf/rc.local /etc/rc.local
 chmod +x /etc/rc.local
+
 cp /home/pi/rpi-photo-frame/conf/config.txt /boot/config.txt
 cp /home/pi/rpi-photo-frame/chrome.service /etc/systemd/system/chrome.service
+cp /home/pi/rpi-photo-frame/photo-frame.service /etc/systemd/system/photo-frame.service
+
+/usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab
 
 # HOUSEKEEPING
 
@@ -52,24 +56,16 @@ apt install chromium-browser -y
 apt install unclutter -y
 apt install git -y
 
-if ! [ -x "$(command -v python3.7)" ]; then
-  curl -sSf https://gist.githubusercontent.com/SeppPenner/6a5a30ebc8f79936fa136c524417761d/raw/ff9ea983c17ef9c59ef23833ad1dc6e015c5aaae/setup.sh | sudo bash -s
-fi
-
-if ! [ -x "$(command -v pip3.7)" ]; then
-  curl -sSf https://gist.githubusercontent.com/SeppPenner/6a5a30ebc8f79936fa136c524417761d/raw/ff9ea983c17ef9c59ef23833ad1dc6e015c5aaae/setup.sh | sudo bash -s
-fi
-
 # PYTHON DEV PACKAGES
 
-apt install python-cffi
-apt install python3-cffi
-apt install curl
+apt install python-cffi -y
+apt install python3-cffi python3-numpy python3-pillow python3-dev -y
+apt install curl -y
 
 # http://localhost:5600/toast/...%20Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten%20..%2060%%20
 
 # PHOTO FRAME
 
-pip3.7 install --upgrade pip
+pip3 install --upgrade pip
 cd /home/pi/rpi-photo-frame || exit
-pip3.7 install -r requirements.txt
+pip3 install -r requirements.txt

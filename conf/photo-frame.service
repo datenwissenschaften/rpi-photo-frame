@@ -1,0 +1,14 @@
+[Unit]
+Description=Starts photo backend server
+
+[Service]
+ExecStart=xinit /home/pi/rpi-photo-frame/scripts/xprograms.sh
+StandardOutput=syslog
+StandardError=syslog
+SyslogIdentifier=piservice
+User=root
+Group=root
+WorkingDirectory=/home/pi
+
+[Install]
+WantedBy=basic.target

@@ -4,6 +4,6 @@ flask_caching
 flask_socketio
 python-telegram-bot
 pyfunctional
-numpy
-Pillow
+# numpy
+# Pillow
 eventlet
