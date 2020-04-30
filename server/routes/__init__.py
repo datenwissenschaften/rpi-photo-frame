@@ -1,5 +1,6 @@
 # -*- coding: UTF-8 -*-
 import os
+from multiprocessing import Process
 
 from flask import Flask, render_template, send_file, jsonify
 from flask_caching import Cache
@@ -9,7 +10,6 @@ from requests import get
 from bot import PhotoBot
 from config import get_config
 from image.cropper import Cropper
-from multiprocessing import Process
 
 
 def create_app(stage):
@@ -36,9 +36,9 @@ def create_app(stage):
     @cache.cached(timeout=60 * 60)
     def weather():
         ip = get('https://api.ipify.org').text
-        location = get('http://api.ipstack.com/%s?access_key=95d4301a153ec3361617942d116c8ddb&format=1' % ip).json()
-        darksky = get('https://api.darksky.net/forecast/9559aa7862d3ef0cf894d3593fde1b11/%s,%s?lang=de&units=si' %
-                      (location['latitude'], location['longitude'])).json()
+        location = get('http://api.ipstack.com/%s?access_key=%s&format=1' % (ip, os.getenv("IPSTACK"))).json()
+        darksky = get('https://api.darksky.net/forecast/%s/%s,%s?lang=de&units=si' %
+                      (os.getenv("DARKSKY"), location['latitude'], location['longitude'])).json()
         return darksky
 
     @app.route('/random')
