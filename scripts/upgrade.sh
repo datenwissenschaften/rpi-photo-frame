@@ -58,14 +58,15 @@ apt install git -y
 
 # PYTHON DEV PACKAGES
 
-apt install python-cffi -y
-apt install python3-cffi python3-numpy python3-pillow python3-dev -y
+apt install libffi-devel -y
+apt install python-cffi python-cryptography -y
+apt install python3-cffi python3-cryptography python3-numpy python3-pillow python3-dev -y
 apt install curl -y
 
 # http://localhost:5600/toast/...%20Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten%20..%2060%%20
 
 # PHOTO FRAME
 
-pip3 install --upgrade pip
+python3.5 -m pip install --upgrade pip
 cd /home/pi/rpi-photo-frame || exit
-pip3 install -r requirements.txt
+python3.5 -m pip install -r requirements.txt

@@ -16,12 +16,12 @@ from PIL import Image
 
 
 class ImageStore:
-    def __init__(self, image_dir: str, img_decay: int):
-        self._images: list = glob.glob(image_dir + "/*")
-        self._decay: int = img_decay
-        self.current_image: str = ""
+    def __init__(self, image_dir, img_decay):
+        self._images = glob.glob(image_dir + "/*")
+        self._decay = img_decay
+        self.current_image = ""
 
-    def _extract_date(self, image_path: str):
+    def _extract_date(self, image_path):
         im = Image.open(image_path)
         exif_data = im.getexif()
         try:

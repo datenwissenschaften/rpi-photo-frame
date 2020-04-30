@@ -11,7 +11,7 @@ from config import get_config
 from image.cropper import Cropper
 
 
-def create_app(stage: str):
+def create_app(stage):
     app = Flask(
         __name__,
         static_url_path='/static',

@@ -6,7 +6,7 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, Conv
 __version__ = '1.0.0'
 
 class PhotoBot:
-    def __init__(self, working_dir: str, pin: int, telegram_token: str):
+    def __init__(self, working_dir, pin, telegram_token):
         self.set_pin_workflow = range(1)
         self.working_dir = working_dir
         self.url = "http://localhost:5600"

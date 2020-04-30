@@ -2,7 +2,7 @@
 Description=Starts photo backend server
 
 [Service]
-ExecStart=xinit /home/pi/rpi-photo-frame/scripts/xprograms.sh
+ExecStart=/usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py runserver
 StandardOutput=syslog
 StandardError=syslog
 SyslogIdentifier=piservice

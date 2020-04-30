@@ -15,7 +15,7 @@ class Cropper:
         self.crop_x = 1280
         self.crop_y = 800
 
-    def crop(self, image_path: str):
+    def crop(self, image_path):
         image = Image.open(image_path)
         thumb = ImageOps.fit(image, (self.crop_x, self.crop_y), Image.ANTIALIAS)
         new_file, filename = tempfile.mkstemp()

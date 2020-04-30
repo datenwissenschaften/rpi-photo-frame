@@ -31,7 +31,7 @@ class ProductionConfig(Config):
     IMAGESTORE = ImageStore(IMAGEDIR, DECAY)
 
 
-def get_config(stage: str):
+def get_config(stage):
     if stage == 'dev':
         return DevelopmentConfig
     if stage == 'staging':
