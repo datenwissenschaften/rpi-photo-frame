@@ -75,3 +75,5 @@ apt install python3-cffi python3-cryptography python3-numpy python3-pillow pytho
 python3.5 -m pip install --upgrade pip
 cd /home/pi/rpi-photo-frame || exit
 python3.5 -m pip install -r requirements.txt --upgrade
+
+reboot 0
