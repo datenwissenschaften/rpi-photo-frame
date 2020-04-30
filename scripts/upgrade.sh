@@ -29,9 +29,9 @@ cp /home/pi/rpi-photo-frame/conf/rc.local /etc/rc.local
 chmod +x /etc/rc.local
 
 cp /home/pi/rpi-photo-frame/conf/config.txt /boot/config.txt
-cp /home/pi/rpi-photo-frame/chrome.service /etc/systemd/system/chrome.service
-cp /home/pi/rpi-photo-frame/photo-frame.service /etc/systemd/system/photo-frame.service
-cp /home/pi/rpi-photo-frame/splash.service /etc/systemd/system/splash.service
+cp /home/pi/rpi-photo-frame/conf/chrome.service /etc/systemd/system/chrome.service
+cp /home/pi/rpi-photo-frame/conf/photo-frame.service /etc/systemd/system/photo-frame.service
+cp /home/pi/rpi-photo-frame/conf/splash.service /etc/systemd/system/splash.service
 
 /usr/bin/crontab /home/pi/rpi-photo-frame/cron/crontab
 
