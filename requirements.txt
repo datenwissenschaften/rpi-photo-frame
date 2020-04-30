@@ -1,0 +1,9 @@
+flask
+requests
+flask_caching
+flask_socketio
+python-telegram-bot
+pyfunctional
+numpy
+Pillow
+eventlet

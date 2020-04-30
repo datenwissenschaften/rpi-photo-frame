@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Disable unneeded services
+# systemctl disable dhcpcd.service
+# systemctl disable networking.service
+# systemctl disable ssh.service
+# systemctl disable ntp.service
+# systemctl disable avahi-daemon.service
+
+
 # Show splash screen
 DISPLAY=:0.0
 export DISPLAY
@@ -15,33 +23,25 @@ systemctl disable getty@tty1.service
 xinit /home/pi/rpi-photo-frame/src/scripts/xprograms.sh &
 
 # Disable swapping
-/sbin/swapoff -a
+# /sbin/swapoff -a
 
-# Disable unneeded services
-# sudo systemctl disable dhcpcd.service
-# sudo systemctl disable networking.service
-# sudo systemctl disable ssh.service
-# sudo systemctl disable ntp.service
-# sudo systemctl disable avahi-daemon.service
 
-systemctl disable dphys-swapfile.service
-systemctl disable keyboard-setup.service
-systemctl disable apt-daily.service
-systemctl disable wifi-country.service
-systemctl disable hciuart.service
-systemctl disable raspi-config.service
-systemctl disable triggerhappy.service
 
 # Update scripts
+
 cp /home/pi/rpi-photo-frame/src/conf/rc.local /etc/rc.local
 chmod +x /etc/rc.local
+
+# Update config files
 
 cp /home/pi/rpi-photo-frame/src/conf/psd.conf /home/pi/.config/psd/psd.conf
 
 # Reload crontab from git
+
 /usr/bin/crontab /home/pi/rpi-photo-frame/src/cron/crontab &
 
 # Start photo frame application
+
 export PHOTO_FRAME_ENV=prod
 /usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py runserver &
 

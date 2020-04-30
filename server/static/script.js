@@ -50,7 +50,7 @@ jQuery(document).ready(function () {
     socket.on('toast', function (data) {
         const options = {
             settings: {
-                duration: 60 * 1000,
+                duration: 8 * 60 * 60 * 1000,
             },
             style: {
                 main: {
@@ -58,7 +58,7 @@ jQuery(document).ready(function () {
                 }
             }
         };
-        // noinspection JSUnresolvedVariable
+        // noinspection JSUnresolvedVariable,JSUnresolvedFunction
         iqwerty.toast.Toast(data.data, options);
     });
     socket.on('image', function (data) {

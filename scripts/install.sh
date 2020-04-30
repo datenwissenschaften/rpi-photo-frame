@@ -68,10 +68,10 @@ apt purge nodejs
 
 # config.txt
 
-echo "lcd_rotate=2" >>/boot/config.txt
-echo "start_x=0" >>/boot/config.txt
-echo "gpu_mem=256" >>/boot/config.txt
-echo "disable_splash=1" >>/boot/config.txt
+echo "lcd_rotate=2" >> /boot/config.txt
+echo "start_x=0" >> /boot/config.txt
+echo "gpu_mem=256" >> /boot/config.txt
+echo "disable_splash=1" >> /boot/config.txt
 
 # arm_freq=1350
 # core_freq=500
