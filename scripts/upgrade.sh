@@ -37,7 +37,6 @@ curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschal
 cp /home/pi/rpi-photo-frame/conf/rc.local /etc/rc.local
 chmod +x /etc/rc.local
 cp /home/pi/rpi-photo-frame/conf/config.txt /boot/config.txt
-/usr/bin/crontab /home/pi/rpi-photo-frame/cron/crontab
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2050%%20
 
@@ -85,8 +84,6 @@ apt install python3-cffi python3-cryptography python3-numpy python3-pillow pytho
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2080%%20
 
-# http://localhost:5600/toast/...%20Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten%20..%2060%%20
-
 # PHOTO FRAME
 
 python3.5 -m pip install --upgrade pip
@@ -94,6 +91,10 @@ cd /home/pi/rpi-photo-frame || exit
 python3.5 -m pip install -r requirements.txt --upgrade
 python3.5 -m pip install gunicorn --upgrade
 
-curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%20100%%20
+# Reactivate crontab
+
+curl http://localhost:5600/toast/Update%20abgeschlossen.%20Neustart...%20
+
+/usr/bin/crontab /home/pi/rpi-photo-frame/cron/crontab
 
 reboot 0
