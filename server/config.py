@@ -12,11 +12,11 @@ class Config:
 
 
 class DevelopmentConfig(Config):
-    IMAGEDIR = os.path.join(Config.BASEDIR, "..", "doc")
+    IMAGEDIR = os.environ.get('IMAGEDIR') or os.path.join(Config.BASEDIR, "..", "doc")
     DECAY = 1
     IMAGESTORE = ImageStore(IMAGEDIR, DECAY)
-    PIN = 123456
-    TELEGRAM_TOKEN = None
+    PIN = os.environ.get('PIN') or 123456
+    TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN') or None
 
 
 class StagingConfig(Config):
@@ -24,11 +24,7 @@ class StagingConfig(Config):
 
 
 class ProductionConfig(Config):
-    IMAGEDIR = os.environ.get('IMAGEDIR') or Config.BASEDIR
-    PIN = os.environ.get('PIN')
-    TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
-    DECAY = 1
-    IMAGESTORE = ImageStore(IMAGEDIR, DECAY)
+    pass
 
 
 def get_config(stage):

@@ -9,6 +9,7 @@ from requests import get
 from bot import PhotoBot
 from config import get_config
 from image.cropper import Cropper
+from multiprocessing import Process
 
 
 def create_app(stage):
@@ -24,7 +25,7 @@ def create_app(stage):
 
     app_config = get_config(stage)
 
-    PhotoBot(app_config.BASEDIR, app_config.PIN, app_config.TELEGRAM_TOKEN)
+    Process(target=PhotoBot, args=(app_config.BASEDIR, app_config.PIN, app_config.TELEGRAM_TOKEN)).start()
 
     @app.route('/')
     @cache.cached(timeout=60 * 60)
