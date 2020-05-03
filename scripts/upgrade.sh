@@ -60,7 +60,6 @@ apt clean -y
 apt autoremove -y
 
 apt install deborphan -y
-apt autoremove --purge libx11-.* lxde-.* raspberrypi-artwork xkb-data omxplayer penguinspuzzle sgml-base xml-core alsa-.* cifs-.* samba-.* fonts-.* desktop-* gnome-.* -y
 apt autoremove --purge "$(deborphan)" -y
 apt autoremove --purge -y
 apt autoclean -y
@@ -69,25 +68,13 @@ curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschal
 
 # MINIMAL UI
 
-apt install fbi -y
-apt install midori matchbox -y
-apt install chromium-browser -y
-apt install unclutter -y
-apt install git -y
+apt install fbi midori matchbox chromium-browser unclutter git -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2075%%20
 
 # PYTHON DEV PACKAGES
 
-apt install libjpeg-dev -y
-apt install zlib1g-dev -y
-apt install libfreetype6-dev -y
-apt install liblcms1-dev -y
-apt install libopenjp2-7 -y
-apt install libtiff5 -y
-apt install libffi-devel -y
-apt install python-cffi python-cryptography -y
-apt install python3-cffi python3-cryptography python3-numpy python3-pillow python3-dev -y
+apt install libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 libffi-devel python-cffi python-cryptography python3-cffi python3-cryptography python3-numpy python3-pillow python3-dev -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2080%%20
 
