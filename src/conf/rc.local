@@ -1,9 +1,0 @@
-#!/bin/sh -e
-
-# Turn all console prints off
-dmesg --console-off
-
-# Clear console
-clear
-
-exit 0

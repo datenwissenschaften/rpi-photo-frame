@@ -1,12 +1,9 @@
-setproctitle
-requests
-cachetools
-astral
-jsonmerge
 flask
+requests
+flask_caching
+flask_socketio
+python-telegram-bot
 pyfunctional
-python-telegram-bot==12.0.0b1
-Flask-Bower
-flask-socketio
 eventlet
+numpy
 Pillow

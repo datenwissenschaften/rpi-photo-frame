@@ -94,8 +94,10 @@ cache
 bower_components
 node_modules
 
-src/config.json
+server/config.json
 conversationbot
 *.jpg
 
 splash.png
+
+Pipfile.lock
