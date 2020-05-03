@@ -16,7 +16,6 @@ apt purge nodejs -y
 chmod +x /usr/local/bin/uninstall-log2ram.sh && sudo /usr/local/bin/uninstall-log2ram.sh
 apt purge plymouth -y
 apt purge profile-sync-daemon -y
-apt purge python* -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2030%%20
 
