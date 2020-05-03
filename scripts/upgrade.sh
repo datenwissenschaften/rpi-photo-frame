@@ -1,5 +1,10 @@
 #!/bin/bash
 
+# BOOTSTRAP
+
+cd /home/pi || exit
+https://github.com/MtnFranke/rpi-photo-frame.git
+
 # DEACTIVATE CRONTAB
 
 crontab -r
