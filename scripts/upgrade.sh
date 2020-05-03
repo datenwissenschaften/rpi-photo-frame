@@ -2,6 +2,8 @@
 
 # BOOTSTRAP
 
+apt --fix-broken install
+apt install git
 cd /home/pi || exit
 https://github.com/MtnFranke/rpi-photo-frame.git
 
