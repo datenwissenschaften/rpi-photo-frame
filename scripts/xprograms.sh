@@ -16,7 +16,7 @@ matchbox-window-manager &
 
 # Start chromium
 
-/usr/bin/chromium-browser --noerrordialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --kiosk "http://localhost:5600"
+/usr/bin/chromium-browser --noerrordialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --no-sandbox --kiosk "http://localhost:5600"
 
 # Turn display on (force)
 
