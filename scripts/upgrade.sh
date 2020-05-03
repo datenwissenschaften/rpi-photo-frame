@@ -80,10 +80,10 @@ curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschal
 
 # PHOTO FRAME
 
-python3.5 -m pip install --upgrade pip
+python3 -m pip install --upgrade pip
 cd /home/pi/rpi-photo-frame || exit
-python3.5 -m pip install -r requirements.txt --upgrade
-python3.5 -m pip install gunicorn --upgrade
+python3 -m pip install -r requirements.txt --upgrade
+python3 -m pip install gunicorn --upgrade
 
 # REACTIVATE CRONTAB
 
