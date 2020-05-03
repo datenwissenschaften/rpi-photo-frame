@@ -85,16 +85,6 @@ apt install python3-cffi python3-cryptography python3-numpy python3-pillow pytho
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2080%%20
 
-# ENSURE DATAPLICITY
-
-if [ "$HOSTNAME" = image-frame-master-slf ]; then
-    curl -s https://www.dataplicity.com/sopukyyq.py | sudo python
-fi
-
-if [ "$HOSTNAME" = image-frame-slf ]; then
-    curl -s https://www.dataplicity.com/sopukyyq.py | sudo python
-fi
-
 # PHOTO FRAME
 
 python3.5 -m pip install --upgrade pip
