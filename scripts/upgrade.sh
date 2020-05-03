@@ -68,6 +68,8 @@ curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschal
 
 # MINIMAL UI
 
+apt install --no-install-recommends xserver-xorg -y
+apt install --no-install-recommends xinit -y
 apt install fbi midori matchbox chromium-browser unclutter git -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2075%%20
