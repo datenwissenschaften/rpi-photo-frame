@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # DEACTIVATE CRONTAB
+
 crontab -r
 
 # STATUS MESSAGE
@@ -84,6 +85,16 @@ apt install python3-cffi python3-cryptography python3-numpy python3-pillow pytho
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2080%%20
 
+# ENSURE DATAPLICITY
+
+if [ "$HOSTNAME" = image-frame-master-slf ]; then
+    curl -s https://www.dataplicity.com/sopukyyq.py | sudo python
+fi
+
+if [ "$HOSTNAME" = image-frame-slf ]; then
+    curl -s https://www.dataplicity.com/sopukyyq.py | sudo python
+fi
+
 # PHOTO FRAME
 
 python3.5 -m pip install --upgrade pip
@@ -91,10 +102,12 @@ cd /home/pi/rpi-photo-frame || exit
 python3.5 -m pip install -r requirements.txt --upgrade
 python3.5 -m pip install gunicorn --upgrade
 
-# Reactivate crontab
+# REACTIVATE CRONTAB
 
 curl http://localhost:5600/toast/Update%20abgeschlossen.%20Neustart...%20
 
 /usr/bin/crontab /home/pi/rpi-photo-frame/cron/crontab
+
+# REBOOT
 
 /sbin/shutdown -r -f
