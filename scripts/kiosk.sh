@@ -8,13 +8,13 @@ xset s 1
 
 /usr/bin/chromium-browser --noerrdialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --kiosk "http://localhost:5600" &
 
-xset -dpms
-xset s off
-xset s noblank
-
 sleep 10
 xset s reset
 xset s 0
+
+xset -dpms
+xset s off
+xset s noblank
 
 while true; do
   sleep 36000
