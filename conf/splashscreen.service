@@ -1,0 +1,11 @@
+[Unit]
+Description=Splash screen
+DefaultDependencies=no
+
+[Service]
+ExecStart=/usr/bin/fbi -T 1 -noverbose -a -t 15 --once /home/pi/rpi-photo-frame/doc/splash.png
+StandardInput=tty
+StandardOutput=tty
+
+[Install]
+WantedBy=sysinit.target
