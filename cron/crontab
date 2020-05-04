@@ -1,2 +1,2 @@
-* * * * * /bin/bash /home/pi/rpi-photo-frame/scripts/update.sh >> /dev/null 2>&1
-@reboot /usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py >> /dev/null 2>&1
+* * * * * /bin/bash /home/pi/rpi-photo-frame/scripts/update.sh >> /var/log/updater.log
+@reboot /usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py >> /var/log/photo-frame.log
