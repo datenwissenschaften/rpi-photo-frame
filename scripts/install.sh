@@ -6,6 +6,7 @@ crontab -r
 
 # HOUSEKEEPING
 
+apt --fix-broken install
 apt install curl -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2010%%20
@@ -29,8 +30,6 @@ curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschal
 # BOOTSTRAP
 
 touch /boot/ssh
-apt --fix-broken install
-apt install git -y
 cd /home/pi || exit
 git clone https://github.com/MtnFranke/rpi-photo-frame.git
 timedatectl set-timezone Europe/Berlin
