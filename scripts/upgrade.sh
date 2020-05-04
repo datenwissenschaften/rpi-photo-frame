@@ -90,6 +90,10 @@ python3 -m pip install -r requirements.txt --upgrade
 python3 -m pip install gunicorn --upgrade
 cd /home/pi/rpi-photo-frame/doc || exit
 
+cp /home/pi/rpi-photo-frame/conf/photo.service /etc/systemd/system/photo.service
+systemctl enable photo
+systemctl start photo
+
 # SPLASH
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2085%%20
