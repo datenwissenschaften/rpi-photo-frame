@@ -5,6 +5,7 @@ from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, Conv
 
 __version__ = '1.0.0'
 
+
 class PhotoBot:
     def __init__(self, working_dir, pin, telegram_token):
         self.set_pin_workflow = range(1)
@@ -17,21 +18,26 @@ class PhotoBot:
 
     def start(self, update, context):
         current_pin = context.user_data.get('pin') or None
-
-        if (current_pin is None) or (int(current_pin) != self.pin):
+        try:
+            if (current_pin is None) or (int(current_pin) != self.pin):
+                update.message.reply_text(
+                    'Hallo! \nIch bin dein Bilderrahmen 😁 🏞 🎉 \n\n'
+                    'Bitte schicke mir die aufgedruckte PIN.')
+                return self.set_pin_workflow
+            else:
+                update.message.reply_text(
+                    'Deine PIN wurde bereits erfolgreich gesetzt 😄.\n'
+                    'Du kannst nun Bilder an mich senden 🙏.\n'
+                    '-- v' + __version__)
+                return ConversationHandler.END
+        except:
             update.message.reply_text(
                 'Hallo! \nIch bin dein Bilderrahmen 😁 🏞 🎉 \n\n'
                 'Bitte schicke mir die aufgedruckte PIN.')
             return self.set_pin_workflow
-        else:
-            update.message.reply_text(
-                'Deine PIN wurde bereits erfolgreich gesetzt 😄.\n'
-                'Du kannst nun Bilder an mich senden 🙏.\n'
-                'v' + __version__)
-            return ConversationHandler.END
 
     def set_pin(self, update, context):
-        context.user_data['pin'] = update.message.text
+        context.user_data['pin'] = int(update.message.text)
         return ConversationHandler.END
 
     def photo_handler(self, update, context):

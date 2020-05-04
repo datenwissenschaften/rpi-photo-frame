@@ -89,7 +89,15 @@ cd /home/pi/rpi-photo-frame || exit
 python3 -m pip install -r requirements.txt --upgrade
 python3 -m pip install gunicorn --upgrade
 cd /home/pi/rpi-photo-frame/doc || exit
+
+# SPLASH
+
+curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2085%%20
+
+cp /home/pi/rpi-photo-frame/conf/splashscreen.service /etc/systemd/system/splashscreen.service
 wget https://www.datenwissenschaften.com/resources/splash.png
+systemctl enable splashscreen
+systemctl start splashscreen
 
 # REACTIVATE CRONTAB
 
