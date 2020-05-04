@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# Splash
-
-/usr/bin/fbi -d /dev/fb0 -t 30 --noverbose -a /home/pi/rpi-photo-frame/doc/splash.png
-
 # No mouse cursor
 
 DISPLAY=:0.0 ; export DISPLAY
