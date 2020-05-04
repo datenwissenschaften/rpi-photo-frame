@@ -12,6 +12,6 @@ sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' /home/pi/.config/chromium
 
 # /usr/bin/fbi -T 1 -noverbose -a -t 5 --once /home/pi/rpi-photo-frame/doc/splash.png &
 /usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py &
-/usr/bin/chromium-browser --noerrdialogs --disable-infobars --kiosk http://localhost:5600 &
+/usr/bin/chromium-browser --noerrordialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --no-sandbox --kiosk --test-type "http://localhost:5600" &
 
 exit 0
