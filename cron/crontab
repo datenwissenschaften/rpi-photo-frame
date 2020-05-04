@@ -1,2 +1,2 @@
 * * * * * /bin/bash /home/pi/rpi-photo-frame/scripts/update.sh >> /dev/null 2>&1
-@reboot /bin/bash /home/pi/rpi-photo-frame/scripts/kiosk.sh >> /dev/null 2>&1
+@reboot /usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py >> /dev/null 2>&1

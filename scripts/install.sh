@@ -56,6 +56,10 @@ curl http://localhost:5600/toast/Update%20abgeschlossen.%20Neustart...%20
 
 /usr/bin/crontab /home/pi/rpi-photo-frame/cron/crontab
 
+# PERMISSIONS
+
+chmod -R 777 /home/pi/rpi-photo-frame
+
 # REBOOT
 
 /sbin/shutdown -r -f
