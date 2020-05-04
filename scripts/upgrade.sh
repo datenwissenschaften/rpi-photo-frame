@@ -4,7 +4,7 @@
 
 touch /boot/ssh
 apt --fix-broken install
-apt install git
+apt install git -y
 cd /home/pi || exit
 git clone https://github.com/MtnFranke/rpi-photo-frame.git
 timedatectl set-timezone Europe/Berlin
