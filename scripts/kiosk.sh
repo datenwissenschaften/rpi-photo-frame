@@ -8,7 +8,7 @@ xset s 1
 
 /usr/bin/chromium-browser --noerrdialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --kiosk "http://localhost:5600" &
 
-sleep 10
+sleep 30
 xset s reset
 xset s 0
 
