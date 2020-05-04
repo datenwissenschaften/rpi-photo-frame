@@ -2,7 +2,7 @@
 
 DISPLAY=:0.0 ; export DISPLAY
 
-/usr/bin/fbi -T 1 -noverbose -a -t 30 --once /home/pi/rpi-photo-frame/doc/splash.png &
+/usr/bin/fbi -T 1 -noverbose -a -t 5 --once /home/pi/rpi-photo-frame/doc/splash.png &
 /usr/bin/xinit /home/pi/rpi-photo-frame/scripts/xprograms.sh &
 
 dmesg --console-off
