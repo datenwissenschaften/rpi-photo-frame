@@ -83,16 +83,18 @@ class PhotoBot:
     def main(self):
 
         try:
-            pp = PicklePersistence(filename='%s/../data/conversationbot' % self.working_dir)
+            updater = Updater(
+                self.telegram_token,
+                persistence=PicklePersistence(filename='%s/../data/conversationbot' % self.working_dir),
+                use_context=True
+            )
         except:
             os.remove('%s/../data/conversationbot' % self.working_dir)
-            pp = PicklePersistence(filename='%s/../data/conversationbot' % self.working_dir)
-
-        updater = Updater(
-            self.telegram_token,
-            persistence=pp,
-            use_context=True
-        )
+            updater = Updater(
+                self.telegram_token,
+                persistence=PicklePersistence(filename='%s/../data/conversationbot' % self.working_dir),
+                use_context=True
+            )
 
         dp = updater.dispatcher
 
