@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export DISPLAY=:0.0
+
 unclutter -idle 0.5 -root &
 xset -dpms
 xset s off
