@@ -63,9 +63,9 @@ python3 -m pip install -r requirements.txt --upgrade
 python3 -m pip install gunicorn --upgrade
 cd /home/pi/rpi-photo-frame/doc || exit
 
-cp /home/pi/rpi-photo-frame/service/photo.service /etc/systemd/system/photo.service
 systemctl stop photo
 systemctl disable photo
+cp /home/pi/rpi-photo-frame/service/photo.service /etc/systemd/system/photo.service
 systemctl enable photo
 systemctl start photo
 
@@ -73,18 +73,18 @@ systemctl start photo
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2085%%20
 
-cp /home/pi/rpi-photo-frame/service/splashscreen.service /etc/systemd/system/splashscreen.service
 wget https://www.datenwissenschaften.com/resources/splash.png
 systemctl stop splashscreen
 systemctl disable splashscreen
+cp /home/pi/rpi-photo-frame/service/splashscreen.service /etc/systemd/system/splashscreen.service
 systemctl enable splashscreen
 systemctl start splashscreen
 
 # XINIT
 
-cp /home/pi/rpi-photo-frame/service/xinit.service /etc/systemd/system/xinit.service
 systemctl stop xinit
 systemctl disable xinit
+cp /home/pi/rpi-photo-frame/service/xinit.service /etc/systemd/system/xinit.service
 systemctl enable xinit
 systemctl start xinit
 

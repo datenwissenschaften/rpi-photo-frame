@@ -11,4 +11,4 @@ StandardInput=tty
 StandardOutput=tty
 
 [Install]
-WantedBy=sysinit.target
+WantedBy=multi-user.target
