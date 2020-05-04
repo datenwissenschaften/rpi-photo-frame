@@ -60,6 +60,11 @@ curl http://localhost:5600/toast/Update%20abgeschlossen.%20Neustart...%20
 
 chmod -R 777 /home/pi/rpi-photo-frame
 
+# SERVICE
+
+cp /home/pi/rpi-photo-frame/scripts/kiosk.service /lib/systemd/system/kiosk.service
+
+
 # REBOOT
 
 /sbin/shutdown -r -f
