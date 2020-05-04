@@ -3,6 +3,7 @@
 DISPLAY=:0.0 ; export DISPLAY
 
 /usr/bin/xinit /home/pi/rpi-photo-frame/scripts/xprograms.sh &
+/usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py >> /var/log/photo-frame.log &
 
 dmesg --console-off
 clear
