@@ -6,7 +6,7 @@ xset s off
 xset s noblank
 
 # /usr/bin/fbi -T 1 -noverbose -a -t 5 --once /home/pi/rpi-photo-frame/doc/splash.png &
-/usr/bin/chromium-browser --noerrordialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --kiosk http://localhost:5600 &
+/usr/bin/chromium-browser --noerrdialogs --disable-infobars --kiosk "http://localhost:5600" &
 
 while true; do
   sleep 36000
