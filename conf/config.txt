@@ -2,6 +2,6 @@ disable_overscan=1
 dtparam=audio=off
 hdmi_force_hotplug=1
 lcd_rotate=2
-start_x=1
+start_x=0
 gpu_mem=64
 disable_splash=1
