@@ -2,6 +2,7 @@
 
 # BOOTSTRAP
 
+touch /boot/ssh
 apt --fix-broken install
 apt install git
 cd /home/pi || exit
@@ -16,15 +17,6 @@ crontab -r
 apt install curl -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2010%%20
-
-# MIGRATION
-
-apt purge nodejs -y
-chmod +x /usr/local/bin/uninstall-log2ram.sh && sudo /usr/local/bin/uninstall-log2ram.sh
-apt purge plymouth -y
-apt purge profile-sync-daemon -y
-
-curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2030%%20
 
 # BOOTUP
 
@@ -82,10 +74,13 @@ curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschal
 
 # PHOTO FRAME
 
+apt install python3-pip libatlas-base-dev -y
 python3 -m pip install --upgrade pip
 cd /home/pi/rpi-photo-frame || exit
 python3 -m pip install -r requirements.txt --upgrade
 python3 -m pip install gunicorn --upgrade
+cd /home/pi/rpi-photo-frame/doc || exit
+wget https://www.datenwissenschaften.com/resources/splash.png
 
 # REACTIVATE CRONTAB
 
