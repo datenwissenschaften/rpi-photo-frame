@@ -8,3 +8,6 @@ After=network.target network-online.target
 ExecStart=/usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py
 StandardInput=tty
 StandardOutput=tty
+
+[Install]
+WantedBy=sysinit.target
