@@ -19,6 +19,15 @@ apt install curl -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2010%%20
 
+# FONTS
+
+perl -pi -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
+
+locale-gen en_US.UTF-8
+update-locale en_US.UTF-8
+
+curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2020%%20
+
 # BOOTUP
 
 systemctl disable plymouth-start.service
