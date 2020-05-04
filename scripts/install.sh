@@ -72,6 +72,12 @@ cd /home/pi/rpi-photo-frame/doc/ || exit
 wget https://www.datenwissenschaften.com/resources/splash.png
 cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
 
+# GUI
+
+rm /etc/xdg/autostart/piwiz.desktop
+cp /home/pi/rpi-photo-frame/conf/autostart /etc/xdg/lxsession/LXDE-pi/autostart
+cp /home/pi/rpi-photo-frame/conf/desktop-items-0.conf /etc/xdg/pcmanfm/LXDE-pi/desktop-items-0.conf
+
 # REBOOT
 
 /sbin/shutdown -r -f
