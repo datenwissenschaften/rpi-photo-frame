@@ -1,9 +1,5 @@
 #!/bin/sh -e
 
-DISPLAY=:0.0 ; export DISPLAY
-
-/usr/bin/xinit /home/pi/rpi-photo-frame/scripts/xprograms.sh &
-
 dmesg --console-off
 clear
 

@@ -19,28 +19,6 @@ apt install curl -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2010%%20
 
-# FONTS
-
-perl -pi -e 's/# en_US.UTF-8 UTF-8/en_US.UTF-8 UTF-8/g' /etc/locale.gen
-
-locale-gen en_US.UTF-8
-update-locale en_US.UTF-8
-
-curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2020%%20
-
-# BOOTUP
-
-systemctl disable plymouth-start.service
-systemctl disable dphys-swapfile.service
-systemctl disable keyboard-setup.service
-systemctl disable apt-daily.service
-systemctl disable wifi-country.service
-systemctl disable hciuart.service
-systemctl disable raspi-config.service
-systemctl disable triggerhappy.service
-
-curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2040%%20
-
 # CONFIGURATIONS
 
 cp /home/pi/rpi-photo-frame/conf/rc.local /etc/rc.local
@@ -55,11 +33,6 @@ apt update
 apt upgrade -y
 apt autoremove -y
 apt autoclean -y
-
-apt purge wolfram-engine -y
-apt purge libreoffice* -y
-apt clean -y
-apt autoremove -y
 
 apt install deborphan -y
 apt autoremove --purge "$(deborphan)" -y
@@ -102,6 +75,12 @@ cp /home/pi/rpi-photo-frame/conf/splashscreen.service /etc/systemd/system/splash
 wget https://www.datenwissenschaften.com/resources/splash.png
 systemctl enable splashscreen
 systemctl start splashscreen
+
+# XINIT
+
+cp /home/pi/rpi-photo-frame/conf/xinit.service /etc/systemd/system/xinit.service
+systemctl enable xinit
+systemctl start xinit
 
 # REACTIVATE CRONTAB
 

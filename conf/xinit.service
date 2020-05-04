@@ -1,0 +1,14 @@
+[Unit]
+Description=Start X programs
+DefaultDependencies=yes
+Wants=network-online.target
+After=network.target network-online.target
+
+[Service]
+EnvironmentFile=/etc/environment
+ExecStart=/usr/bin/xinit /home/pi/rpi-photo-frame/scripts/xprograms.sh
+StandardInput=tty
+StandardOutput=tty
+
+[Install]
+WantedBy=sysinit.target
