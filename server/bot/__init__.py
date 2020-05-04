@@ -1,3 +1,4 @@
+import os
 import uuid
 
 import requests
@@ -81,9 +82,15 @@ class PhotoBot:
 
     def main(self):
 
+        try:
+            pp = PicklePersistence(filename='%s/../data/conversationbot' % self.working_dir)
+        except:
+            os.remove('%s/../data/conversationbot' % self.working_dir)
+            pp = PicklePersistence(filename='%s/../data/conversationbot' % self.working_dir)
+
         updater = Updater(
             self.telegram_token,
-            persistence=PicklePersistence(filename='%s/../data/conversationbot' % self.working_dir),
+            persistence=pp,
             use_context=True
         )
 
