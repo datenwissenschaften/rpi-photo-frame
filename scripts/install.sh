@@ -65,6 +65,7 @@ chmod -R 777 /home/pi/rpi-photo-frame
 cp /home/pi/rpi-photo-frame/scripts/kiosk.service /lib/systemd/system/kiosk.service
 systemctl daemon-reload
 systemctl enable kiosk.service
+cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
 
 # REBOOT
 
