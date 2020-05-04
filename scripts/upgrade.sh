@@ -80,14 +80,6 @@ cp /home/pi/rpi-photo-frame/service/splashscreen.service /etc/systemd/system/spl
 systemctl enable splashscreen
 systemctl start splashscreen
 
-# XINIT
-
-systemctl stop xinit
-systemctl disable xinit
-cp /home/pi/rpi-photo-frame/service/xinit.service /etc/systemd/system/xinit.service
-systemctl enable xinit
-systemctl start xinit
-
 # REACTIVATE CRONTAB
 
 curl http://localhost:5600/toast/Update%20abgeschlossen.%20Neustart...%20
