@@ -1,12 +1,10 @@
 [Unit]
 Description=Photo service
 DefaultDependencies=yes
+Wants=network-online.target
+After=network.target network-online.target
 
 [Service]
 ExecStart=/usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py
 StandardInput=tty
 StandardOutput=tty
-
-[Install]
-After=network-online.target
-Wants=network-online.target
