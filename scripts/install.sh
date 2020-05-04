@@ -63,7 +63,12 @@ chmod -R 777 /home/pi/rpi-photo-frame
 # SERVICE
 
 cp /home/pi/rpi-photo-frame/scripts/kiosk.service /lib/systemd/system/kiosk.service
-
+systemctl daemon-reload
+systemctl stop kiosk.service
+systemctl disable kiosk.service
+systemctl daemon-reload
+systemctl start kiosk.service
+systemctl enable kiosk.service
 
 # REBOOT
 
