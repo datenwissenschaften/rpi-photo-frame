@@ -1,1 +1,2 @@
-* * * * * /bin/sh /home/pi/rpi-photo-frame/scripts/update.sh >> /dev/null 2>&1
+* * * * * /bin/bash /home/pi/rpi-photo-frame/scripts/update.sh >> /dev/null 2>&1
+@reboot /bin/bash /home/pi/rpi-photo-frame/scripts/kiosk.sh >> /dev/null 2>&1

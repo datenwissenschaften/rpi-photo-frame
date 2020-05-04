@@ -1,13 +1,5 @@
 #!/bin/sh -e
 
-for env in $( cat /etc/environment ); do export $(echo $env | sed -e 's/"//g'); done
-
-DISPLAY=:0.0 ; export DISPLAY
-
-/usr/bin/fbi -T 1 -noverbose -a -t 5 --once /home/pi/rpi-photo-frame/doc/splash.png &
-/usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py &
-/usr/bin/xinit /home/pi/rpi-photo-frame/scripts/xprograms.sh &
-
 dmesg --console-off
 clear
 

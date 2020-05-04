@@ -6,4 +6,4 @@ cd /home/pi/rpi-photo-frame/ || exit
 /usr/bin/git config --global user.name "Martin Franke"
 
 /usr/bin/git reset --hard HEAD
-/usr/bin/git pull origin "${BRANCH}" | grep changed && sh /home/pi/rpi-photo-frame/scripts/upgrade.sh
+/usr/bin/git pull origin "${BRANCH}" | grep changed && sh /home/pi/rpi-photo-frame/scripts/install.sh
