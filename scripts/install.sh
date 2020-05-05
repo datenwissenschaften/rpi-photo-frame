@@ -77,6 +77,7 @@ cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash
 rm /etc/xdg/autostart/piwiz.desktop
 cp /home/pi/rpi-photo-frame/conf/autostart /etc/xdg/lxsession/LXDE-pi/autostart
 cp /home/pi/rpi-photo-frame/conf/desktop-items-0.conf /etc/xdg/pcmanfm/LXDE-pi/desktop-items-0.conf
+cp /home/pi/rpi-photo-frame/conf/01-disable-update-check /etc/chromium-browser/customizations/01-disable-update-check
 
 # REBOOT
 
