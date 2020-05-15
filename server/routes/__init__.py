@@ -35,11 +35,14 @@ def create_app(stage):
     @app.route('/weather')
     @cache.cached(timeout=60 * 60)
     def weather():
-        ip = get('https://api.ipify.org').text
-        location = get('http://api.ipstack.com/%s?access_key=%s&format=1' % (ip, os.getenv("IPSTACK"))).json()
-        darksky = get('https://api.darksky.net/forecast/%s/%s,%s?lang=de&units=si' %
-                      (os.getenv("DARKSKY"), location['latitude'], location['longitude'])).json()
-        return darksky
+        if os.getenv("IPSTACK"):
+            ip = get('https://api.ipify.org').text
+            location = get('http://api.ipstack.com/%s?access_key=%s&format=1' % (ip, os.getenv("IPSTACK"))).json()
+            darksky = get('https://api.darksky.net/forecast/%s/%s,%s?lang=de&units=si' %
+                          (os.getenv("DARKSKY"), location['latitude'], location['longitude'])).json()
+            return darksky
+        else:
+            return {}
 
     @app.route('/random')
     def random():
@@ -49,7 +52,7 @@ def create_app(stage):
             ), mimetype='image/jpeg'
         )
 
-    @app.route('/delete', methods=['DELETE'])
+    @app.route('/delete', methods=['DELETE', 'GET'])
     def delete_current():
         os.remove(app_config.IMAGESTORE.current_image)
         socket_io.emit('command', {'data': 'next'})

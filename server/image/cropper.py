@@ -19,5 +19,5 @@ class Cropper:
         image = Image.open(image_path)
         thumb = ImageOps.fit(image, (self.crop_x, self.crop_y), Image.ANTIALIAS)
         new_file, filename = tempfile.mkstemp()
-        thumb.save(filename, 'JPEG', quality=70)
+        thumb.save(filename, 'PNG', quality=70)
         return filename
