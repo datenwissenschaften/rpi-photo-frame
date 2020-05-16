@@ -21,7 +21,8 @@ def is_connected():
 
 def start():
     if not is_connected():
-        os.system('sudo wifi-connect')
+        os.system('sudo /usr/bin/fbi -T 1 -noverbose -a -t 3600 --once /home/pi/rpi-photo-frame/doc/wifi.png &')
+        os.system('sudo wifi-connect -s Bilderrahmen')
         os.system('sudo reboot')
     else:
         port = int(os.environ.get("PORT", 5600))
