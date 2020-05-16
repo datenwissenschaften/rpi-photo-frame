@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# Display progress
+
+curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%200%%20
+
 # DEACTIVATE CRONTAB
 
 crontab -r
