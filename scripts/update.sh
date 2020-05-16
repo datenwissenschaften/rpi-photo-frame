@@ -10,6 +10,7 @@ cd /home/pi/rpi-photo-frame/ || exit
 CHANGED=$(/usr/bin/git status --porcelain --untracked-files=no)
 
 if [ -n "${CHANGED}" ]; then
+  /usr/bin/git pull origin "${BRANCH}"
   /bin/bash /home/pi/rpi-photo-frame/scripts/install.sh
 else
   echo ""
