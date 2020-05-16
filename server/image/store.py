@@ -37,6 +37,9 @@ class ImageStore:
             unix_time = os.path.getmtime(image_path)
         return int(unix_time)
 
+    def get_all_images(self):
+        return glob.glob(self._image_dir + "/*")
+
     def get_weighted_random_image(self):
         images = glob.glob(self._image_dir + "/*")
         images_by_date = seq(images) \

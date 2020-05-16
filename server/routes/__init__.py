@@ -42,7 +42,7 @@ def create_app(stage):
                           (os.getenv("DARKSKY"), location['latitude'], location['longitude'])).json()
             return darksky
         else:
-            return {}
+            return {"currently": {"temperature": 99.9, "icon": "day-cloudy"}}
 
     @app.route('/random')
     def random():
