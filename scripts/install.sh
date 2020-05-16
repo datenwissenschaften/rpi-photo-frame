@@ -1,10 +1,5 @@
 #!/bin/bash
 
-# WIFI
-
-export PORTAL_SSID="Bilderrahmen"
-bash <(curl -L https://github.com/balena-io/wifi-connect/raw/master/scripts/raspbian-install.sh)
-
 # DEACTIVATE CRONTAB
 
 crontab -r
