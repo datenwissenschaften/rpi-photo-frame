@@ -10,7 +10,7 @@ cd /home/pi/rpi-photo-frame/ || exit
 CHANGED=$(/usr/bin/git status --porcelain --untracked-files=no)
 
 if [ -n "${CHANGED}" ]; then
-  sh /home/pi/rpi-photo-frame/scripts/install.sh
+  /bin/bash /home/pi/rpi-photo-frame/scripts/install.sh
 else
   echo ""
 fi
