@@ -25,7 +25,7 @@ def create_app(stage):
 
     app_config = get_config(stage)
 
-    Process(target=PhotoBot, args=(app_config.BASEDIR, app_config.PIN, app_config.TELEGRAM_TOKEN)).start()
+    Process(target=PhotoBot, args=(app_config.IMAGEDIR, app_config.PIN, app_config.TELEGRAM_TOKEN)).start()
 
     @app.route('/')
     @cache.cached(timeout=60 * 60)

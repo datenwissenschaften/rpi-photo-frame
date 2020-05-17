@@ -4,13 +4,13 @@ import uuid
 import requests
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, PicklePersistence)
 
-__version__ = '1.0.0'
+__version__ = '1.1.0'
 
 
 class PhotoBot:
-    def __init__(self, working_dir, pin, telegram_token):
+    def __init__(self, image_dir, pin, telegram_token):
         self.set_pin_workflow = range(1)
-        self.working_dir = working_dir
+        self.image_dir = image_dir
         self.url = "http://localhost:5600"
         self.pin = int(pin)
         self.telegram_token = telegram_token
@@ -39,6 +39,7 @@ class PhotoBot:
 
     def set_pin(self, update, context):
         context.user_data['pin'] = int(update.message.text)
+        update.message.reply_text('Damit haben wir alles 😄. Du kannst nun Bilder an mich senden 🙏.')
         return ConversationHandler.END
 
     def photo_handler(self, update, context):
@@ -54,7 +55,7 @@ class PhotoBot:
                 photo_file = update.message.photo[-1].get_file()
             except:
                 photo_file = update.message.document[-1].get_file()
-            photo_file.download('%s/../images/%s.jpg' % (self.working_dir, filename))
+            photo_file.download('%s/%s.jpg' % (self.image_dir, filename))
             requests.get(self.url + '/next/%s.jpg' % filename).json()
             update.message.reply_text('Danke für das Photo 🤩!\n'
                                       'Ich zeige es dir gleich an.')
@@ -85,14 +86,14 @@ class PhotoBot:
         try:
             updater = Updater(
                 self.telegram_token,
-                persistence=PicklePersistence(filename='%s/../data/conversationbot' % self.working_dir),
+                persistence=PicklePersistence(filename='%s/../telegram_bot' % self.image_dir),
                 use_context=True
             )
         except:
-            os.remove('%s/../data/conversationbot' % self.working_dir)
+            os.remove('%s/../telegram_bot' % self.image_dir)
             updater = Updater(
                 self.telegram_token,
-                persistence=PicklePersistence(filename='%s/../data/conversationbot' % self.working_dir),
+                persistence=PicklePersistence(filename='%s/../telegram_bot' % self.image_dir),
                 use_context=True
             )
 
