@@ -5,7 +5,7 @@ import socket
 
 __version__ = '1.0.0'
 
-import time
+from retry.api import retry_call
 
 from routes import create_app
 
@@ -13,17 +13,19 @@ from routes import create_app
 
 
 def is_connected():
-    try:
-        time.sleep(10)
-        socket.create_connection(("www.google.com", 80))
-        return True
-    except OSError:
-        pass
-    return False
+    import logging
+    logging.basicConfig()
+    socket.create_connection(("www.google.com", 80))
+    return True
 
 
 def start():
-    if not is_connected():
+    try:
+        connected = retry_call(is_connected, tries=6, delay=1, backoff=2)
+    except:
+        connected = False
+
+    if not connected:
         os.system('sudo /usr/bin/fbi -T 1 -noverbose -a -t 3600 --once /home/pi/rpi-photo-frame/doc/wifi.png &')
         os.system('sudo wifi-connect -s Bilderrahmen')
         os.system('sudo reboot')

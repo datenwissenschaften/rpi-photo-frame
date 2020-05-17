@@ -1,7 +1,5 @@
 #!/bin/bash
 
-sleep 10
-
 /usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py >>/home/pi/photo-frame.log &
 
 unclutter -idle 0 -root &
