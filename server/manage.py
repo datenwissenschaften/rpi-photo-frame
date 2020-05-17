@@ -5,6 +5,8 @@ import socket
 
 __version__ = '1.0.0'
 
+import time
+
 from routes import create_app
 
 (socket_io, app) = create_app(os.getenv("PHOTO_FRAME_ENV", "dev").lower())
@@ -12,6 +14,7 @@ from routes import create_app
 
 def is_connected():
     try:
+        time.sleep(10)
         socket.create_connection(("www.google.com", 80))
         return True
     except OSError:
