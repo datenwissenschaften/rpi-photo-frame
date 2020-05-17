@@ -1,7 +1,7 @@
-import os
 import uuid
 
 import requests
+from retry import retry
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, PicklePersistence)
 
 __version__ = '1.1.0'
@@ -14,6 +14,7 @@ class PhotoBot:
         self.url = "http://localhost:5600"
         self.pin = int(pin)
         self.telegram_token = telegram_token
+        self.updater = None
         if self.telegram_token is not None:
             self.main()
 
@@ -81,23 +82,20 @@ class PhotoBot:
     def cancel(self):
         return ConversationHandler.END
 
+    @retry(delay=1, backoff=2)
+    def init_updater(self):
+        self.updater = Updater(
+            self.telegram_token,
+            persistence=PicklePersistence(filename='%s/../telegram_bot' % self.image_dir),
+            use_context=True
+        )
+        return True
+
     def main(self):
 
-        try:
-            updater = Updater(
-                self.telegram_token,
-                persistence=PicklePersistence(filename='%s/../telegram_bot' % self.image_dir),
-                use_context=True
-            )
-        except:
-            os.remove('%s/../telegram_bot' % self.image_dir)
-            updater = Updater(
-                self.telegram_token,
-                persistence=PicklePersistence(filename='%s/../telegram_bot' % self.image_dir),
-                use_context=True
-            )
+        self.init_updater()
 
-        dp = updater.dispatcher
+        dp = self.updater.dispatcher
 
         start_conversation_handler = ConversationHandler(
             entry_points=[CommandHandler('start', self.start)],
@@ -119,6 +117,6 @@ class PhotoBot:
 
         dp.add_error_handler(self.error)
 
-        updater.start_polling()
+        self.updater.start_polling()
 
-        updater.idle()
+        self.updater.idle()
