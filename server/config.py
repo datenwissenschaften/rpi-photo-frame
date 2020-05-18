@@ -13,8 +13,8 @@ class Config:
 
 class DevelopmentConfig(Config):
     IMAGEDIR = os.environ.get('IMAGEDIR') or os.path.join(Config.BASEDIR, "..", "doc")
-    DECAY = 1
-    IMAGESTORE = ImageStore(IMAGEDIR, DECAY)
+    DECAY = os.environ.get('DECAY') or 1
+    IMAGESTORE = ImageStore(IMAGEDIR, int(DECAY))
     PIN = os.environ.get('PIN')
     TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
 
