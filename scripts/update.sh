@@ -12,7 +12,7 @@ sudo /usr/bin/git fetch
 CHANGED=0
 sudo /usr/bin/git remote update && /usr/bin/git status -uno | grep -q 'Your branch is behind' && CHANGED=1
 if [ $CHANGED = 1 ]; then
-  sudo /usr/bin/git pull origin "${BRANCH}"
+  sudo /usr/bin/git pull
   sudo /bin/bash /home/pi/rpi-photo-frame/scripts/install.sh
 else
   echo ""

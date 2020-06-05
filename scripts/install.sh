@@ -56,6 +56,7 @@ python3 -m pip install gunicorn --upgrade
 
 # PERMISSIONS
 
+curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2085%%20
 chmod -R 777 /home/pi/rpi-photo-frame
 
 # SERVICE
@@ -66,6 +67,7 @@ systemctl enable kiosk.service
 
 # SPLASH
 
+curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2095%%20
 cd /home/pi/rpi-photo-frame/doc/ || exit
 wget https://www.datenwissenschaften.com/resources/splash.png
 cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
@@ -79,4 +81,5 @@ cp /home/pi/rpi-photo-frame/conf/01-disable-update-check /etc/chromium-browser/c
 
 # REBOOT
 
+curl http://localhost:5600/toast/Update%20abgeschlossen.%20Neustart...%20
 /sbin/shutdown -r -f
