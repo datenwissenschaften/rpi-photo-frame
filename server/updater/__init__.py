@@ -1,21 +1,19 @@
-import multiprocessing
 import os
-import time
+
+import threading
 
 
 class Updater:
-    RUNNING = True
+    RUNNING = False
+    THREAD = None
 
     def __init__(self):
-        multiprocessing.Process(target=self.run())
+        self.job()
 
     def job(self):
-        self.RUNNING = False
-        os.system("sudo /bin/bash /home/pi/rpi-photo-frame/scripts/update.sh")
-        time.sleep(60)
-        self.RUNNING = True
-        multiprocessing.Process(target=self.run())
-
-    def run(self):
-        while self.RUNNING:
-            self.job()
+        if not self.RUNNING:
+            self.RUNNING = True
+            os.system("sudo /bin/bash /home/pi/rpi-photo-frame/scripts/update.sh")
+            self.RUNNING = False
+            self.THREAD = threading.Timer(60.0, self.job)
+            self.THREAD.start()

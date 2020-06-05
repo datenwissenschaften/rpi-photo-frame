@@ -21,7 +21,7 @@ class Cropper:
             file_path=image_path,
             crop_width=self.crop_x,
             crop_height=self.crop_y,
-            num_of_crops=1,
+            num_of_crops=5,
             down_sample_factor=8
         )
 

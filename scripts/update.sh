@@ -15,5 +15,5 @@ if [ $CHANGED = 1 ]; then
   sudo /usr/bin/git pull origin "${BRANCH}"
   sudo /bin/bash /home/pi/rpi-photo-frame/scripts/install.sh
 else
-    echo ""
+  echo ""
 fi
