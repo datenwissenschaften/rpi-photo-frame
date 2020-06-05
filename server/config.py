@@ -3,6 +3,7 @@
 import os
 
 from image.store import ImageStore
+from updater import Updater
 
 
 class Config:
@@ -17,6 +18,7 @@ class DevelopmentConfig(Config):
     IMAGESTORE = ImageStore(IMAGEDIR, int(DECAY))
     PIN = os.environ.get('PIN')
     TELEGRAM_TOKEN = os.environ.get('TELEGRAM_TOKEN')
+    UPDATER = Updater()
 
 
 class StagingConfig(Config):

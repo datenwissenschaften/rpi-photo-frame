@@ -1,1 +1,0 @@
-* * * * * /bin/bash /home/pi/rpi-photo-frame/scripts/update.sh > /dev/null 2>&1
