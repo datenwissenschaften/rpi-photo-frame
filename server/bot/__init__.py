@@ -4,7 +4,7 @@ import requests
 from retry import retry
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, PicklePersistence)
 
-__version__ = '1.1.0'
+from __version__ import __version__
 
 
 class PhotoBot:

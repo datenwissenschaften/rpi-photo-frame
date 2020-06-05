@@ -3,8 +3,6 @@
 import os
 import socket
 
-__version__ = '1.0.0'
-
 from retry.api import retry_call
 
 from routes import create_app
