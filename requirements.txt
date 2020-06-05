@@ -8,3 +8,6 @@ eventlet
 numpy
 Pillow
 retry
+katna
+opencv-python-headless
+opencv-contrib-python-headless
