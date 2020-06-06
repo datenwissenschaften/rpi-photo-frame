@@ -1,14 +1,15 @@
-from __future__ import print_function
 from __future__ import division
+from __future__ import print_function
+
+import argparse
+import math
+import os
 
 import cv2
-import argparse
-import os
-import math
 
 # Algorithm parameters
 COMBINE_FACE_WEIGHT = 10
-COMBINE_FEATURE_WEIGHT = 10
+COMBINE_FEATURE_WEIGHT = 3
 FEATURE_DETECT_MAX_CORNERS = 50
 FEATURE_DETECT_QUALITY_LEVEL = 0.1
 FEATURE_DETECT_MIN_DISTANCE = 10
@@ -16,6 +17,30 @@ FACE_DETECT_REJECT_LEVELS = 1.3
 FACE_DETECT_LEVEL_WEIGHTS = 5
 
 cascade_path = os.path.dirname(__file__) + '/cascades/haarcascade_frontalface_default.xml'
+
+
+def center_from_glasses(matrix):
+    glasses_cascade = cv2.CascadeClassifier(os.path.dirname(__file__) + '/cascades/haarcascade_eye_tree_eyeglasses.xml')
+    glasses = glasses_cascade.detectMultiScale(matrix, FACE_DETECT_REJECT_LEVELS, FACE_DETECT_LEVEL_WEIGHTS)
+
+    x, y = (0, 0)
+    weight = 0
+
+    # iterate over our glasses array
+    for (x, y, w, h) in glasses:
+        print('Glasses detected at ', x, y, w, h)
+        weight += w * h
+        x += (x + w / 2) * w * h
+        y += (y + h / 2) * w * h
+
+    if len(glasses) == 0:
+        return False
+
+    return {
+        'x': x / weight,
+        'y': y / weight,
+        'count': len(glasses)
+    }
 
 
 def center_from_faces(matrix):
