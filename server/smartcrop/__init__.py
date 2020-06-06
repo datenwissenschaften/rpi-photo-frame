@@ -9,7 +9,7 @@ import cv2
 
 # Algorithm parameters
 COMBINE_FACE_WEIGHT = 10
-COMBINE_FEATURE_WEIGHT = 3
+COMBINE_FEATURE_WEIGHT = 0
 FEATURE_DETECT_MAX_CORNERS = 50
 FEATURE_DETECT_QUALITY_LEVEL = 0.1
 FEATURE_DETECT_MIN_DISTANCE = 10
@@ -97,7 +97,7 @@ def exact_crop(center, original_width, original_height, target_width, target_hei
     offset_w = left + target_width
     if offset_w > original_width:
         # overflowing
-        # print("Left side over by ", offsetW - original_width)
+        print("Left side over by ", offset_w - original_width)
         left = left - (offset_w - original_width)
     left = max(left, 0)
     right = min(left + target_width, original_width)
