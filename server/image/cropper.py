@@ -9,5 +9,5 @@ class Cropper:
         self.crop_y = 800
 
     def crop(self, image_path):
-        smart_crop(image_path, self.crop_x, self.crop_y, tempfile.gettempdir() + "/_working_image_.jpeg", False)
+        smart_crop(image_path, self.crop_x, self.crop_y, tempfile.gettempdir() + "/_working_image_.jpeg", True)
         return tempfile.gettempdir() + "/_working_image_.jpeg"
