@@ -1,5 +1,6 @@
-import os
 import tempfile
+
+from smartcrop import smart_crop
 
 
 class Cropper:
@@ -8,7 +9,5 @@ class Cropper:
         self.crop_y = 800
 
     def crop(self, image_path):
-        os.system("smartcroppy --width " + str(self.crop_x) + " --height "
-                  + str(self.crop_y) + " " + image_path + " " + tempfile.gettempdir() + "/_working_image_.jpeg")
-
+        smart_crop(image_path, self.crop_x, self.crop_y, tempfile.gettempdir() + "/_working_image_.jpeg", True)
         return tempfile.gettempdir() + "/_working_image_.jpeg"

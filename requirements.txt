@@ -8,6 +8,5 @@ eventlet
 numpy
 Pillow
 retry
-smartcrop
 opencv-python-headless
 opencv-contrib-python-headless
