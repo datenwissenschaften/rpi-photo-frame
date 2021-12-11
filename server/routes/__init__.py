@@ -47,7 +47,7 @@ def create_app(stage):
                 ip = get('https://api.ipify.org').text
                 location = get('http://api.ipstack.com/%s?access_key=%s&format=1' % (ip, os.getenv("IPSTACK"))).json()
                 with open('/tmp/LOCATION', 'w') as f:
-                    json.dump(data, f, ensure_ascii=False)
+                    json.dump(location, f, ensure_ascii=False)
             darksky = get('https://api.darksky.net/forecast/%s/%s,%s?lang=de&units=si' %
                           (os.getenv("DARKSKY"), location['latitude'], location['longitude'])).json()
             return darksky
