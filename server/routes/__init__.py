@@ -1,5 +1,8 @@
 # -*- coding: UTF-8 -*-
 import os
+import json
+
+from pathlib import Path
 from multiprocessing import Process
 
 from flask import Flask, render_template, send_file, jsonify
@@ -36,8 +39,15 @@ def create_app(stage):
     @cache.cached(timeout=60 * 60)
     def weather():
         if os.getenv("IPSTACK"):
-            ip = get('https://api.ipify.org').text
-            location = get('http://api.ipstack.com/%s?access_key=%s&format=1' % (ip, os.getenv("IPSTACK"))).json()
+            if Path('/tmp/LOCATION').is_file():
+                f = open('/tmp/LOCATION')
+                location = json.load(f)
+                f.close()
+            else:
+                ip = get('https://api.ipify.org').text
+                location = get('http://api.ipstack.com/%s?access_key=%s&format=1' % (ip, os.getenv("IPSTACK"))).json()
+                with open('/tmp/LOCATION', 'w') as f:
+                    json.dump(location, f, ensure_ascii=False)
             darksky = get('https://api.darksky.net/forecast/%s/%s,%s?lang=de&units=si' %
                           (os.getenv("DARKSKY"), location['latitude'], location['longitude'])).json()
             return darksky
