@@ -1,6 +1,8 @@
 import datetime
 import glob
 import os
+import random
+
 from operator import itemgetter
 
 import numpy
@@ -35,29 +37,32 @@ class ImageStore:
             unix_time = datetime_object.timestamp()
         except:
             unix_time = os.path.getmtime(image_path)
-        return int(unix_time / 1000)
+        return int(unix_time / 100000)
 
     def get_all_images(self):
         return glob.glob(self._image_dir + "/*")
 
     def get_weighted_random_image(self):
         images = glob.glob(self._image_dir + "/*")
-        images_by_date = seq(images) \
-            .map(lambda x: (x, self._extract_date(x))) \
-            .sorted(key=itemgetter(1), reverse=False) \
-            .map(lambda x: x[0]) \
-            .zip_with_index() \
-            .map(lambda x: (x[0], x[1] ** self._decay + 1))
+        
+        #images_by_date = seq(images) \
+        #    .map(lambda x: (x, self._extract_date(x))) \
+        #    .sorted(key=itemgetter(1), reverse=False) \
+        #    .map(lambda x: x[0]) \
+        #    .zip_with_index() \
+        #    .map(lambda x: (x[0], x[1] ** self._decay + 1))
+            
+        #sum_all_decay = images_by_date \
+        #    .map(lambda x: x[1]) \
+        #    .sum()
 
-        sum_all_decay = images_by_date \
-            .map(lambda x: x[1]) \
-            .sum()
+        #probablities_by_decay = images_by_date.map(lambda x: float(x[1]) / float(sum_all_decay)).to_list()
 
-        probablities_by_decay = images_by_date.map(lambda x: float(x[1]) / float(sum_all_decay)).to_list()
-
-        self.current_image = numpy.random.choice(
-            images_by_date.map(lambda x: x[0]).to_list(),
-            p=probablities_by_decay
-        )
+        #self.current_image = numpy.random.choice(
+        #    images_by_date.map(lambda x: x[0]).to_list(),
+        #    p=probablities_by_decay
+        #)
+        
+        self.current_image = random.choice(images)
 
         return self.current_image
