@@ -35,7 +35,7 @@ class ImageStore:
             unix_time = datetime_object.timestamp()
         except:
             unix_time = os.path.getmtime(image_path)
-        return int(unix_time)
+        return int(unix_time / 1000)
 
     def get_all_images(self):
         return glob.glob(self._image_dir + "/*")
