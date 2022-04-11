@@ -86,7 +86,7 @@ class PhotoBot:
     def init_updater(self):
         self.updater = Updater(
             self.telegram_token,
-            persistence=PicklePersistence(filename='%s/../telegram_bot' % self.image_dir),
+            persistence=PicklePersistence(filename='/tmp/telegram_bot'),
             use_context=True
         )
         return True
