@@ -39,7 +39,7 @@ def create_app(stage):
     @cache.cached(timeout=60 * 60)
     def weather():
         if os.getenv("IPSTACK"):
-            if Path('/tmp/LOCATION').is_file():
+            if os.path.isfile('/tmp/LOCATION'):
                 f = open('/tmp/LOCATION')
                 location = json.load(f)
                 f.close()

@@ -5,8 +5,8 @@ flask_socketio
 python-telegram-bot
 pyfunctional
 eventlet
-numpy
-Pillow
 retry
-opencv-python-headless
-opencv-contrib-python-headless
+numpy==1.22.3
+Pillow==9.0.1
+opencv-python-headless==4.5.5.64
+opencv-contrib-python-headless==4.5.5.62
