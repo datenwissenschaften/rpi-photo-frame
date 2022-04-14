@@ -1,7 +1,20 @@
 #!/bin/bash
 
-export LD_PRELOAD=/usr/lib/arm-linux-gnueabihf/libatomic.so.1
-/usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py >>/home/pi/photo-frame.log &
+### UPDATER
+
+/bin/bash /home/pi/rpi-photo-frame/scripts/update.sh >>/home/pi/updater.log &
+
+### WIFI CHECKER
+
+/bin/bash /home/pi/rpi-photo-frame/scripts/wifi.sh >>/home/pi/wifi.log &
+
+### DOCKER
+
+docker run -p 8888:80 -e DETECTORS="['thumbor.detectors.face_detector']" -e FILE_LOADER_ROOT_PATH="/images" -e LOADER="thumbor.loaders.file_loader" -v /home/pi/rpi-photo-frame/images:/images minimalcompact/thumbor
+
+## TODO: Image Frame Image
+
+### KIOSK CHROME
 
 unclutter -idle 0 -root &
 
