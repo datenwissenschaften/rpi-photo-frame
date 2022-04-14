@@ -10,7 +10,7 @@
 
 ### DOCKER
 
-docker run -p 8888:80 -e DETECTORS="['thumbor.detectors.face_detector']" -e FILE_LOADER_ROOT_PATH="/images" -e LOADER="thumbor.loaders.file_loader" -v /home/pi/rpi-photo-frame/images:/images minimalcompact/thumbor
+docker run -d --rm -p 8888:80 -e DETECTORS="['thumbor.detectors.face_detector']" -e FILE_LOADER_ROOT_PATH="/images" -e LOADER="thumbor.loaders.file_loader" -v /home/pi/rpi-photo-frame/images:/images minimalcompact/thumbor
 
 ## TODO: Image Frame Image
 
