@@ -27,7 +27,7 @@ apt autoremove -y
 
 curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2020%%20
 
-apt install curl xdotool unclutter sed git fbi chromium-browser -y
+apt install curl xdotool unclutter sed git fbi chromium-browser default-jdk -y
 
 pip install thumbor
 
