@@ -29,6 +29,8 @@ curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschal
 
 apt install curl xdotool unclutter sed git fbi chromium-browser -y
 
+pip install thumbor
+
 curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2035%%20
 
 # BOOTSTRAP

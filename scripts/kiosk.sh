@@ -1,5 +1,9 @@
 #!/bin/bash
 
+### ENV
+
+export PATH="$HOME/.local/bin:$PATH"
+
 ### UPDATER
 
 /bin/bash /home/pi/rpi-photo-frame/scripts/update.sh >>/home/pi/updater.log &
@@ -10,9 +14,7 @@
 
 ### DOCKER
 
-docker run -d --rm -p 8888:80 -e DETECTORS="['thumbor.detectors.face_detector']" -e FILE_LOADER_ROOT_PATH="/images" -e LOADER="thumbor.loaders.file_loader" -v /home/pi/rpi-photo-frame/images:/images minimalcompact/thumbor &
-
-## TODO: Image Frame Image
+thumbor -c /home/pi/thumbor.conf >>/home/pi/thumbor.log &
 
 ### KIOSK CHROME
 
