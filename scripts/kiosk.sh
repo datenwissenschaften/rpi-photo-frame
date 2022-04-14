@@ -6,15 +6,19 @@ export PATH="$HOME/.local/bin:$PATH"
 
 ### UPDATER
 
-/bin/bash /home/pi/rpi-photo-frame/scripts/update.sh >>/home/pi/updater.log &
+sudo /bin/bash /home/pi/rpi-photo-frame/scripts/update.sh >>/home/pi/updater.log &
 
 ### WIFI CHECKER
 
-/bin/bash /home/pi/rpi-photo-frame/scripts/wifi.sh >>/home/pi/wifi.log &
+sudo /bin/bash /home/pi/rpi-photo-frame/scripts/wifi.sh >>/home/pi/wifi.log &
 
-### DOCKER
+### THUMBOR
 
 thumbor -c /home/pi/thumbor.conf >>/home/pi/thumbor.log &
+
+### RPI-PI-PHOTOFRAME
+
+MASTER_IP=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
 
 ### KIOSK CHROME
 

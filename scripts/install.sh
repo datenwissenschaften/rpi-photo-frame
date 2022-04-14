@@ -44,7 +44,7 @@ curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschal
 
 # CONFIGURATIONS
 
-cp /home/pi/rpi-photo-frame/conf/rc.local /etc/rc.local
+cp /home/pi/rpi-photo-frame/scripts/rc.local /etc/rc.local
 chmod +x /etc/rc.local
 
 curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2075%%20
@@ -60,19 +60,12 @@ cp /home/pi/rpi-photo-frame/scripts/kiosk.service /lib/systemd/system/kiosk.serv
 systemctl daemon-reload
 systemctl enable kiosk.service
 
-# SPLASH
-
-curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2095%%20
-cd /home/pi/rpi-photo-frame/doc/ || exit
-wget https://www.datenwissenschaften.com/resources/splash.png
-cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
-
 # GUI
 
 rm /etc/xdg/autostart/piwiz.desktop
-cp /home/pi/rpi-photo-frame/conf/autostart /etc/xdg/lxsession/LXDE-pi/autostart
-cp /home/pi/rpi-photo-frame/conf/desktop-items-0.conf /etc/xdg/pcmanfm/LXDE-pi/desktop-items-0.conf
-cp /home/pi/rpi-photo-frame/conf/01-disable-update-check /etc/chromium-browser/customizations/01-disable-update-check
+cp /home/pi/rpi-photo-frame/scripts/autostart /etc/xdg/lxsession/LXDE-pi/autostart
+cp /home/pi/rpi-photo-frame/scripts/desktop-items-0.conf /etc/xdg/pcmanfm/LXDE-pi/desktop-items-0.conf
+cp /home/pi/rpi-photo-frame/scripts/01-disable-update-check /etc/chromium-browser/customizations/01-disable-update-check
 
 # REBOOT
 
