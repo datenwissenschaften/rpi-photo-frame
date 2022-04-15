@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# VERSION
+
+VERSION="1.5.1"
+
 # CWD
 
 cd /home/pi/ || exit
@@ -54,12 +58,14 @@ fi
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (30%)"}'
 
 cd /home/pi/rpi-photo-frame || exit
-if [ ! -d "/opt/rpi-photo-frame-1.5.0/" ]; then
+if [ ! -d "/opt/rpi-photo-frame-$VERSION/" ]; then
   sbt dist
-  unzip /home/pi/rpi-photo-frame/target/universal/rpi-photo-frame-1.5.0.zip
-  mv /home/pi/rpi-photo-frame-1.5.0 /opt/rpi-photo-frame-1.5.0
-  cp /home/pi/secret.conf /opt/rpi-photo-frame-1.5.0/conf/secret.conf
+  unzip /home/pi/rpi-photo-frame/target/universal/rpi-photo-frame-$VERSION.zip
+  mv /home/pi/rpi-photo-frame-$VERSION /opt/rpi-photo-frame-$VERSION
+  cp /home/pi/secret.conf /opt/rpi-photo-frame-$VERSION/conf/secret.conf
 fi
+
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (40%)"}'
 
 # BOOTSTRAP
 
