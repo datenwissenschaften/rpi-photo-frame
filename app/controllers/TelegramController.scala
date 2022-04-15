@@ -47,6 +47,7 @@ class TelegramController @Inject() (
   val db: DB = DBMaker
     .fileDB(f"${configuration.get[String]("temp.dir")}telegram.db")
     .closeOnJvmShutdown()
+    .checksumHeaderBypass()
     .make()
   val map: HTreeMap[String, String] = db.hashMap("telegram", Serializer.STRING, Serializer.STRING).createOrOpen()
 
