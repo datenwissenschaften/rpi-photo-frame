@@ -83,6 +83,12 @@ cp /home/pi/rpi-photo-frame/scripts/autostart /etc/xdg/lxsession/LXDE-pi/autosta
 cp /home/pi/rpi-photo-frame/scripts/desktop-items-0.conf /etc/xdg/pcmanfm/LXDE-pi/desktop-items-0.conf
 cp /home/pi/rpi-photo-frame/scripts/01-disable-update-check /etc/chromium-browser/customizations/01-disable-update-check
 
+# SERVICE
+
+cp /home/pi/rpi-photo-frame/scripts/kiosk.service /lib/systemd/system/kiosk.service
+systemctl daemon-reload
+systemctl enable kiosk.service
+
 # REBOOT
 
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update abgeschlossen. Neustart..."}'
