@@ -31,7 +31,7 @@ xset s noblank
 
 sleep 5
 
-/usr/bin/chromium-browser --noerrdialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --kiosk "http://$MASTER_IP:9000" &
+/usr/bin/chromium-browser --no-sandbox --noerrdialogs --incognito --disable-session-crashed-bubble --disable-infobars --force-device-scale-factor=1.00 --kiosk "http://$MASTER_IP:9000" &
 
 while true; do
   sleep 36000
