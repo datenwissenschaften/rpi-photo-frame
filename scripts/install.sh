@@ -2,7 +2,7 @@
 
 # CWD
 
-cd /home/pi/rpi-photo-frame/ || exit
+cd /home/pi/ || exit
 
 # DISPLAY PROGRESS
 
@@ -37,23 +37,29 @@ pip install thumbor
 
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (30%)"}'
 
-wget -nc https://downloads.lightbend.com/scala/2.13.8/scala-2.13.8.deb
-dpkg -i scala-2.13.8.deb
+if [ ! -f "/home/pi/scala-2.13.8.deb" ]; then
+  wget -nc https://downloads.lightbend.com/scala/2.13.8/scala-2.13.8.deb -P /home/pi/
+  dpkg -i scala-2.13.8.deb
+fi
 
-wget -nc https://github.com/sbt/sbt/releases/download/v1.6.2/sbt-1.6.2.zip
+wget -nc https://github.com/sbt/sbt/releases/download/v1.6.2/sbt-1.6.2.zip -P /home/pi/
 unzip -n sbt-1.6.2.zip
-mkdir -p /usr/lib/sbt
-mv /home/pi/sbt/bin/sbt-launch.jar /usr/lib/sbt
-cp /home/pi/rpi-photo-frame/scripts/sbt /bin/sbt
-chmod +x /bin/sbt
+if [ ! -d "/home/pi/sbt" ]; then
+  mkdir -p /usr/lib/sbt
+  mv /home/pi/sbt/bin/sbt-launch.jar /usr/lib/sbt
+  cp /home/pi/rpi-photo-frame/scripts/sbt /bin/sbt
+  chmod +x /bin/sbt
+fi
 
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (30%)"}'
 
 cd /home/pi/rpi-photo-frame || exit
-sbt dist
-unzip /home/pi/rpi-photo-frame/target/universal/rpi-photo-frame-1.5.0.zip
-mv /home/pi/rpi-photo-frame-1.5.0 /opt/rpi-photo-frame-1.5.0
-cp /home/pi/secret.conf /opt/rpi-photo-frame-1.5.0/conf/secret.conf
+if [ ! -d "/opt/rpi-photo-frame-1.5.0/" ]; then
+  sbt dist
+  unzip /home/pi/rpi-photo-frame/target/universal/rpi-photo-frame-1.5.0.zip
+  mv /home/pi/rpi-photo-frame-1.5.0 /opt/rpi-photo-frame-1.5.0
+  cp /home/pi/secret.conf /opt/rpi-photo-frame-1.5.0/conf/secret.conf
+fi
 
 # BOOTSTRAP
 
