@@ -33,6 +33,23 @@ pip install thumbor
 
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (30%)"}'
 
+wget -nc https://downloads.lightbend.com/scala/2.13.8/scala-2.13.8.deb
+dpkg -i scala-2.13.8.deb
+
+wget -nc https://github.com/sbt/sbt/releases/download/v1.6.2/sbt-1.6.2.zip
+unzip -n sbt-1.6.2.zip
+mkdir -p /usr/lib/sbt
+mv /home/pi/sbt/bin/sbt-launch.jar /usr/lib/sbt
+cp /home/pi/rpi-photo-frame/scripts/sbt /bin/sbt
+chmod +x /bin/sbt
+
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (30%)"}'
+
+cd /home/pi/rpi-photo-frame || exit
+sbt reload clean dist
+unzip /home/pi/rpi-photo-frame/target/universal/rpi-photo-frame-1.5.0.zip
+mv /home/pi/rpi-photo-frame/rpi-photo-frame-1.5.0 /opt/rpi-photo-frame-1.5.0
+
 # BOOTSTRAP
 
 touch /boot/ssh
