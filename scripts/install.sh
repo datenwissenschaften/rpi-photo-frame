@@ -76,12 +76,6 @@ curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d 
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (80%)"}'
 chmod -R 777 /home/pi/rpi-photo-frame
 
-# SERVICE
-
-cp /home/pi/rpi-photo-frame/scripts/kiosk.service /lib/systemd/system/kiosk.service
-systemctl daemon-reload
-systemctl enable kiosk.service
-
 # GUI
 
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (90%)"}'

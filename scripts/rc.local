@@ -1,5 +1,7 @@
 #!/bin/sh -e
 
+/bin/bash /home/pi/rpi-photo-frame/scripts/kiosk.sh
+
 dmesg --console-off
 clear
 
