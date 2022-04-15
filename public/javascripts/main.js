@@ -8,6 +8,29 @@ jQuery(document).ready(function () {
         jQuery("#image").attr("src", "/photo?photo=" + data);
     }
 
+    function sendToast(data) {
+        console.log(data);
+        toastr.options = {
+            "closeButton": false,
+            "debug": false,
+            "newestOnTop": true,
+            "progressBar": true,
+            "positionClass": "toast-top-center",
+            "preventDuplicates": true,
+            "onclick": null,
+            "showDuration": "300",
+            "hideDuration": "1000",
+            "timeOut": "0",
+            "extendedTimeOut": "0",
+            "showEasing": "swing",
+            "hideEasing": "linear",
+            "showMethod": "fadeIn",
+            "hideMethod": "fadeOut",
+            "escapeHtml": false
+        };
+        toastr.success("<p>" + data + "</p>");
+    }
+
     (function () {
         setRandomImage();
         setTimeout(arguments.callee, 60 * 60 * 1000);
@@ -48,17 +71,19 @@ jQuery(document).ready(function () {
     };
     socket.onmessage = function (event) {
         const data = JSON.parse(event.data);
+        console.log(data);
         if (data.type === "next") {
             setRandomImage();
         }
         if (data.type === "photo") {
             setImage(data.data);
         }
+        if (data.type === "toast") {
+            sendToast(data.message);
+        }
     };
     socket.onclose = function () {
     };
-    // socket.on("connect", function () {
-    // });
     // socket.on("command", function (data) {
     //     if (data.data === "next") {
     //         setRandomImage();

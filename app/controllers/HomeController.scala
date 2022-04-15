@@ -73,7 +73,8 @@ class HomeController @Inject() (
     }
 
   def random(): String = {
-    def getListOfFiles(dir: File): Seq[File]                   = dir.listFiles.filter(_.isFile).filter(_.getName.toLowerCase.endsWith(".jpg")).toSeq
+    def getListOfFiles(dir: File): Seq[File] =
+      dir.listFiles.filter(_.isFile).filter(_.getName.toLowerCase.endsWith(".jpg")).toSeq
     def getRandomElement(seq: Seq[File], random: Random): File = seq(random.nextInt(seq.length))
     getRandomElement(getListOfFiles(new File(configuration.get[String]("photo.folder"))), new Random).getName
   }

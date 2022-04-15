@@ -2,7 +2,7 @@
 
 # DISPLAY PROGRESS
 
-curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%200%%20
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (0%)"}'
 
 # DEACTIVATE CRONTAB
 
@@ -13,7 +13,7 @@ crontab -r
 apt --fix-broken install
 apt install curl -y
 
-curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2010%%20
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (10%)"}'
 
 apt purge wolfram-engine scratch scratch2 nuscratch sonic-pi idle3 -y
 apt purge smartsim java-common minecraft-pi libreoffice* -y
@@ -25,13 +25,13 @@ apt update
 apt upgrade -y
 apt autoremove -y
 
-curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2020%%20
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (20%)"}'
 
 apt install curl xdotool unclutter sed git fbi chromium-browser default-jdk -y
 
 pip install thumbor
 
-curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2035%%20
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (30%)"}'
 
 # BOOTSTRAP
 
@@ -40,18 +40,18 @@ cd /home/pi || exit
 git clone https://github.com/MtnFranke/rpi-photo-frame.git
 timedatectl set-timezone Europe/Berlin
 
-curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2050%%20
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (50%)"}'
 
 # CONFIGURATIONS
 
 cp /home/pi/rpi-photo-frame/scripts/rc.local /etc/rc.local
 chmod +x /etc/rc.local
 
-curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2075%%20
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (70%)"}'
 
 # PERMISSION FIX
 
-curl http://localhost:9000/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2085%%20
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (80%)"}'
 chmod -R 777 /home/pi/rpi-photo-frame
 
 # SERVICE
@@ -62,6 +62,7 @@ systemctl enable kiosk.service
 
 # GUI
 
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (90%)"}'
 rm /etc/xdg/autostart/piwiz.desktop
 cp /home/pi/rpi-photo-frame/scripts/autostart /etc/xdg/lxsession/LXDE-pi/autostart
 cp /home/pi/rpi-photo-frame/scripts/desktop-items-0.conf /etc/xdg/pcmanfm/LXDE-pi/desktop-items-0.conf
@@ -69,5 +70,5 @@ cp /home/pi/rpi-photo-frame/scripts/01-disable-update-check /etc/chromium-browse
 
 # REBOOT
 
-curl http://localhost:9000/toast/Update%20abgeschlossen.%20Neustart...%20
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update abgeschlossen. Neustart..."}'
 /sbin/shutdown -r -f

@@ -88,3 +88,14 @@ body {
 .wi {
     line-height: 0;
 }
+
+#toast-container.toast-bottom-center > div, #toast-container.toast-top-center > div {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#toast-container div {
+    color: white;
+    font: 16px Sans-Serif;
+}

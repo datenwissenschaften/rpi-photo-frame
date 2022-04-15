@@ -12,6 +12,7 @@ sealed trait AppEvent
 final case class NextPhoto()                 extends AppEvent
 final case class DeletePhoto()               extends AppEvent
 final case class ShowPhoto(filePath: String) extends AppEvent
+final case class Toast(message: String)      extends AppEvent
 
 object SimpleWebSocketActor {
   def props(clientActorRef: ActorRef): Props = Props(new SimpleWebSocketActor(clientActorRef))
@@ -28,6 +29,8 @@ class SimpleWebSocketActor(clientActorRef: ActorRef) extends Actor {
       clientActorRef ! Json.parse(s"""{"type": "next"}""")
     case photo: ShowPhoto =>
       clientActorRef ! Json.parse(s"""{"type": "photo", "data": "${photo.filePath}"}""")
+    case toast: Toast =>
+      clientActorRef ! Json.parse(s"""{"type": "toast", "message": "${toast.message}"}""")
   }
 
   def getMessage(json: JsValue): String = (json \ "command").as[String]
@@ -42,6 +45,12 @@ class WebSocketsController @Inject() (cc: ControllerComponents)(implicit system:
     ActorFlow.actorRef { actorRef =>
       SimpleWebSocketActor.props(actorRef)
     }
+  }
+
+  def toast: Action[AnyContent] = Action { request =>
+    val message = (request.body.asJson.get \ "message").as[String]
+    system.eventStream.publish(Toast(message))
+    Ok
   }
 
 }
