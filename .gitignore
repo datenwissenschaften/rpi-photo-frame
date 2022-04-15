@@ -119,7 +119,6 @@ tmp/
 test-result
 server.pid
 *.eml
-/dist/
 
 secret.conf
 
