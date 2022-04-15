@@ -19,7 +19,7 @@ thumbor -c /home/pi/rpi-photo-frame/scripts/thumbor.conf >/home/pi/thumbor.log &
 ### RPI-PI-PHOTOFRAME
 
 export MASTER_IP=$(ip -o route get to 8.8.8.8 | sed -n 's/.*src \([0-9.]\+\).*/\1/p')
-/opt/rpi-photo-frame-1.5.0/bin/rpi-photo-frame >/home/pi/rpi-photo-frame.log &
+/opt/rpi-photo-frame-1.5.0/bin/rpi-photo-frame &
 
 ### KIOSK CHROME
 
