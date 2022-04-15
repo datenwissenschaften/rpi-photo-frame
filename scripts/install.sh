@@ -50,7 +50,7 @@ chmod +x /bin/sbt
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (30%)"}'
 
 cd /home/pi/rpi-photo-frame || exit
-sbt reload clean dist
+sbt dist
 unzip /home/pi/rpi-photo-frame/target/universal/rpi-photo-frame-1.5.0.zip
 mv /home/pi/rpi-photo-frame-1.5.0 /opt/rpi-photo-frame-1.5.0
 
