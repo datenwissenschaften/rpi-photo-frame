@@ -122,3 +122,5 @@ server.pid
 /dist/
 
 secret.conf
+
+images/*
