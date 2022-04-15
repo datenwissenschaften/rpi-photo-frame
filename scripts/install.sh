@@ -57,10 +57,10 @@ fi
 
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (30%)"}'
 
-cd /home/pi/rpi-photo-frame || exit
+cd /home/pi/ || exit
 if [ ! -d "/opt/rpi-photo-frame-$VERSION/" ]; then
-  sbt dist
-  unzip /home/pi/rpi-photo-frame/target/universal/rpi-photo-frame-$VERSION.zip
+  # sbt dist
+  unzip /home/pi/rpi-photo-frame/dist/rpi-photo-frame-$VERSION.zip
   mv /home/pi/rpi-photo-frame-$VERSION /opt/rpi-photo-frame-$VERSION
   cp /home/pi/secret.conf /opt/rpi-photo-frame-$VERSION/conf/secret.conf
 fi
