@@ -53,6 +53,7 @@ cd /home/pi/rpi-photo-frame || exit
 sbt dist
 unzip /home/pi/rpi-photo-frame/target/universal/rpi-photo-frame-1.5.0.zip
 mv /home/pi/rpi-photo-frame-1.5.0 /opt/rpi-photo-frame-1.5.0
+cp /home/pi/secret.conf /opt/rpi-photo-frame-1.5.0/conf/secret.conf
 
 # BOOTSTRAP
 
