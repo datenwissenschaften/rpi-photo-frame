@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# CWD
+
+cd /home/pi/rpi-photo-frame/ || exit
+
 # DISPLAY PROGRESS
 
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (0%)"}'
