@@ -45,18 +45,17 @@ class TelegramController @Inject() (
   val folder: String = configuration.get[String]("photo.folder")
 
   val db: DB = DBMaker
-    .fileDB("/tmp/telegram.db")
-    .fileLockDisable()
-    .concurrencyDisable()
-    .checksumHeaderBypass()
+    .fileDB(f"${configuration.get[String]("temp.dir")}telegram.db")
+    .closeOnJvmShutdown()
     .make()
   val map: HTreeMap[String, String] = db.hashMap("telegram", Serializer.STRING, Serializer.STRING).createOrOpen()
 
   val photoDB: DB = DBMaker
-    .fileDB("/tmp/photo.db")
+    .fileDB(f"${configuration.get[String]("temp.dir")}photo.db")
     .concurrencyDisable()
     .checksumHeaderBypass()
     .fileLockDisable()
+    .closeOnJvmShutdown()
     .make()
   val photoMap: HTreeMap[String, String] = photoDB.hashMap("photo", Serializer.STRING, Serializer.STRING).createOrOpen()
 

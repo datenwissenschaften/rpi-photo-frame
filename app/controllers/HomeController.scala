@@ -27,10 +27,11 @@ class HomeController @Inject() (
   val cacheKey: String      = "weatherCache.key"
 
   val db: DB = DBMaker
-    .fileDB("/tmp/photo.db")
+    .fileDB(f"${configuration.get[String]("temp.dir")}photo.db")
     .concurrencyDisable()
     .checksumHeaderBypass()
     .fileLockDisable()
+    .closeOnJvmShutdown()
     .make()
   val map: HTreeMap[String, String] = db.hashMap("photo", Serializer.STRING, Serializer.STRING).createOrOpen()
 
