@@ -71,7 +71,6 @@ curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d 
 
 touch /boot/ssh
 cd /home/pi || exit
-git clone https://github.com/MtnFranke/rpi-photo-frame.git
 timedatectl set-timezone Europe/Berlin
 
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (50%)"}'
