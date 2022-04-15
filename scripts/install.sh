@@ -52,7 +52,7 @@ curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d 
 cd /home/pi/rpi-photo-frame || exit
 sbt reload clean dist
 unzip /home/pi/rpi-photo-frame/target/universal/rpi-photo-frame-1.5.0.zip
-mv /home/pi/rpi-photo-frame/rpi-photo-frame-1.5.0 /opt/rpi-photo-frame-1.5.0
+mv /home/pi/rpi-photo-frame-1.5.0 /opt/rpi-photo-frame-1.5.0
 
 # BOOTSTRAP
 
