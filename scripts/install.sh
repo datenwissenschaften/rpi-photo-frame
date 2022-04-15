@@ -14,6 +14,7 @@ crontab -r
 
 # HOUSEKEEPING
 
+dpkg --configure -a
 apt --fix-broken install
 apt install curl -y
 
