@@ -4,7 +4,7 @@ Wants=graphical.target
 After=graphical.target
 
 [Service]
-EnvironmentFile=/boot/environment.txt
+EnvironmentFile=/etc/environment
 Environment=DISPLAY=:0.0
 Environment=XAUTHORITY=/home/pi/.Xauthority
 Type=simple

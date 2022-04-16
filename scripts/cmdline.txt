@@ -1,0 +1,1 @@
+logo.nologo loglevel=1 quiet splash vt.global_cursor_default=0 plymouth.ignore-serial-console

@@ -1,0 +1,12 @@
+# https://www.playframework.com/documentation/latest/ScalaI18N
+
+bot.welcome=Hallo!\nIch bin dein Bilderrahmen 😁 🏞 🎉\nBitte schicke mir die aufgedruckte PIN.
+bot.pin=Deine PIN wurde bereits erfolgreich gesetzt 😄.\nDu kannst nun Bilder an mich senden 🙏.
+bot.success=Damit haben wir alles 😄. Du kannst nun Bilder an mich senden 🙏.
+bot.not-authorized=Du hast keine PIN gesetzt oder deine PIN ist falsch 😱.\nBitte nutze den /start command 🧐.
+
+bot.photo.new=Danke für das Photo 🤩!\nIch zeige es dir gleich an.
+bot.photo.delete=Photo erfolgreich gelöscht ✅!\nIch zeige es dir nicht mehr an.
+bot.photo.next=Ok, ich zeige dir das nächste Photo an 🏞.
+
+bot.error=Fehler ❌!\nBitte versuche es erneut.
