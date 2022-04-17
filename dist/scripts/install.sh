@@ -1,9 +1,5 @@
 #!/bin/bash
 
-# DISPLAY PROGRESS
-
-curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (0%)"}'
-
 # DEACTIVATE CRONTAB
 
 crontab -r
@@ -13,21 +9,28 @@ crontab -r
 apt --fix-broken install
 apt install curl -y
 
+curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (0%)"}'
+
+apt purge wolfram-engine scratch scratch2 nuscratch sonic-pi idle3 smartsim java-common minecraft-pi libreoffice* -y
+apt full-upgrade -y && apt autoremove -y && apt clean && apt autoclean -y && apt -f install -y
+apt update && apt upgrade -y && apt dist-upgrade -y && apt autoremove -y && apt clean && apt autoclean -y
+
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (10%)"}'
 
-apt purge wolfram-engine scratch scratch2 nuscratch sonic-pi idle3 -y
-apt purge smartsim java-common minecraft-pi libreoffice* -y
-
-apt clean
-apt autoremove -y
-
-apt update
-apt upgrade -y
-apt autoremove -y
+apt update && apt upgrade -y && apt dist-upgrade -y && apt apt full-upgrade -y && rpi-update
 
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (20%)"}'
 
-apt install curl xdotool unclutter sed git fbi chromium-browser default-jdk -y
+sed -i 's/buster/bullseye/g' /etc/apt/sources.list
+sed -i 's/buster/bullseye/g' /etc/apt/sources.list.d/raspi.list
+sed -i 's/dtoverlay=vc4-fkms-v3d/#dtoverlay=vc4-fkms-v3d/g' /boot/config.txt
+sed -i 's/\[all\]/\[all\]\ndtoverlay=vc4-kms-v3d/' /boot/config.txt
+
+apt update && apt install libgcc-8-dev gcc-8-base -y
+apt full-upgrade -y && apt autoremove -y && apt clean && apt autoclean -y && apt -f install -y
+apt full-upgrade -y && apt autoremove -y && apt clean && apt autoclean -y && apt -f install -y
+
+apt install xdotool unclutter sed git fbi chromium-browser default-jdk -y
 
 pip install thumbor
 
@@ -45,11 +48,6 @@ curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d 
 curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (70%)"}'
 cp /opt/rpi-photo-frame/scripts/rc.local /etc/rc.local
 chmod +x /etc/rc.local
-
-# PERMISSION FIX
-
-curl -X POST http://localhost:9000/toast -H 'Content-Type: application/json' -d '{"message":"Update läuft. Bitte nicht ausschalten. (80%)"}'
-chmod -R 777 /opt/rpi-photo-frame
 
 # GUI
 
