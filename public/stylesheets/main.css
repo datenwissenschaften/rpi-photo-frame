@@ -1,0 +1,101 @@
+.module {
+    background-size: cover;
+    position: relative;
+}
+
+div {
+    color: white;
+    font: 48px Sans-Serif;
+}
+
+h2#time {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 4px 8px;
+    color: white;
+    margin: 0;
+    font: 48px Sans-Serif;
+    z-index: 10000;
+}
+
+h2#temp {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    background: rgba(0, 0, 0, 0.75);
+    padding: 4px 8px;
+    color: white;
+    margin: 0;
+    font: 48px Sans-Serif;
+    z-index: 10000;
+}
+
+.opp h2 {
+    background: rgba(255, 255, 255, 0.75);
+    color: black;
+    z-index: 10000;
+}
+
+html {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.bg {
+    /*width: 100%;*/
+    /*height: 100%;*/
+    background-color: black;
+    /*overflow: hidden;*/
+    /*opacity: 1.0;*/
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
+
+
+    /* Absolute centering */
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    /* Size limit */
+    max-width: 100%;
+    max-height: 100%;
+
+    /* Other required settings */
+    margin: auto;
+    overflow: auto;
+
+}
+
+.transparent {
+    opacity: 0;
+}
+
+.wi {
+    line-height: 0;
+}
+
+#toast-container.toast-bottom-center > div, #toast-container.toast-top-center > div {
+    width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#toast-container div {
+    color: white;
+    font: 16px Sans-Serif;
+}
