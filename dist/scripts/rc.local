@@ -1,0 +1,6 @@
+#!/bin/sh -e
+
+dmesg --console-off
+clear
+
+exit 0

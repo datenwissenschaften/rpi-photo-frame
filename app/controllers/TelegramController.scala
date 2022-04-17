@@ -44,6 +44,10 @@ class TelegramController @Inject() (
   val pin: String    = configuration.get[String]("secret.pin")
   val folder: String = configuration.get[String]("photo.folder")
 
+  val p: Package      = getClass.getPackage
+  val name: String    = p.getImplementationTitle
+  val version: String = p.getImplementationVersion
+
   val db: DB = DBMaker
     .fileDB(f"${configuration.get[String]("temp.dir")}telegram.db")
     .closeOnJvmShutdown()
@@ -131,7 +135,7 @@ class TelegramController @Inject() (
         request(SendMessage(msg.source, messagesApi(reply)(lang))).void
       } else {
         map.put(f"workflow_${msg.from.get.id}", "START")
-        request(SendMessage(msg.source, messagesApi("bot.welcome")(lang))).void
+        request(SendMessage(msg.source, messagesApi("bot.welcome")(lang) + f" - $name - $version")).void
       }
     }
   }
