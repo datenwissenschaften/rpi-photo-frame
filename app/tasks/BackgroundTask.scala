@@ -53,7 +53,6 @@ class BackgroundTask @Inject() (actorSystem: ActorSystem, ws: WSClient, configur
           logger.info(f"Unzipped $release")
           f"rm $optDir/rpi-photo-frame".!
           f"ln -s $release $optDir/rpi-photo-frame".!
-          f"cp /boot/secret.conf $optDir/rpi-photo-frame/conf/secret.conf".!
         } else {
           logger.error(s"Failed to install $release")
           f"rm $archive".!
