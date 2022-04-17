@@ -1,7 +1,7 @@
 name := "rpi-photo-frame"
 organization := "com.datenwissenschaften"
 
-version := "1.6.0"
+version := "1.7.0"
 
 lazy val root = (project in file(".")).enablePlugins(PlayScala)
 

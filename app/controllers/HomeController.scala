@@ -27,8 +27,7 @@ class HomeController @Inject() (
   val cacheKey: String      = "weatherCache.key"
 
   val db: DB = DBMaker
-    .fileDB(f"${configuration.get[String]("temp.dir")}photo.db")
-    .concurrencyDisable()
+    .fileDB(f"${configuration.get[String]("temp.dir")}/photo.db")
     .checksumHeaderBypass()
     .fileLockDisable()
     .closeOnJvmShutdown()

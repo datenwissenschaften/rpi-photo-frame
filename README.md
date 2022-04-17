@@ -15,4 +15,7 @@ bash <(curl -L https://github.com/balena-io/wifi-connect/raw/master/scripts/rasp
 
 git clone https://github.com/MtnFranke/rpi-photo-frame
 sudo sh /home/pi/rpi-photo-frame/scripts/install.sh
+
+curl -L https://raw.githubusercontent.com/MtnFranke/rpi-photo-frame/new-display/dist/scripts/install.sh | sudo bash
+
 ```

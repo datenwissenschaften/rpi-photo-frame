@@ -39,25 +39,22 @@ class TelegramController @Inject() (
 
   implicit val timeout: Timeout = Timeout(FiniteDuration(1, TimeUnit.SECONDS))
 
-  val lang: Lang     = langs.availables.head
-  val token: String  = configuration.get[String]("telegram.token")
-  val pin: String    = configuration.get[String]("secret.pin")
-  val folder: String = configuration.get[String]("photo.folder")
-
-  val p: Package      = getClass.getPackage
-  val name: String    = p.getImplementationTitle
-  val version: String = p.getImplementationVersion
+  val lang: Lang          = langs.availables.head
+  val token: String       = configuration.get[String]("telegram.token")
+  val pin: String         = configuration.get[String]("secret.pin")
+  val photoFolder: String = configuration.get[String]("photo.folder")
+  val tmpDir: String      = configuration.get[String]("temp.dir")
 
   val db: DB = DBMaker
-    .fileDB(f"${configuration.get[String]("temp.dir")}telegram.db")
+    .fileDB(f"$tmpDir/telegram.db")
     .closeOnJvmShutdown()
     .checksumHeaderBypass()
+    .fileLockDisable()
     .make()
   val map: HTreeMap[String, String] = db.hashMap("telegram", Serializer.STRING, Serializer.STRING).createOrOpen()
 
   val photoDB: DB = DBMaker
-    .fileDB(f"${configuration.get[String]("temp.dir")}photo.db")
-    .concurrencyDisable()
+    .fileDB(f"${tmpDir}/photo.db")
     .checksumHeaderBypass()
     .fileLockDisable()
     .closeOnJvmShutdown()
@@ -75,7 +72,7 @@ class TelegramController @Inject() (
         system.eventStream.publish(NextPhoto())
         msg.reply("bot.photo.next")
       case "/delete" =>
-        new java.io.File(f"${folder}${photoMap.get("current.image")}").delete()
+        new java.io.File(f"$photoFolder/${photoMap.get("current.image")}").delete()
         system.eventStream.publish(NextPhoto())
         msg.reply("bot.photo.delete")
       case `pin` =>
@@ -94,7 +91,7 @@ class TelegramController @Inject() (
           val maxPhoto = photo.maxBy(_.height)
           request(GetFile(maxPhoto.fileId)).flatMap { file =>
             downloadFile(
-              f"https://api.telegram.org/file/bot${token}/${file.filePath.get}"
+              f"https://api.telegram.org/file/bot$token/${file.filePath.get}"
             ).map(_ => ())
           }
           request(SendMessage(msg.source, messagesApi("bot.photo.new")(lang))).void
@@ -109,7 +106,8 @@ class TelegramController @Inject() (
   def downloadFile(url: String): Future[Done] = {
     val futureResponse: Future[WSResponse] = ws.url(url).withMethod("GET").stream()
     val filePath                           = f"${Random.alphanumeric.take(10).mkString}.jpg"
-    val localFile                          = new java.io.File(f"${folder}${filePath}")
+    val localFile                          = new java.io.File(f"$photoFolder/$filePath")
+    logger.debug(s"Downloading file $url to $localFile")
     futureResponse.flatMap { res =>
       val outputStream = java.nio.file.Files.newOutputStream(localFile.toPath)
       val sink = Sink.foreach[ByteString] { bytes =>
@@ -135,7 +133,7 @@ class TelegramController @Inject() (
         request(SendMessage(msg.source, messagesApi(reply)(lang))).void
       } else {
         map.put(f"workflow_${msg.from.get.id}", "START")
-        request(SendMessage(msg.source, messagesApi("bot.welcome")(lang) + f" - $name - $version")).void
+        request(SendMessage(msg.source, messagesApi("bot.welcome")(lang))).void
       }
     }
   }

@@ -62,7 +62,10 @@ jQuery(document).ready(function () {
     })();
 
     // noinspection JSUnresolvedFunction
-    const socket = new ReconnectingWebSocket("ws://localhost:9000/ws", null, {debug: true, reconnectInterval: 3000});
+    const socket = new ReconnectingWebSocket("ws://" + location.hostname + ":9000/ws", null, {
+        debug: true,
+        reconnectInterval: 3000
+    });
     socket.open();
     socket.onopen = function () {
         jQuery("#image").click(function () {
@@ -84,29 +87,4 @@ jQuery(document).ready(function () {
     };
     socket.onclose = function () {
     };
-    // socket.on("command", function (data) {
-    //     if (data.data === "next") {
-    //         setRandomImage();
-    //     }
-    // });
-    // socket.on("toast", function (data) {
-    //     const options = {
-    //         settings: {
-    //             duration: 8 * 60 * 60 * 1000
-    //         },
-    //         style: {
-    //             main: {
-    //                 "font": "48px Sans-Serif;"
-    //             }
-    //         }
-    //     };
-    //     // noinspection JSUnresolvedVariable,JSUnresolvedFunction
-    //     iqwerty.toast.Toast(data.data, options);
-    // });
-    // socket.on("image", function (data) {
-    //     setImage(data.data);
-    // });
-    // socket.on("disconnect", function () {
-    // });
-
 });
