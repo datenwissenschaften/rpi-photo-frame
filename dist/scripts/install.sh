@@ -18,7 +18,7 @@ pip install thumbor
 
 if [ ! -f "/home/pi/scala-2.13.8.deb" ]; then
   wget -nc https://downloads.lightbend.com/scala/2.13.8/scala-2.13.8.deb -P /home/pi/
-  dpkg -i scala-2.13.8.deb
+  dpkg -i /home/pi/scala-2.13.8.deb
 fi
 
 # HOUSEKEEPING
