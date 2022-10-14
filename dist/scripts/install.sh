@@ -23,7 +23,7 @@ fi
 
 # HOUSEKEEPING
 
-sudo /bin/bash /opt/rpi-photo-frame/scripts/housekeeping.sh >/home/pi/housekeeping.log
+sudo /bin/bash /opt/rpi-photo-frame/dist/scripts/housekeeping.sh >/home/pi/housekeeping.log
 
 # REBOOT
 
