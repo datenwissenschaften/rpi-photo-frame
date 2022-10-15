@@ -2,8 +2,8 @@
 
 cd /home/pi/rpi-photo-frame/ || exit
 
-sudo /usr/bin/git config --global user.email "martin.franke@semiwa.org"
-sudo /usr/bin/git config --global user.name "Martin Franke"
+sudo /usr/bin/git config --global user.email "martin.franke@me.com"
+sudo /usr/bin/git config --global user.name "MtnFranke"
 
 sudo /usr/bin/git clean -f -d
 sudo /usr/bin/git reset --hard HEAD

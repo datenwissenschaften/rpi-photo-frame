@@ -1,12 +1,12 @@
 flask
 requests
 flask_caching
-flask_socketio
+flask_socketio==4.3.2
 python-telegram-bot
 pyfunctional
 eventlet
 numpy
 Pillow
 retry
-opencv-python-headless
-opencv-contrib-python-headless
+opencv-python-headless==4.5.5.62
+opencv-contrib-python-headless==4.5.5.62

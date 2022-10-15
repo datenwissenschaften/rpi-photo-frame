@@ -27,7 +27,15 @@ apt autoremove -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2020%%20
 
-apt install curl xdotool unclutter sed git fbi python3-pip libatlas-base-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 python-cffi python-cryptography python3-cffi python3-cryptography python3-numpy python3-pillow python3-dev  libhdf5-dev libhdf5-serial-dev libjasper-dev libjasper-dev -y
+apt install curl xdotool unclutter sed git fbi python3-pip libatlas-base-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 python-cffi python-cryptography python3-cffi python3-cryptography python3-numpy python3-pillow python3-dev  libhdf5-dev libhdf5-serial-dev libjasper-dev libjasper-dev python3-h5py -y
+
+apt install libcblas-dev -y
+apt install libhdf5-dev -y
+apt install libhdf5-serial-dev -y
+apt install libatlas-base-dev -y
+apt install libjasper-dev -y
+apt install libqtgui4 -y
+apt install libqt4-test -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2035%%20
 
@@ -53,6 +61,8 @@ python3 -m pip install --upgrade pip
 cd /home/pi/rpi-photo-frame || exit
 python3 -m pip install -r requirements.txt --upgrade
 python3 -m pip install gunicorn --upgrade
+python3 -m pip install numpy --upgrade --ignore-installed
+python3 -m pip install thumbor
 
 # PERMISSIONS
 
