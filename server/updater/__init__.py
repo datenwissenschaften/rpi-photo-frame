@@ -11,11 +11,13 @@ class Updater:
     def __init__(self):
         self.job()
 
-    def is_raspberrypi(self):
+    @staticmethod
+    def is_raspberrypi():
         # noinspection PyBroadException
         try:
             with io.open('/sys/firmware/devicetree/base/model', 'r') as m:
-                if 'raspberry pi' in m.read().lower(): return True
+                if 'raspberry pi' in m.read().lower():
+                    return True
         except Exception:
             pass
         return False

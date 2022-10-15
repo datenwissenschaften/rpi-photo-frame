@@ -1,10 +1,10 @@
 import uuid
 
 import requests
+# noinspection PyUnresolvedReferences
+from __version__ import __version__
 from retry import retry
 from telegram.ext import (Updater, CommandHandler, MessageHandler, Filters, ConversationHandler, PicklePersistence)
-
-from __version__ import __version__
 
 
 class PhotoBot:

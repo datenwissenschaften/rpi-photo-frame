@@ -22,9 +22,11 @@ class ImageStore:
         self._decay = img_decay
         self.current_image = ""
 
-    def _extract_date(self, image_path):
+    @staticmethod
+    def _extract_date(image_path):
         im = Image.open(image_path)
         exif_data = im.getexif()
+        # noinspection PyBroadException
         try:
             ret = {}
             for tag, value in exif_data.items():
@@ -34,7 +36,7 @@ class ImageStore:
                 ret.get("DateTime"), "%Y:%m:%d %H:%M:%S"
             )
             unix_time = datetime_object.timestamp()
-        except:
+        except Exception:
             unix_time = os.path.getmtime(image_path)
         return int(unix_time / 100000)
 

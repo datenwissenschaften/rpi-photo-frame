@@ -89,6 +89,18 @@ cp /home/pi/rpi-photo-frame/conf/autostart /etc/xdg/lxsession/LXDE-pi/autostart
 cp /home/pi/rpi-photo-frame/conf/desktop-items-0.conf /etc/xdg/pcmanfm/LXDE-pi/desktop-items-0.conf
 cp /home/pi/rpi-photo-frame/conf/01-disable-update-check /etc/chromium-browser/customizations/01-disable-update-check
 
+# RAM DISK
+
+# shellcheck disable=SC2046
+# shellcheck disable=SC2143
+if [ -z $(grep "ramdisk" "/etc/fstab") ]; then
+  mkdir -p /mnt/ramdisk
+  echo "tmpfs /mnt/ramdisk tmpfs nodev,nosuid,size=16M 0 0 " >>/etc/fstab
+  sudo mount -a
+else
+  echo 'RAM DISK EXISTS'
+fi
+
 # REBOOT
 
 curl http://localhost:5600/toast/Update%20abgeschlossen.%20Neustart...%20

@@ -1,6 +1,5 @@
 import os
 import shutil
-import tempfile
 
 import requests
 from screeninfo import get_monitors
@@ -25,7 +24,7 @@ class Cropper:
         file_name = os.path.basename(image_path)
         url = f'http://localhost:8888/unsafe/{self.crop_x}x{self.crop_y}/{file_name}'
         response = requests.get(url, stream=True)
-        with open(f'{tempfile.gettempdir()}/_working_image_.jpeg', 'wb') as out_file:
+        with open(f'/mnt/ramdisk/working_image.jpeg', 'wb') as out_file:
             shutil.copyfileobj(response.raw, out_file)
         del response
-        return tempfile.gettempdir() + "/_working_image_.jpeg"
+        return "/mnt/ramdisk/working_image.jpeg"
