@@ -27,7 +27,7 @@ apt autoremove -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2020%%20
 
-apt install curl xdotool unclutter sed git fbi python3-pip libatlas-base-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 python-cffi python-cryptography python3-cffi python3-cryptography python3-numpy python3-pillow python3-dev  libhdf5-dev libhdf5-serial-dev libjasper-dev libjasper-dev python3-h5py -y
+apt install curl xdotool unclutter sed git fbi python3-pip libatlas-base-dev libjpeg-dev zlib1g-dev libfreetype6-dev liblcms1-dev libopenjp2-7 libtiff5 python-cffi python-cryptography python3-cffi python3-cryptography python3-numpy python3-pillow python3-dev libhdf5-dev libhdf5-serial-dev libjasper-dev libjasper-dev python3-h5py -y
 
 apt install libcblas-dev -y
 apt install libhdf5-dev -y
