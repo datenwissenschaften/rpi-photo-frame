@@ -2,7 +2,7 @@
 
 cd /home/pi/rpi-photo-frame/ || exit
 
-sudo /usr/bin/git git config pull.rebase false
+sudo /usr/bin/git config pull.rebase false
 sudo /usr/bin/git config --global user.email "martin.franke@me.com"
 sudo /usr/bin/git config --global user.name "MtnFranke"
 
