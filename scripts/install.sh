@@ -72,7 +72,7 @@ systemctl enable kiosk.service
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2095%%20
 cd /home/pi/rpi-photo-frame/doc/ || exit
-wget https://www.datenwissenschaften.com/resources/splash.png
+wget https://www.datenwissenschaften.com/images/splash.png
 cp /home/pi/rpi-photo-frame/doc/splash.png /usr/share/plymouth/themes/pix/splash.png
 
 # GUI
