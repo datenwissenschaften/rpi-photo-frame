@@ -2,7 +2,7 @@
 
 ### THUMBOR
 
-thumbor -c /opt/rpi-photo-frame/scripts/thumbor.conf >/home/pi/thumbor.log &
+thumbor -c /home/pi/rpi-photo-frame/scripts/thumbor.conf >/home/pi/thumbor.log &
 
 export LD_PRELOAD=/usr/lib/arm-linux-gnueabihf/libatomic.so.1
 /usr/bin/python3 /home/pi/rpi-photo-frame/server/manage.py >>/home/pi/photo-frame.log &
