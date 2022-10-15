@@ -1,7 +1,7 @@
 flask
 requests
 flask_caching
-flask_socketio==4.3.2
+flask_socketio
 python-telegram-bot
 pyfunctional
 eventlet
