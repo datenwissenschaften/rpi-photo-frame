@@ -2,7 +2,6 @@ import datetime
 import glob
 import os
 import random
-
 from operator import itemgetter
 
 import numpy
@@ -44,25 +43,26 @@ class ImageStore:
 
     def get_weighted_random_image(self):
         images = glob.glob(self._image_dir + "/*")
-        
-        #images_by_date = seq(images) \
-        #    .map(lambda x: (x, self._extract_date(x))) \
-        #    .sorted(key=itemgetter(1), reverse=False) \
-        #    .map(lambda x: x[0]) \
-        #    .zip_with_index() \
-        #    .map(lambda x: (x[0], x[1] ** self._decay + 1))
-            
-        #sum_all_decay = images_by_date \
-        #    .map(lambda x: x[1]) \
-        #    .sum()
 
-        #probablities_by_decay = images_by_date.map(lambda x: float(x[1]) / float(sum_all_decay)).to_list()
+        images_by_date = seq(images) \
+            .map(lambda x: (x, self._extract_date(x))) \
+            .sorted(key=itemgetter(1), reverse=False) \
+            .map(lambda x: x[0]) \
+            .zip_with_index() \
+            .map(lambda x: (x[0], x[1] ** self._decay + 1)) \
+            .take(48)
 
-        #self.current_image = numpy.random.choice(
-        #    images_by_date.map(lambda x: x[0]).to_list(),
-        #    p=probablities_by_decay
-        #)
-        
+        sum_all_decay = images_by_date \
+            .map(lambda x: x[1]) \
+            .sum()
+
+        probabilities_by_decay = images_by_date.map(lambda x: float(x[1]) / float(sum_all_decay)).to_list()
+
+        self.current_image = numpy.random.choice(
+            images_by_date.map(lambda x: x[0]).to_list(),
+            p=probabilities_by_decay
+        )
+
         self.current_image = random.choice(images)
 
         return self.current_image

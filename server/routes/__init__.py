@@ -1,18 +1,27 @@
 # -*- coding: UTF-8 -*-
-import os
+import io
 import json
-
-from pathlib import Path
+import os
 from multiprocessing import Process
-
-from flask import Flask, render_template, send_file, jsonify
-from flask_caching import Cache
-from flask_socketio import SocketIO
-from requests import get
+from pathlib import Path
 
 from bot import PhotoBot
 from config import get_config
+from flask import Flask, render_template, send_file, jsonify
+from flask_caching import Cache
+from flask_socketio import SocketIO
 from image.cropper import Cropper
+from requests import get
+
+
+def is_raspberrypi():
+    # noinspection PyBroadException
+    try:
+        with io.open('/sys/firmware/devicetree/base/model', 'r') as m:
+            if 'raspberry pi' in m.read().lower(): return True
+    except Exception:
+        pass
+    return False
 
 
 def create_app(stage):
@@ -28,7 +37,8 @@ def create_app(stage):
 
     app_config = get_config(stage)
 
-    Process(target=PhotoBot, args=(app_config.IMAGEDIR, app_config.PIN, app_config.TELEGRAM_TOKEN)).start()
+    if is_raspberrypi():
+        Process(target=PhotoBot, args=(app_config.IMAGEDIR, app_config.PIN, app_config.TELEGRAM_TOKEN)).start()
 
     @app.route('/')
     @cache.cached(timeout=60 * 60)

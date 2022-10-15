@@ -18,9 +18,10 @@ def is_connected():
 
 
 def start():
+    # noinspection PyBroadException
     try:
         connected = retry_call(is_connected, tries=6, delay=1, backoff=2)
-    except:
+    except Exception:
         connected = False
 
     if not connected:

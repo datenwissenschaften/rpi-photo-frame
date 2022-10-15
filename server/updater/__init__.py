@@ -1,3 +1,4 @@
+import io
 import os
 
 import threading
@@ -10,8 +11,17 @@ class Updater:
     def __init__(self):
         self.job()
 
+    def is_raspberrypi(self):
+        # noinspection PyBroadException
+        try:
+            with io.open('/sys/firmware/devicetree/base/model', 'r') as m:
+                if 'raspberry pi' in m.read().lower(): return True
+        except Exception:
+            pass
+        return False
+
     def job(self):
-        if not self.RUNNING:
+        if not self.RUNNING and self.is_raspberrypi():
             self.RUNNING = True
             os.system("sudo /bin/bash /home/pi/rpi-photo-frame/scripts/update.sh")
             self.RUNNING = False

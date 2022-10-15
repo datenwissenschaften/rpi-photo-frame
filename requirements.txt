@@ -8,5 +8,6 @@ eventlet
 numpy
 Pillow
 retry
+screeninfo
 opencv-python-headless==4.5.5.62
 opencv-contrib-python-headless==4.5.5.62
