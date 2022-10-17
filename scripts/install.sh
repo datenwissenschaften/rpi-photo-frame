@@ -28,7 +28,8 @@ apt autoremove -y
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2020%%20
 
 apt install curl xdotool unclutter sed git fbi python3-pip \
-  python3-cffi python3-cryptography python3-numpy python3-pillow -y
+  python3-cffi python3-cryptography python3-numpy python3-pillow \
+  libcblas-dev -y
 
 curl http://localhost:5600/toast/Update%20l%C3%A4uft.%20Bitte%20nicht%20ausschalten.%20%2035%%20
 
