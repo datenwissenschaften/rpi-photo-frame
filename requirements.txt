@@ -10,3 +10,4 @@ Pillow
 retry
 opencv-python-headless
 opencv-contrib-python-headless
+dnspython>=2.6.0rc1 # not directly required, pinned by Snyk to avoid a vulnerability
