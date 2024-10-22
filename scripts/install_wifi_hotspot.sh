@@ -13,11 +13,14 @@ echo "Stopping services for setup..."
 sudo systemctl stop hostapd
 sudo systemctl stop dnsmasq
 
-# Configure dnsmasq for DHCP
+# Configure dnsmasq for DHCP and DNS redirection to trigger captive portal
 echo "Configuring dnsmasq..."
 sudo tee /etc/dnsmasq.conf > /dev/null <<EOL
 interface=wlan0      # Use wlan0 interface for the hotspot
 dhcp-range=192.168.4.2,192.168.4.20,255.255.255.0,24h
+
+# Redirect all DNS queries to the Raspberry Pi (192.168.4.1) to trigger captive portal
+address=/#/192.168.4.1
 EOL
 
 # Configure hostapd for the access point (no password, open network)
