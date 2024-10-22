@@ -2,6 +2,7 @@
 
 import os
 import socket
+import time
 
 from retry.api import retry_call
 
@@ -18,8 +19,6 @@ def is_connected():
 
 
 def start():
-    print("Starting the server")
-
     # noinspection PyBroadException
     try:
         connected = retry_call(is_connected, tries=6, delay=1, backoff=2)
@@ -27,12 +26,11 @@ def start():
         connected = False
 
     if not connected:
-        print("Not connected to the internet")
         os.system('sudo /usr/bin/fbi -T 1 -noverbose -a -t 3600 --once /home/pi/rpi-photo-frame/doc/wifi.png &')
-        os.system('sudo wifi-connect -s Bilderrahmen')
-        os.system('sudo reboot')
+        time.sleep(10)
+        start()
     else:
-        print("Connected to the internet")
+        os.system('sudo pkill -f fbi')
         port = int(os.environ.get("PORT", 5600))
         socket_io.run(app, "0.0.0.0", port)
 

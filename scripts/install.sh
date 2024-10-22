@@ -95,6 +95,17 @@ else
   echo 'RAM DISK EXISTS'
 fi
 
+# DISABLE SWAP
+
+dphys-swapfile swapoff
+sed -i 's/CONF_SWAPSIZE=.*/CONF_SWAPSIZE=0/' /etc/dphys-swapfile
+dphys-swapfile setup
+dphys-swapfile swapon
+
+# GIT FIX
+
+git config --global --add safe.directory '*'
+
 # REBOOT
 
 curl http://localhost:5600/toast/Update%20abgeschlossen.%20Neustart...%20
