@@ -136,4 +136,49 @@ echo "Enabling and starting the Flask app service..."
 sudo systemctl enable wifi-config
 sudo systemctl start wifi-config
 
-echo "Setup complete! The Raspberry Pi hotspot 'Bilderrahmen' is now active."
+# Create the Wi-Fi monitor script
+echo "Creating Wi-Fi monitor script..."
+sudo tee /usr/local/bin/wifi_monitor.sh > /dev/null <<EOL
+#!/bin/bash
+
+while true; do
+  # Check if there is an active Wi-Fi connection
+  if nmcli -t -f ACTIVE,SSID dev wifi | grep -q "^yes"; then
+    echo "Wi-Fi is connected. Stopping hotspot..."
+    sudo systemctl stop hostapd
+    sudo systemctl stop dnsmasq
+  else
+    echo "Wi-Fi not connected. Starting hotspot..."
+    sudo systemctl start hostapd
+    sudo systemctl start dnsmasq
+  fi
+  # Check every 30 seconds
+  sleep 30
+done
+EOL
+
+# Make the Wi-Fi monitor script executable
+sudo chmod +x /usr/local/bin/wifi_monitor.sh
+
+# Create a systemd service to run the Wi-Fi monitor script
+echo "Creating systemd service for Wi-Fi monitor..."
+sudo tee /etc/systemd/system/wifi-monitor.service > /dev/null <<EOL
+[Unit]
+Description=Wi-Fi Monitor Service
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/wifi_monitor.sh
+Restart=always
+User=root
+
+[Install]
+WantedBy=multi-user.target
+EOL
+
+# Enable and start the Wi-Fi monitor service
+echo "Enabling and starting the Wi-Fi monitor service..."
+sudo systemctl enable wifi-monitor
+sudo systemctl start wifi-monitor
+
+echo "Setup complete! The Raspberry Pi hotspot 'Bilderrahmen' is now active and will be disabled when a proper Wi-Fi connection is established."
